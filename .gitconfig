@@ -1,0 +1,12 @@
+[user]
+	name = Jan-Philip Loos
+	email = maxdaten@gmail.com
+[core]
+	autocrlf = input
+	excludesfile = /Users/jloos/.gitignore
+[alias]
+	r = rebase --autostash
+[pull]
+	rebase = false
+[init]
+	defaultBranch = main

@@ -1,0 +1,14 @@
+# Ignore everything
+*
+
+# ... but
+!.gitignore
+!.gitconfig
+
+# shells
+!.zshrc
+!.bash_profile
+
+# nix
+!.nix-channels
+!*/.config/nixpkgs/home.nix
