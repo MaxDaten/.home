@@ -8,16 +8,18 @@
 
   home.packages = with pkgs; [
     htop
-    fortune
     ripgrep
     jq
     tree
-
-    comma
-
+    terminal-notifier
+    direnv
     peco
 
+    # linting
     shellcheck
+    
+    # Nix tools
+    comma
     nixfmt
 
     # Infrastructure
@@ -85,6 +87,17 @@
           hash = "sha256-/4c/52HLvycTPjuiMKC949XYLPNJUhedd3xEV/ioxfw=";
         };
       }
+
+      {
+        # https://github.com/franciscolourenco/done
+        name = "done";
+        src = pkgs.fetchFromGitHub {
+          owner = "franciscolourenco";
+          repo = "done";
+          rev = "d6abb267bb3fb7e987a9352bc43dcdb67bac9f06";
+          hash = "sha256-6oeyN9ngXWvps1c5QAUjlyPDQwRWAoxBiVTNmZ4sG8E=";
+        };
+      }
     ];
 
     shellAbbrs = {
@@ -118,6 +131,9 @@
 
       set -gx PROJECT_PATHS ~/Workspace/buzzar ~/Workspace/kmo ~/Workspace/gitops
       set -gx EDITOR code
+
+      # done
+      set __done_enabled
     '';
 
     functions = {
@@ -171,5 +187,4 @@
     ];
 
   };
-
 }
