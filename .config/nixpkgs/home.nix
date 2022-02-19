@@ -6,6 +6,14 @@
   home.username = "jloos";
   home.homeDirectory = "/Users/jloos";
 
+  home.packages = with pkgs; [
+    htop
+    fortune
+    ripgrep
+    jq
+    tree
+  ];
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
@@ -18,4 +26,40 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  # Configurations
+
+  programs.bat.enable = true;
+
+  # Git
+  programs.git = {
+    enable = true;
+    userName = "Jan-Philip Loos";
+    userEmail = "maxdaten@gmail.com";
+  };
+
+  # Vim
+  programs.neovim = {
+    enable = true;
+    vimAlias = true;
+    extraConfig = ''
+      colorscheme gruvbox
+    '';
+
+    plugins = with pkgs.vimPlugins; [
+      gruvbox
+
+      # Languages
+      vim-nix
+      
+      vim-fish
+      
+      vim-go
+      
+      vim-pandoc
+      vim-pandoc-syntax
+    ];
+
+  };
+
 }
