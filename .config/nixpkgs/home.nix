@@ -36,6 +36,25 @@
     enable = true;
     userName = "Jan-Philip Loos";
     userEmail = "maxdaten@gmail.com";
+
+    aliases = {
+      r = "rebase --autostash";
+    };
+
+    extraConfig = {
+      core = {
+        autocrlf = "input";
+        # excludesfile = /Users/jloos/.gitignore;
+      };
+
+      pull = {
+        rebase = false;
+      };
+
+      init = {
+        defaultBranch = "main";
+      };
+    };
   };
 
   # Vim
