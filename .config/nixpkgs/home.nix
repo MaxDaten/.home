@@ -23,6 +23,7 @@
     # Infrastructure
     awscli2
     google-cloud-sdk
+    kubectl
   ];
 
   # This value determines the Home Manager release that your
@@ -81,6 +82,11 @@
       hm = "home-manager";
       hms = "home-manager switch";
       gco = "git checkout";
+      gm = "git commit -m \"\"";
+    };
+
+    shellAliases = {
+      k = "kubectl";
     };
 
     shellInit = ''
