@@ -51,7 +51,6 @@
           owner = "oh-my-fish";
           repo = "plugin-peco";
           rev = "0a3282c9522c4e0102aaaa36f89645d17db78657";
-          # hash = "sha256-pWkEhjbcxXduyKz1mAFo90IuQdX7R8bLCQgb0R+hXs4=";
           sha256 = "005r6yar254hkx6cpd2g590na812mq9z9a17ghjl6sbyyxq24jhi";
         };
       }
@@ -74,6 +73,16 @@
           repo = "z";
           rev = "45a9ff6d0932b0e9835cbeb60b9794ba706eef10";
           hash = "sha256-pWkEhjbcxXduyKz1mAFo90IuQdX7R8bLCQgb0R+hXs4=";
+        };
+      }
+
+      {
+        name = "pj";
+        src = pkgs.fetchFromGitHub {
+          owner = "oh-my-fish";
+          repo = "plugin-pj";
+          rev = "43c94f24fd53a55cb6b01400b9b39eb3b6ed7e4e";
+          hash = "sha256-/4c/52HLvycTPjuiMKC949XYLPNJUhedd3xEV/ioxfw=";
         };
       }
     ];
@@ -106,6 +115,9 @@
       function fish_user_key_bindings
         bind \cr 'peco_select_history (commandline -b)'
       end
+
+      set -gx PROJECT_PATHS ~/Workspace/buzzar ~/Workspace/kmo ~/Workspace/gitops
+      set -gx EDITOR code
     '';
 
     functions = {
