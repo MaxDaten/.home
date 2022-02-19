@@ -19,6 +19,10 @@
 
     shellcheck
     nixfmt
+
+    # Infrastructure
+    awscli2
+    google-cloud-sdk
   ];
 
   # This value determines the Home Manager release that your
