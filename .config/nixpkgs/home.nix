@@ -13,6 +13,10 @@
     jq
     tree
 
+    comma
+
+    peco
+
     shellcheck
     nixfmt
   ];
@@ -37,6 +41,17 @@
 
     plugins = [
       {
+        name = "peco";
+        src = pkgs.fetchFromGitHub {
+          owner = "oh-my-fish";
+          repo = "plugin-peco";
+          rev = "0a3282c9522c4e0102aaaa36f89645d17db78657";
+          # hash = "sha256-pWkEhjbcxXduyKz1mAFo90IuQdX7R8bLCQgb0R+hXs4=";
+          sha256 = "005r6yar254hkx6cpd2g590na812mq9z9a17ghjl6sbyyxq24jhi";
+        };
+      }
+
+      {
         name = "foreign-env";
         src = pkgs.fetchFromGitHub {
           owner = "oh-my-fish";
@@ -44,16 +59,6 @@
           rev = "dddd9213272a0ab848d474d0cbde12ad034e65bc";
           # SRI hash
           hash = "sha256-er1KI2xSUtTlQd9jZl1AjqeArrfBxrgBLcw5OqinuAM=";
-        };
-      }
-
-      {
-        name = "peco";
-        src = pkgs.fetchFromGitHub {
-          owner = "oh-my-fish";
-          repo = "plugin-peco";
-          rev = "0a3282c9522c4e0102aaaa36f89645d17db78657";
-          hash = "sha256-pWkEhjbcxXduyKz1mAFo90IuQdX7R8bLCQgb0R+hXs4=";
         };
       }
 
@@ -67,6 +72,12 @@
         };
       }
     ];
+
+    shellAbbrs = {
+      hm = "home-manager";
+      hms = "home-manager switch";
+      gco = "git checkout";
+    };
 
     shellInit = ''
       # nix
