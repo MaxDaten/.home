@@ -76,12 +76,21 @@
 
       # home-manager
       set -gpx NIX_PATH "$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels"
+    '';
+
+    interactiveShellInit = ''
+      set fish_greeting "🎣"
 
       # peco
       function fish_user_key_bindings
         bind \cr 'peco_select_history (commandline -b)'
       end
     '';
+
+    functions = {
+      gitignore = "curl -sL https://www.gitignore.io/api/$argv";
+      freload = "source ~/.config/fish/config.fish";
+    };
   };
 
   programs.bat.enable = true;
