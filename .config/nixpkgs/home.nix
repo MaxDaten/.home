@@ -14,6 +14,7 @@
     terminal-notifier
     direnv
     peco
+    wget
 
     # linting
     shellcheck
