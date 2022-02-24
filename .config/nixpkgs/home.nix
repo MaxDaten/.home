@@ -156,7 +156,7 @@
     extraConfig = {
       core = {
         autocrlf = "input";
-        # excludesfile = /Users/jloos/.gitignore;
+        excludesfile = "/Users/jloos/.config/git/.gitignore";
       };
 
       pull = { rebase = false; };
