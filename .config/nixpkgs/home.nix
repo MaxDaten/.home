@@ -15,6 +15,7 @@
     direnv
     peco
     wget
+    jless
 
     # linting
     shellcheck
@@ -156,7 +157,7 @@
     extraConfig = {
       core = {
         autocrlf = "input";
-        excludesfile = "/Users/jloos/.config/git/.gitignore";
+        excludesfile = "/Users/jloos/.config/git/global.gitignore";
       };
 
       pull = { rebase = false; };
