@@ -135,7 +135,7 @@
     '';
 
     interactiveShellInit = ''
-      set fish_greeting "🎣"
+      set fish_greeting "🐡"
 
       # peco
       function fish_user_key_bindings
