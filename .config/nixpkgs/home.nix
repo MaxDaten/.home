@@ -151,7 +151,7 @@
 
     functions = {
       gitignore = "curl -sL https://www.gitignore.io/api/$argv";
-      freload = "source ~/.config/fish/config.fish";
+      fish_reload = "source ~/.config/fish/config.fish";
     };
   };
 
