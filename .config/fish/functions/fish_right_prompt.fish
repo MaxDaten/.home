@@ -25,6 +25,9 @@ function fish_right_prompt
     set -q VIRTUAL_ENV
     and set -l venv (string replace -r '.*/' '' -- "$VIRTUAL_ENV")
 
+    set -l nix_prompt
+    test -n "$IN_NIX_SHELL"; and set nix_prompt (set_color cyan)"*$normal"
+
     set_color reset
-    string join " " -- $venv $duration $vcs $d
+    string join " " -- $nix_prompt $venv $duration $vcs $d
 end
