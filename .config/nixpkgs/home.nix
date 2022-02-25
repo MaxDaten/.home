@@ -17,6 +17,9 @@
     wget
     jless
 
+    # fonts
+    jetbrains-mono
+
     # linting
     shellcheck
     
@@ -116,8 +119,9 @@
     shellAbbrs = {
       hm = "home-manager";
       hms = "home-manager switch";
-      gco = "git checkout";
-      gm = "git commit -m \"\"";
+      gitco = "git checkout";
+      gitrb = "git rebase --autostash";
+      gitcm = "git commit -m \"\"";
     };
 
     shellAliases = {
