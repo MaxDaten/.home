@@ -3,6 +3,7 @@ function fish_prompt
 
     set -l normal (set_color normal)
     set -l usercolor (set_color $fish_color_user)
+    set -l space " "
 
     set -l delim \U25BA
     # If we don't have unicode use a simpler delimiter
@@ -42,5 +43,5 @@ function fish_prompt
     # Shorten pwd if prompt is too long
     set -l pwd (prompt_pwd)
 
-    echo -n -s $prompt_host $cwd $pwd $normal $prompt_status $delim
+    echo -n -s $prompt_host $cwd $pwd $normal $prompt_status $delim $space
 end
