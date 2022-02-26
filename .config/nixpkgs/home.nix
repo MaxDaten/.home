@@ -16,6 +16,7 @@
     peco
     wget
     jless
+    broot
 
     # fonts
     jetbrains-mono
