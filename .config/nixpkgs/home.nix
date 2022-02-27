@@ -123,6 +123,7 @@
       gitco = "git checkout";
       gitrb = "git rebase --autostash";
       gitcm = "git commit -m \"\"";
+      pjo = "pj open";
     };
 
     shellAliases = {
