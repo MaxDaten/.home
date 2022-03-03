@@ -128,6 +128,7 @@
 
     shellAliases = {
       k = "kubectl";
+      br = "broot";
     };
 
     shellInit = ''
