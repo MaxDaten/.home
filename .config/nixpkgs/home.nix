@@ -107,7 +107,7 @@
 
       {
         # https://github.com/lilyball/nix-env.fish
-        name = "done";
+        name = "nix-env";
         src = pkgs.fetchFromGitHub {
           owner = "lilyball";
           repo = "nix-env.fish";
