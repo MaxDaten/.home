@@ -115,6 +115,17 @@
           hash = "sha256-RG/0rfhgq6aEKNZ0XwIqOaZ6K5S4+/Y5EEMnIdtfPhk=";
         };
       }
+
+      {
+        # https://github.com/laughedelic/pisces
+        name = "pisces";
+        src = pkgs.fetchFromGitHub {
+          owner = "laughedelic";
+          repo = "pisces";
+          rev = "e45e0869855d089ba1e628b6248434b2dfa709c4";
+          hash = "sha256-Oou2IeNNAqR00ZT3bss/DbhrJjGeMsn9dBBYhgdafBw=";
+        };
+      }
     ];
 
     shellAbbrs = {
@@ -122,7 +133,7 @@
       hms = "home-manager switch";
       gitco = "git checkout";
       gitrb = "git rebase --autostash";
-      gitcm = "git commit -m \"\"";
+      gitcm = "git commit -m";
       pjo = "pj open";
     };
 
