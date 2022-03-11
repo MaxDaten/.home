@@ -9,14 +9,16 @@
   home.packages = with pkgs; [
     htop
     ripgrep
-    jq
+    watch
     tree
-    terminal-notifier
-    direnv
-    peco
     wget
-    jless
+    direnv
+
+    terminal-notifier
+    peco
     broot
+    jq
+    jless
 
     # fonts
     jetbrains-mono
