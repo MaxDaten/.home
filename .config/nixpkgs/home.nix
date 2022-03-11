@@ -12,6 +12,7 @@
     watch
     tree
     wget
+    pwgen
     direnv
 
     terminal-notifier
@@ -34,6 +35,7 @@
     awscli2
     google-cloud-sdk
     kubectl
+    kustomize
   ];
 
   # This value determines the Home Manager release that your
