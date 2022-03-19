@@ -13,6 +13,8 @@
     tree
     wget
     pwgen
+    dive
+    gnupg
     direnv
 
     terminal-notifier
