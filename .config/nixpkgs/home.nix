@@ -23,6 +23,10 @@
     jq
     jless
 
+    # shell tools
+    spaceship-prompt
+    nerdfonts
+
     # fonts
     jetbrains-mono
 
@@ -151,7 +155,7 @@
     shellInit = ''
       # nix
       if test -e /Users/jloos/.nix-profile/etc/profile.d/nix.sh
-          fenv source /Users/jloos/.nix-profile/etc/profile.d/nix.sh
+        fenv source /Users/jloos/.nix-profile/etc/profile.d/nix.sh
       end
 
       # home-manager
@@ -174,8 +178,22 @@
     '';
 
     functions = {
-      gitignore = "curl -sL https://www.gitignore.io/api/$argv";
+      gitignore   = "curl -sL https://www.gitignore.io/api/$argv";
       fish_reload = "source ~/.config/fish/config.fish";
+    };
+  };
+
+  programs.starship = {
+    enable = true;
+    enableFishIntegration = true;
+    settings = {
+      # Inserts a blank line between shell prompts
+      add_newline = true;
+
+      character = {
+        success_symbol = "[➜](bold green)";
+        error_symbol = "[➜](bold red)";
+      };
     };
   };
 
