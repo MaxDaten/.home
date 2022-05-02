@@ -7,25 +7,29 @@
   home.homeDirectory = "/Users/jloos";
 
   home.packages = with pkgs; [
+    gnupg
+    direnv
+
+    peco
+
+    # shell tools
+    terminal-notifier
+    spaceship-prompt
+    nerdfonts
     htop
     ripgrep
     watch
     tree
     wget
     pwgen
-    dive
-    gnupg
-    direnv
-
-    terminal-notifier
-    peco
+    
     broot
+    # Data Structures
+
     jq
     jless
-
-    # shell tools
-    spaceship-prompt
-    nerdfonts
+    dasel # Query data structures
+    gron  # transforms to grepable jsons
 
     # fonts
     jetbrains-mono
@@ -42,6 +46,7 @@
     google-cloud-sdk
     kubectl
     kustomize
+    dive # Analyze docker layer
   ];
 
   # This value determines the Home Manager release that your
