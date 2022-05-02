@@ -145,6 +145,7 @@
 
     shellAbbrs = {
       hm = "home-manager";
+      hme = "home-manager edit";
       hms = "home-manager switch";
       gitco = "git checkout";
       gitrb = "git rebase --autostash";
