@@ -15,7 +15,6 @@
     # shell tools
     terminal-notifier
     spaceship-prompt
-    nerdfonts
     htop
     ripgrep
     watch
@@ -24,8 +23,8 @@
     pwgen
     
     broot
-    # Data Structures
 
+    # Data Structures
     jq
     jless
     dasel # Query data structures
@@ -33,6 +32,7 @@
 
     # fonts
     jetbrains-mono
+    nerdfonts
 
     # linting
     shellcheck
@@ -90,6 +90,7 @@
       }
 
       {
+        # https://github.com/jethrokuan/z
         name = "z";
         src = pkgs.fetchFromGitHub {
           owner = "jethrokuan";
@@ -307,6 +308,10 @@
 
       vim-pandoc
       vim-pandoc-syntax
+
+      vim-yaml
+      vim-json
+      vim-markdown
     ];
 
   };
