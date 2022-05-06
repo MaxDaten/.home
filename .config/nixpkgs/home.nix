@@ -63,6 +63,7 @@
   programs.home-manager.enable = true;
 
   # Configurations
+  programs.man.generateCaches = true; # Allow man completions
 
   programs.fish = {
     enable = true;
