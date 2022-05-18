@@ -152,6 +152,7 @@
       gitco = "git checkout";
       gitrb = "git rebase --autostash";
       gitcm = "git commit -m";
+      gitca = "git commit --amend --no-edit";
       pjo = "pj open";
     };
 
