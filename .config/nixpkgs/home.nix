@@ -258,6 +258,11 @@
   };
 
   programs.bat.enable = true;
+  programs.bash.enable = true;
+  programs.zsh.enable = true;
+
+  programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
 
   # Git
   programs.git = {
