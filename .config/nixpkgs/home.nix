@@ -21,14 +21,15 @@
     tree
     wget
     pwgen
-    
+
     broot
 
     # Data Structures
     jq
+    yq
     jless
     dasel # Query data structures
-    gron  # transforms to grepable jsons
+    gron # transforms to grepable jsons
 
     # fonts
     jetbrains-mono
@@ -36,7 +37,7 @@
 
     # linting
     shellcheck
-    
+
     # Nix tools
     comma
     nixfmt
@@ -187,7 +188,7 @@
     '';
 
     functions = {
-      gitignore   = "curl -sL https://www.gitignore.io/api/$argv";
+      gitignore = "curl -sL https://www.gitignore.io/api/$argv";
       fish_reload = "source ~/.config/fish/config.fish";
     };
   };
@@ -199,9 +200,7 @@
       # Inserts a blank line between shell prompts
       add_newline = true;
 
-      line_break = {
-        disabled = false;
-      };
+      line_break = { disabled = false; };
 
       format = pkgs.lib.concatStrings [
         "$directory"
@@ -217,7 +216,7 @@
 
       kubernetes = {
         disabled = false;
-        format = ''[\[$symbol$context( \($namespace\))\]]($style) '';
+        format = "[\\[$symbol$context( \\($namespace\\))\\]]($style) ";
         context_aliases = {
           "k8s-cluster01.prelive.kmo.zone" = "kmo-prelive";
           "k8s-cluster01.live.kmo.zone" = "kmo-live";
@@ -230,9 +229,7 @@
         disabled = false;
       };
 
-      docker_context = {
-        disabled = true;
-      };
+      docker_context = { disabled = true; };
 
       nix_shell = {
         format = "$symbol$state";
@@ -245,21 +242,13 @@
         symbol = " ";
       };
 
-      java = {
-        disabled = false;
-      };
+      java = { disabled = false; };
 
-      gcloud = {
-        disabled = true;
-      };
+      gcloud = { disabled = true; };
 
-      aws = {
-        disabled = false;
-      };
+      aws = { disabled = false; };
 
-      scala = {
-        format = ''[$symbol($version )]($style) '';
-      };
+      scala = { format = "[$symbol($version )]($style) "; };
 
       character = {
         success_symbol = "[➜](bold green)";
