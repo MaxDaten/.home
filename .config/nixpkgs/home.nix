@@ -21,6 +21,7 @@
     tree
     wget
     pwgen
+    neofetch
 
     broot
 
