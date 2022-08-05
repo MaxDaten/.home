@@ -157,6 +157,9 @@
       gitca = "git commit --amend --no-edit";
       pjo = "pj open";
       awse = "code --new-window ~/.aws/credentials ~/.aws/config";
+      tp = "terraform plan";
+      ta = "terraform apply";
+      tay = "terraform apply --yes";
     };
 
     shellAliases = {
