@@ -150,12 +150,13 @@
     shellAbbrs = {
       hm = "home-manager";
       hme = "home-manager edit";
-      hms = "home-manager switch";
+      hms = "NIXPKGS_ALLOW_BROKEN=1 home-manager switch";
       gitco = "git checkout";
       gitrb = "git rebase --autostash";
       gitcm = "git commit -m";
       gitca = "git commit --amend --no-edit";
       pjo = "pj open";
+      awse = "code --new-window ~/.aws/credentials ~/.aws/config";
     };
 
     shellAliases = {
