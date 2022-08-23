@@ -1,0 +1,14 @@
+services:
+  nixbuilder:
+    build:
+      context: .
+      dockerfile: docker/nixbuilder
+    image: nixbuilder
+    working_dir: /workspace
+    volumes:
+      - .:/workspace
+      - nix-store:/nix/store
+    command: docker/nixbuilder/build-image.sh
+
+volumes:
+  nix-store:
