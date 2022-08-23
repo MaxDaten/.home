@@ -1,5 +1,5 @@
 {
-  modulesPath ? <nixpkgs/nixos/modules>,
+  modulesPath,
   pkgs,
   lib,
   ...

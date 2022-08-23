@@ -1,14 +1,10 @@
 {
-  modulesPath ? <nixpkgs/nixos/modules>,
+  modulesPath,
   pkgs,
   lib,
   ...
 }: {
   imports = [
-    # (modulesPath + "/profiles/base.nix")
-    # (modulesPath + "/installer/sd-card/sd-image.nix")
-    # (modulesPath + "/profiles/installation-device.nix")
-    # (modulesPath + "/installer/sd-card/sd-image-raspberrypi.nix")
     (modulesPath + "/installer/sd-card/sd-image-aarch64.nix")
   ];
 

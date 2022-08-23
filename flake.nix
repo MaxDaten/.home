@@ -26,11 +26,6 @@
     system = "aarch64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
 
-    overlay-allowMissing = final: super: {
-      makeModulesClosure = x:
-        super.makeModulesClosure (x // {allowMissing = true;});
-    };
-
     devShells = flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
     in {
@@ -52,17 +47,11 @@
       nixosConfigurations.pi4-nixos = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
-          ({
-            config,
-            pkgs,
-            ...
-          }: {nixpkgs.overlays = [overlay-allowMissing];})
+          ./machines/pi4-nixos
+          ./nixos/modules/fixup-allow-missing-modules.nix
           nixos-hardware.nixosModules.raspberry-pi-4
-          ./nixos/modules/sd-image.nix
-          ./nixos/modules/hardware.nix
-          ./nixos/modules/network.nix
+          ./nixos/modules/pi4-sd-image.nix
           ./nixos/modules/system.nix
-          ./nixos/modules/nix.nix
           # Secret Management
           sops-nix.nixosModules.sops
           # Enable vsc ssh remote
