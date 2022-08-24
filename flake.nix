@@ -52,6 +52,7 @@
           nixos-hardware.nixosModules.raspberry-pi-4
           ./nixos/modules/pi4-sd-image.nix
           ./nixos/modules/system.nix
+          ./nixos/modules/my-networks.nix
           # Secret Management
           sops-nix.nixosModules.sops
           # Enable vsc ssh remote
