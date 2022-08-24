@@ -1,2 +1,5 @@
 result*
 *.img
+
+# Secrets
+**/*secrets.env
