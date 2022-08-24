@@ -1,13 +1,14 @@
 {
   description = "Raspberry Pi NixOS";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.05";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  inputs.nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
   inputs.nixos-hardware.url = github:NixOS/nixos-hardware/master;
   inputs.flake-utils.url = "github:numtide/flake-utils";
   inputs.vscode-server.url = "github:msteen/nixos-vscode-server";
   inputs.home-manager = {
-    url = "github:nix-community/home-manager/release-22.05";
-    inputs.nixpkgs.follows = "nixpkgs";
+    url = "github:nix-community/home-manager";
+    inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
   inputs.sops-nix = {
     url = github:Mic92/sops-nix;
@@ -17,6 +18,7 @@
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-unstable,
     nixos-hardware,
     flake-utils,
     vscode-server,
@@ -48,6 +50,7 @@
         inherit system;
         modules = [
           ./machines/pi4-nixos
+          ./users/jloos
           ./nixos/modules/fixup-allow-missing-modules.nix
           nixos-hardware.nixosModules.raspberry-pi-4
           ./nixos/modules/pi4-sd-image.nix
@@ -64,19 +67,14 @@
           }: {
             services.vscode-server.enable = true;
           })
-          # home-manager.nixosModules.home-manager
-          # {
-          #   home-manager.useGlobalPkgs = true;
-          #   home-manager.useUserPackages = true;
-          #   home-manager.users.jloos = import (pkgs.fetchgitPrivate {
-          #     url = "git@github.com:MaxDaten/.home.git";
-          #     rev = "fcd020eac678331fb9c6a1865f7778430b34be3f";
-          #     sparseCheckout = ''
-          #       .config/nixpkgs/home.nix
-          #     '';
-          #     sha256 = "";
-          #   }) { src = .config/nixpkgs/home.nix; };
-          # }
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.jloos = {
+              imports = [ (./. + "/users/jloos/home.nix") ];
+            };
+          }
         ];
       };
 

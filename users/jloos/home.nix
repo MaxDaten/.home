@@ -4,16 +4,22 @@
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "jloos";
-  home.homeDirectory = "/Users/jloos";
+  home.homeDirectory = 
+    if pkgs.stdenv.hostPlatform.isDarwin
+    then "/Users/jloos" 
+    else "/home/jloos";
 
-  home.packages = with pkgs; [
+  home.packages = with pkgs; 
+    let darwinPackages = [
+        terminal-notifier
+      ];
+    in [
     gnupg
     direnv
 
     peco
 
     # shell tools
-    terminal-notifier
     spaceship-prompt
     htop
     ripgrep
@@ -49,7 +55,7 @@
     kubectl
     kustomize
     dive # Analyze docker layer
-  ];
+  ] ++ (if pkgs.stdenv.hostPlatform.isDarwin then darwinPackages else []);
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
