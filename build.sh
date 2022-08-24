@@ -1,11 +1,11 @@
 #! /usr/bin/env nix-shell
-#! nix-shell -i bash -p tree
+#! nix-shell -i bash -p tree findutils
 
 set -euo pipefail
 
 echo "🐳 Build image via docker"
 docker compose up --exit-code-from nixbuilder
-IMAGE=$(find . -name 'nixos-sd-image*.img')
+IMAGE=$(find . -name 'nixos-sd-image*.img' -printf '%T@ %p\n' | sort -n | tail -1 | cut -f2- -d" ")
 
 read -p "Write image ${IMAGE}? (This may take a while) [yn]: " WRITE_IMAGE
 
