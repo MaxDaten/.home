@@ -2,13 +2,12 @@
   description = "Raspberry Pi NixOS";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-  inputs.nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
   inputs.nixos-hardware.url = github:NixOS/nixos-hardware/master;
   inputs.flake-utils.url = "github:numtide/flake-utils";
   inputs.vscode-server.url = "github:msteen/nixos-vscode-server";
   inputs.home-manager = {
     url = "github:nix-community/home-manager";
-    inputs.nixpkgs.follows = "nixpkgs-unstable";
+    inputs.nixpkgs.follows = "nixpkgs";
   };
   inputs.sops-nix = {
     url = github:Mic92/sops-nix;
@@ -18,7 +17,6 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-unstable,
     nixos-hardware,
     flake-utils,
     vscode-server,

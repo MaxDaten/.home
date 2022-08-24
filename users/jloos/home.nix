@@ -83,6 +83,7 @@
 
     plugins = [
       {
+        # https://github.com/oh-my-fish/plugin-peco
         name = "peco";
         src = pkgs.fetchFromGitHub {
           owner = "oh-my-fish";
@@ -93,11 +94,12 @@
       }
 
       {
+        # https://github.com/oh-my-fish/plugin-foreign-env
         name = "foreign-env";
         src = pkgs.fetchFromGitHub {
           owner = "oh-my-fish";
           repo = "plugin-foreign-env";
-          rev = "dddd9213272a0ab848d474d0cbde12ad034e65bc";
+          rev = "b3dd471bcc885b597c3922e4de836e06415e52dd";
           # SRI hash
           hash = "sha256-er1KI2xSUtTlQd9jZl1AjqeArrfBxrgBLcw5OqinuAM=";
         };
@@ -109,7 +111,7 @@
         src = pkgs.fetchFromGitHub {
           owner = "jethrokuan";
           repo = "z";
-          rev = "45a9ff6d0932b0e9835cbeb60b9794ba706eef10";
+          rev = "85f863f20f24faf675827fb00f3a4e15c7838d76";
           hash = "sha256-pWkEhjbcxXduyKz1mAFo90IuQdX7R8bLCQgb0R+hXs4=";
         };
       }
