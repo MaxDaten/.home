@@ -73,6 +73,10 @@
   # Configurations
   programs.man.generateCaches = true; # Allow man completions
 
+  home.sessionVariables = {
+    EDITOR = if pkgs.stdenv.hostPlatform.isDarwin then "code --wait" else "vim";
+  };
+
   programs.fish = {
     enable = true;
 
@@ -175,8 +179,8 @@
 
     shellInit = ''
       # nix
-      if test -e /Users/jloos/.nix-profile/etc/profile.d/nix.sh
-        fenv source /Users/jloos/.nix-profile/etc/profile.d/nix.sh
+      if test -e $HOME/.nix-profile/etc/profile.d/nix.sh
+        fenv source $HOME/.nix-profile/etc/profile.d/nix.sh
       end
 
       # home-manager
@@ -192,7 +196,7 @@
       end
 
       set -gx PROJECT_PATHS ~/Workspace/buzzar ~/Workspace/kmo ~/Workspace/gitops
-      set -gx EDITOR code
+      # set -gx EDITOR code
 
       # done
       set __done_enabled
@@ -286,7 +290,7 @@
     extraConfig = {
       core = {
         autocrlf = "input";
-        excludesfile = "/Users/jloos/.config/git/global.gitignore";
+        excludesfile = (pkgs.writeText ".gitignore" (builtins.readFile ./global.gitignore)).outPath;
       };
 
       pull = { rebase = false; };
