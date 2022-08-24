@@ -38,6 +38,6 @@ nixos-rebuild --flake .#pi4-nixos \
 
 ## TODO
 
-- [ ] Integrate already present home-manager managed home configs for `users.jloos`
+- [x] Integrate already present home-manager managed home configs for `users.jloos`
 - [ ] Secret management via [sops-nix](https://github.com/Mic92/sops-nix)
   - <https://xeiaso.net/blog/nixos-encrypted-secrets-2021-01-20>
