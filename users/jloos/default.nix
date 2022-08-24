@@ -1,3 +1,4 @@
+# System settings of user
 { pkgs, config, ... }:
 {
   users.extraUsers.jloos = {
