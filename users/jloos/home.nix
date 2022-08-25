@@ -1,7 +1,9 @@
-{ config, pkgs, ... }:
-
 {
-
+  config,
+  pkgs,
+  hasGui ? false,
+  ...
+}: {
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
@@ -15,58 +17,71 @@
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "jloos";
-  home.homeDirectory = 
+  home.homeDirectory =
     if pkgs.stdenv.hostPlatform.isDarwin
-    then "/Users/jloos" 
+    then "/Users/jloos"
     else "/home/jloos";
 
-  home.packages = with pkgs; 
-    let darwinPackages = [
-        terminal-notifier
-      ];
-    in [
-    gnupg
-    direnv
+  home.packages = with pkgs; let
+    darwinPackages = [
+      terminal-notifier
+    ];
+    withOptionalDarwinPackages =
+      if pkgs.stdenv.hostPlatform.isDarwin
+      then darwinPackages
+      else [];
 
-    peco
+    guiPackages = [
+      # fonts
+      jetbrains-mono
+      nerdfonts
+    ];
+    withGuiRelevantPackages =
+      if pkgs.stdenv.hostPlatform.isDarwin
+      then guiPackages
+      else [];
+  in
+    [
+      gnupg
+      direnv
 
-    # shell tools
-    spaceship-prompt
-    htop
-    ripgrep
-    watch
-    tree
-    wget
-    pwgen
-    neofetch
+      peco
 
-    broot
+      # shell tools
+      spaceship-prompt
+      htop
+      ripgrep
+      watch
+      tree
+      wget
+      pwgen
+      neofetch
 
-    # Data Structures
-    jq
-    yq
-    jless
-    dasel # Query data structures
-    gron # transforms to grepable jsons
+      broot
 
-    # fonts
-    jetbrains-mono
-    nerdfonts
+      # Data Structures
+      jq
+      yq
+      jless
+      dasel # Query data structures
+      gron # transforms to grepable jsons
 
-    # linting
-    shellcheck
+      # linting
+      shellcheck
 
-    # Nix tools
-    comma
-    nixfmt
+      # Nix tools
+      comma
+      nixfmt
 
-    # Infrastructure
-    awscli2
-    google-cloud-sdk
-    kubectl
-    kustomize
-    dive # Analyze docker layer
-  ] ++ (if pkgs.stdenv.hostPlatform.isDarwin then darwinPackages else []);
+      # Infrastructure
+      awscli2
+      google-cloud-sdk
+      kubectl
+      kustomize
+      dive # Analyze docker layer
+    ]
+    ++ withOptionalDarwinPackages
+    ++ withGuiRelevantPackages;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -75,7 +90,10 @@
   programs.man.generateCaches = true; # Allow man completions
 
   home.sessionVariables = {
-    EDITOR = if pkgs.stdenv.hostPlatform.isDarwin then "code --wait" else "vim";
+    EDITOR =
+      if pkgs.stdenv.hostPlatform.isDarwin
+      then "code --wait"
+      else "vim";
   };
 
   programs.fish = {
@@ -112,7 +130,7 @@
           owner = "jethrokuan";
           repo = "z";
           rev = "85f863f20f24faf675827fb00f3a4e15c7838d76";
-          hash = "sha256-pWkEhjbcxXduyKz1mAFo90IuQdX7R8bLCQgb0R+hXs4=";
+          hash = "sha256-+FUBM7CodtZrYKqU542fQD+ZDGrd2438trKM0tIESs0=";
         };
       }
 
@@ -218,7 +236,7 @@
       # Inserts a blank line between shell prompts
       add_newline = true;
 
-      line_break = { disabled = false; };
+      line_break = {disabled = false;};
 
       format = pkgs.lib.concatStrings [
         "$directory"
@@ -247,7 +265,7 @@
         disabled = false;
       };
 
-      docker_context = { disabled = true; };
+      docker_context = {disabled = true;};
 
       nix_shell = {
         format = "$symbol$state";
@@ -260,13 +278,13 @@
         symbol = " ";
       };
 
-      java = { disabled = false; };
+      java = {disabled = false;};
 
-      gcloud = { disabled = true; };
+      gcloud = {disabled = true;};
 
-      aws = { disabled = false; };
+      aws = {disabled = false;};
 
-      scala = { format = "[$symbol($version )]($style) "; };
+      scala = {format = "[$symbol($version )]($style) ";};
 
       character = {
         success_symbol = "[➜](bold green)";
@@ -288,7 +306,7 @@
     userName = "Jan-Philip Loos";
     userEmail = "maxdaten@gmail.com";
 
-    aliases = { r = "rebase --autostash"; };
+    aliases = {r = "rebase --autostash";};
 
     extraConfig = {
       core = {
@@ -296,9 +314,9 @@
         excludesfile = (pkgs.writeText ".gitignore" (builtins.readFile ./global.gitignore)).outPath;
       };
 
-      pull = { rebase = false; };
+      pull = {rebase = false;};
 
-      init = { defaultBranch = "main"; };
+      init = {defaultBranch = "main";};
     };
   };
 
@@ -327,6 +345,5 @@
       vim-json
       vim-markdown
     ];
-
   };
 }
