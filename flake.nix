@@ -61,7 +61,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.jloos = {
-              imports = [ (./. + "/users/jloos/home.nix") ];
+              imports = [(./. + "/users/jloos/home.nix")];
             };
           }
         ];

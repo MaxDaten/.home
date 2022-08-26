@@ -1,6 +1,9 @@
 # System settings of user
-{ pkgs, config, ... }:
 {
+  pkgs,
+  config,
+  ...
+}: {
   users.extraUsers.jloos = {
     isNormalUser = true;
     extraGroups = [

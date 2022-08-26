@@ -2,13 +2,16 @@
   config,
   pkgs,
   hasGui ? false,
+  fetchFromGitHub,
   ...
-}: {
+}: let
+  nixos-vscode-server = fetchTarball {
+    url = "https://github.com/msteen/nixos-vscode-server/tarball/master";
+    sha256 = "sha256:00ki5z2svrih9j9ipl8dm3dl6hi9wgibydsfa7rz2mdw9p0370yl";
+  };
+in {
   imports = [
-    "${fetchTarball {
-      url = "https://github.com/msteen/nixos-vscode-server/tarball/master";
-      sha256 = "sha256:00ki5z2svrih9j9ipl8dm3dl6hi9wgibydsfa7rz2mdw9p0370yl";
-    }}/modules/vscode-server/home.nix"
+    "${nixos-vscode-server}/modules/vscode-server/home.nix"
   ];
 
   # This value determines the Home Manager release that your
