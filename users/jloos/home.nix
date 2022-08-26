@@ -4,6 +4,13 @@
   hasGui ? false,
   ...
 }: {
+  imports = [
+    "${fetchTarball {
+      url = "https://github.com/msteen/nixos-vscode-server/tarball/master";
+      sha256 = "sha256:00ki5z2svrih9j9ipl8dm3dl6hi9wgibydsfa7rz2mdw9p0370yl";
+    }}/modules/vscode-server/home.nix"
+  ];
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
@@ -83,6 +90,8 @@
     ]
     ++ withOptionalDarwinPackages
     ++ withGuiRelevantPackages;
+
+  services.vscode-server.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

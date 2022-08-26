@@ -56,15 +56,6 @@
           ./nixos/modules/my-networks.nix
           # Secret Management
           sops-nix.nixosModules.sops
-          # Enable vsc ssh remote
-          vscode-server.nixosModule
-          ({
-            config,
-            pkgs,
-            ...
-          }: {
-            services.vscode-server.enable = true;
-          })
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
