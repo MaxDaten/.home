@@ -72,6 +72,7 @@
       # Nix tools
       comma
       nixfmt
+      alejandra
 
       # Infrastructure
       awscli2
