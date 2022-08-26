@@ -18,14 +18,25 @@ This builds an .img based on this flake and writes it onto an sd which the raspb
 
 This utilize docker to build an aarch64-linux image. Currently nix cross compilation does not work for me this is why only aarch64 is supported.
 
-### Switch nixos to this configuration
+### Install NixOS
+
+Once the pi started, connect via ssh `ssh jloos@pi4-nixos` or as root `ssh root@pi4-nixos`.
+
+```bash
+git clone git@github.com:MaxDaten/.home.git
+sudo ln -sf /home/jloos/.home/flake.nix /etc/nixos/flake.nix
+sudo nixos-install --root / --flake
+reboot
+```
+
+### Apply new NixOS configuration
 
 Either run on the pi:
 
 ```bash
-sudo nixos-rebuild switch --flake github:MaxDaten/raspi-nixos/<commit-sha>
+sudo nixos-rebuild switch --flake github:MaxDaten/.home/<commit-sha>
 # for example:
-# sudo nixos-rebuild switch --flake github:MaxDaten/raspi-nixos/12e09b66f64f46b97236ffb2eba97e41969b4c1f
+# sudo nixos-rebuild switch --flake github:MaxDaten/.home/12e09b66f64f46b97236ffb2eba97e41969b4c1f
 ```
 
 or remotely:
@@ -34,6 +45,16 @@ or remotely:
 nixos-rebuild --flake .#pi4-nixos \
   --target-host pi4-nixos --build-host pi4-nixos \
   switch
+```
+
+### Use Visual Studio Code remotely
+
+Does not work out of the box but <https://github.com/msteen/nixos-vscode-server> is already installed as a nixos module.
+But it has to be [enabled manually on user basis](https://github.com/msteen/nixos-vscode-server#enable-the-service):
+
+```bash
+systemctl --user enable auto-fix-vscode-server.service
+systemctl --user start auto-fix-vscode-server.service
 ```
 
 ## TODO
