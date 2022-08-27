@@ -38,10 +38,6 @@
     {
       # formatter = nixpkgs.legacyPackages.aarch64-darwin.alejandra;
 
-      # Issue: https://github.com/NixOS/nixos-hardware/issues/360#issuecomment-1009626988
-      # Workaround: https://github.com/NixOS/nixpkgs/issues/126755#issuecomment-869149243
-      # overlays.default = overlay-allowMissing;
-
       nixosConfigurations.pi4-nixos = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
@@ -58,6 +54,9 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = {
+              headless = true;
+            };
             home-manager.users.jloos = {
               imports = [(./. + "/users/jloos/home.nix")];
             };

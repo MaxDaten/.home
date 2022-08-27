@@ -1,14 +1,25 @@
 {
   config,
+  lib,
   pkgs,
-  hasGui ? false,
-  fetchFromGitHub,
+  headless ? true,
   ...
 }: let
   nixos-vscode-server = fetchTarball {
     url = "https://github.com/msteen/nixos-vscode-server/tarball/master";
     sha256 = "sha256:00ki5z2svrih9j9ipl8dm3dl6hi9wgibydsfa7rz2mdw9p0370yl";
   };
+
+  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
+  darwinPackages = with pkgs; [
+    terminal-notifier
+  ];
+
+  guiPackages = with pkgs; [
+    # fonts
+    jetbrains-mono
+    nerdfonts
+  ];
 in {
   imports = [
     "${nixos-vscode-server}/modules/vscode-server/home.nix"
@@ -32,69 +43,49 @@ in {
     then "/Users/jloos"
     else "/home/jloos";
 
-  home.packages = with pkgs; let
-    darwinPackages = [
-      terminal-notifier
-    ];
-    withOptionalDarwinPackages =
-      if pkgs.stdenv.hostPlatform.isDarwin
-      then darwinPackages
-      else [];
+  home.packages = with pkgs; [
+    gnupg
+    direnv
+    htop
 
-    guiPackages = [
-      # fonts
-      jetbrains-mono
-      nerdfonts
-    ];
-    withGuiRelevantPackages =
-      if pkgs.stdenv.hostPlatform.isDarwin
-      then guiPackages
-      else [];
-  in
-    [
-      gnupg
-      direnv
-      tmux
-      htop
+    peco
 
-      peco
+    # shell tools
+    spaceship-prompt
+    htop
+    ripgrep
+    watch
+    tree
+    wget
+    pwgen
+    neofetch
 
-      # shell tools
-      spaceship-prompt
-      htop
-      ripgrep
-      watch
-      tree
-      wget
-      pwgen
-      neofetch
+    broot
 
-      broot
+    # Data Structures
+    jq
+    yq
+    jless
+    dasel # Query data structures
+    gron # transforms to grepable jsons
 
-      # Data Structures
-      jq
-      yq
-      jless
-      dasel # Query data structures
-      gron # transforms to grepable jsons
+    # linting
+    shellcheck
 
-      # linting
-      shellcheck
+    # Nix tools
+    comma
+    nixfmt
+    alejandra
 
-      # Nix tools
-      comma
-      nixfmt
-      alejandra
-
-      # Infrastructure
-      awscli2
-      google-cloud-sdk
-      kubectl
-      kustomize
-      dive # Analyze docker layer
-    ]
-    ++ withOptionalDarwinPackages
-    ++ withGuiRelevantPackages;
+    # Infrastructure
+    awscli2
+    google-cloud-sdk
+    kubectl
+    kustomize
+    dive # Analyze docker layer
+  ]
+  ++ lib.optional isDarwin darwinPackages
+  ++ lib.optional (!headless) guiPackages;
 
   services.vscode-server.enable = true;
 
@@ -109,6 +100,26 @@ in {
       if pkgs.stdenv.hostPlatform.isDarwin
       then "code --wait"
       else "vim";
+  };
+
+  programs.tmux = {
+    enable = true;
+    tmuxinator.enable = true;
+    clock24 = true;
+    plugins = with pkgs; [
+      tmuxPlugins.cpu
+      {
+        plugin = tmuxPlugins.resurrect;
+        extraConfig = "set -g @resurrect-strategy-nvim 'session'";
+      }
+      {
+        plugin = tmuxPlugins.continuum;
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+          set -g @continuum-save-interval '60' # minutes
+        '';
+      }
+    ];
   };
 
   programs.fish = {
