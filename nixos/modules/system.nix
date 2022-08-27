@@ -1,5 +1,5 @@
 {
-  modulesPath,
+  config,
   pkgs,
   lib,
   ...
@@ -29,6 +29,11 @@
   security = {
     sudo.wheelNeedsPassword = false;
   };
+
+  # Allow access to secrets
+  # systemd.services.some-service = {
+  #   serviceConfig.SupplementaryGroups = [config.users.groups.keys.name];
+  # };
 
   # system.copySystemConfiguration = true;
 }

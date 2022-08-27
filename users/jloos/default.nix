@@ -10,6 +10,7 @@
       "wheel"
       "networkmanager"
       "lp"
+      config.users.groups.keys.name # Allow access to secrets
     ];
 
     shell = pkgs.fish;
