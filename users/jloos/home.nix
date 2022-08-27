@@ -39,7 +39,7 @@ in {
   # paths it should manage.
   home.username = "jloos";
   home.homeDirectory =
-    if pkgs.stdenv.hostPlatform.isDarwin
+    if isDarwin
     then "/Users/jloos"
     else "/home/jloos";
 
@@ -97,7 +97,7 @@ in {
 
   home.sessionVariables = {
     EDITOR =
-      if pkgs.stdenv.hostPlatform.isDarwin
+      if isDarwin
       then "code --wait"
       else "vim";
   };
