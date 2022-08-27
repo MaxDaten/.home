@@ -1,10 +1,15 @@
 {
   config,
   pkgs,
-  modulesPath,
+  nixos-hardware,
   lib,
   ...
 }: {
+  imports = [
+    ./fixup-allow-missing-modules.nix
+    nixos-hardware.nixosModules.raspberry-pi-4
+  ];
+
   fileSystems = lib.mkForce {
     # There is no U-Boot on the Pi 4, thus the firmware partition needs to be mounted as /boot.
     "/boot" = {

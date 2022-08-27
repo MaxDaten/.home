@@ -43,11 +43,12 @@
 
       nixosConfigurations.pi4-nixos = nixpkgs.lib.nixosSystem {
         inherit system;
+        specialArgs = {
+          inherit nixos-hardware;
+        };
         modules = [
           ./machines/pi4-nixos
           ./users/jloos
-          ./nixos/modules/fixup-allow-missing-modules.nix
-          nixos-hardware.nixosModules.raspberry-pi-4
           ./nixos/modules/pi4-sd-image.nix
           ./nixos/modules/system.nix
           (import ./nixos/modules/my-networks)
