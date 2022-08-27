@@ -82,12 +82,14 @@ The machine to consume secrets has to be imported via it's host key:
 cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age
 ```
 
+For me details follow documentation of sops-nix.
+
 ## TODO
 
 - [x] Integrate already present home-manager managed home configs for `users.jloos`
 - [x] Secret management via [sops-nix](https://github.com/Mic92/sops-nix)
   - <https://xeiaso.net/blog/nixos-encrypted-secrets-2021-01-20>
-- [ ] SOPS for Installer Image? => Pin HOST key
+- [ ] SOPS for Installer Image? => Pin HOST key?
 - [ ] Hardware Dashboard
 - [ ] Home-Bridge
 - [ ] Remote building on pi4
