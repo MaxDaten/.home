@@ -60,8 +60,9 @@ systemctl --user start auto-fix-vscode-server.service
 ## TODO
 
 - [x] Integrate already present home-manager managed home configs for `users.jloos`
-- [ ] Secret management via [sops-nix](https://github.com/Mic92/sops-nix)
+- [x] Secret management via [sops-nix](https://github.com/Mic92/sops-nix)
   - <https://xeiaso.net/blog/nixos-encrypted-secrets-2021-01-20>
-- [ ] Remote building on pi4
-- [ ] Home-Bridge
+- [ ] SOPS for Installer Image? => Pin HOST key
 - [ ] Hardware Dashboard
+- [ ] Home-Bridge
+- [ ] Remote building on pi4
