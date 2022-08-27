@@ -54,6 +54,8 @@ in {
     [
       gnupg
       direnv
+      tmux
+      htop
 
       peco
 
