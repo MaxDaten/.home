@@ -51,8 +51,16 @@
     extraOptions = ''
       min-free = ${toString (100 * 1024 * 1024)}
       max-free = ${toString (1024 * 1024 * 1024)}
+      keep-outputs = true
+      keep-derivations = true
     '';
   };
 
-  system.stateVersion = "22.05";
+  system = {
+    stateVersion = "22.05";
+    # autoUpgrade = {
+    #   enable = true;
+    #   channel = "https://nixos.org/channels/nixos-unstable";
+    # };
+  };
 }
