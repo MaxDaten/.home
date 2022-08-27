@@ -8,14 +8,13 @@
   networking.wireless = {
     enable = true;
     interfaces = ["wlan0"];
-    environmentFile = ./. + ./wireless-secrets.env;
     networks = {
       "Player Five" = {
-        psk = "@PSK_PLAYER_FIVE_TWO@";
+        psk = "XXXX";
         priority = 100;
       };
       "Player Two" = {
-        psk = "@PSK_PLAYER_FIVE_TWO@";
+        psk = "XXXX";
         priority = 90;
       };
     };

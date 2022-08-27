@@ -50,9 +50,16 @@
           nixos-hardware.nixosModules.raspberry-pi-4
           ./nixos/modules/pi4-sd-image.nix
           ./nixos/modules/system.nix
-          ./nixos/modules/my-networks.nix
+          (import ./nixos/modules/my-networks)
           # Secret Management
           sops-nix.nixosModules.sops
+          {
+            sops.defaultSopsFile = ./secrets/pi4-nixos.yaml;
+            sops.age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+            sops.age.keyFile = "/var/lib/sops-nix/key.txt";
+            sops.age.generateKey = true;
+          }
+          # User environment managed by Home Manager
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
