@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 read -r -d '' HERE_CONFIG <<'EOF'
 # required
