@@ -39,8 +39,6 @@
     });
   in
     {
-      # formatter = nixpkgs.legacyPackages.aarch64-darwin.alejandra;
-
       nixosConfigurations.pi4-nixos = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
