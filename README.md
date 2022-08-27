@@ -57,6 +57,31 @@ systemctl --user enable auto-fix-vscode-server.service
 systemctl --user start auto-fix-vscode-server.service
 ```
 
+### Secret Management
+
+(sops)[https://github.com/mozilla/sops] & (sops-nix)[https://github.com/Mic92/sops-nix] is used to manage secrets consumed by nixos.
+
+You have to follow these steps to allow yourself to edit secrets:
+
+1. Get your age compatible key from ssh `./generate-sops-keys.sh`
+2. Add your key to `./.sops.yaml`:
+  ```yaml
+  keys:
+    - &user age1m2xmznzaswlsyyrndx5q55tzcdzuxc0nmnawu0q8mnve8vjatyhsn2z6rc
+  creation_rules:
+    - path_regex: secrets/[^/]+\.yaml$
+      key_groups:
+      - age:
+        - *user
+  ```
+
+The machine to consume secrets has to be imported via it's host key:
+
+```bash
+# on host machine
+cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age
+```
+
 ## TODO
 
 - [x] Integrate already present home-manager managed home configs for `users.jloos`
