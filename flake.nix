@@ -51,7 +51,7 @@
           ./users/jloos
           ./nixos/modules/pi4-sd-image.nix
           ./nixos/modules/system.nix
-          (import ./nixos/modules/my-networks)
+          ./nixos/modules/my-networks
           # Secret Management
           sops-nix.nixosModules.sops
           {
