@@ -5,9 +5,11 @@
 keys:
   - &jloos@pi4-nixos age1m2xmznzaswlsyyrndx5q55tzcdzuxc0nmnawu0q8mnve8vjatyhsn2z6rc
   - &jloos@macos age1scdp7nz77538w8sxk863nywywfqej6q5adrtp8fp3vpzfcxm4ajsk7vtxh
+  - &pi4-nixos age14vzyu76zxv8zquw2j05h869ys4wvpgnhmg6d7f4phzvynmc2sp6svpn332
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
     key_groups:
     - age:
       - *jloos@pi4-nixos
       - *jloos@macos
+      - *pi4-nixos
