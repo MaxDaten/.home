@@ -43,49 +43,50 @@ in {
     then "/Users/jloos"
     else "/home/jloos";
 
-  home.packages = with pkgs; [
-    gnupg
-    direnv
-    htop
+  home.packages = with pkgs;
+    [
+      gnupg
+      direnv
+      htop
 
-    peco
+      peco
 
-    # shell tools
-    spaceship-prompt
-    htop
-    ripgrep
-    watch
-    tree
-    wget
-    pwgen
-    neofetch
+      # shell tools
+      spaceship-prompt
+      htop
+      ripgrep
+      watch
+      tree
+      wget
+      pwgen
+      neofetch
 
-    broot
+      broot
 
-    # Data Structures
-    jq
-    yq
-    jless
-    dasel # Query data structures
-    gron # transforms to grepable jsons
+      # Data Structures
+      jq
+      yq
+      jless
+      dasel # Query data structures
+      gron # transforms to grepable jsons
 
-    # linting
-    shellcheck
+      # linting
+      shellcheck
 
-    # Nix tools
-    comma
-    nixfmt
-    alejandra
+      # Nix tools
+      comma
+      nixfmt
+      alejandra
 
-    # Infrastructure
-    awscli2
-    google-cloud-sdk
-    kubectl
-    kustomize
-    dive # Analyze docker layer
-  ]
-  ++ lib.optional isDarwin darwinPackages
-  ++ lib.optional (!headless) guiPackages;
+      # Infrastructure
+      awscli2
+      google-cloud-sdk
+      kubectl
+      kustomize
+      dive # Analyze docker layer
+    ]
+    ++ lib.optional isDarwin darwinPackages
+    ++ lib.optional (!headless) guiPackages;
 
   services.vscode-server.enable = true;
 
