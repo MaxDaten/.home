@@ -3,9 +3,11 @@
 # Also see https://github.com/Mic92/dotfiles/blob/master/nixos/.sops.yaml
 # for a more complex example.
 keys:
-  - &jloos age1m2xmznzaswlsyyrndx5q55tzcdzuxc0nmnawu0q8mnve8vjatyhsn2z6rc
+  - &jloos@pi4-nixos age1m2xmznzaswlsyyrndx5q55tzcdzuxc0nmnawu0q8mnve8vjatyhsn2z6rc
+  - &jloos@macos age1scdp7nz77538w8sxk863nywywfqej6q5adrtp8fp3vpzfcxm4ajsk7vtxh
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
     key_groups:
     - age:
-      - *jloos
+      - *jloos@pi4-nixos
+      - *jloos@macos
