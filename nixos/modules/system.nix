@@ -5,6 +5,10 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
+    # system tools
+    libraspberrypi
+
+    # minimal tools
     vim
     gitMinimal
     bash
