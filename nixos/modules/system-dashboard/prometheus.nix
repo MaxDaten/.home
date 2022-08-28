@@ -1,0 +1,49 @@
+{
+  config,
+  pkgs,
+  ...
+}: let
+  prometheusUriPath = "/prometheus/";
+in {
+  services.prometheus.enable = true;
+  services.prometheus = {
+    exporters = {
+      node = {
+        enable = true;
+        enabledCollectors = ["systemd"];
+        port = 9092;
+      };
+    };
+
+    scrapeConfigs = [
+      {
+        job_name = "pi4-nixos";
+        static_configs = [
+          {
+            targets = ["127.0.0.1:${toString config.services.prometheus.exporters.node.port}"];
+          }
+        ];
+      }
+    ];
+  };
+
+  services.avahi.extraServiceFiles.prometheus = ''
+    <?xml version="1.0" standalone='no'?><!--*-nxml-*-->
+    <!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+    <service-group>
+      <name replace-wildcards="yes">Prometheus on %h</name>
+      <service>
+        <type>_http._tcp</type>
+        <port>${toString config.services.prometheus.port}</port>
+      </service>
+    </service-group>
+  '';
+
+  # nginx reverse proxy
+  services.nginx.virtualHosts."prometheus.pi4-nixos.local" = {
+    locations."${prometheusUriPath}" = {
+      proxyPass = "http://127.0.0.1:${toString config.services.prometheus.port}/";
+      proxyWebsockets = true;
+    };
+  };
+}

@@ -9,18 +9,6 @@ in {
     owner = "grafana";
   };
 
-  services.avahi.extraServiceFiles.grafana = ''
-    <?xml version="1.0" standalone='no'?><!--*-nxml-*-->
-    <!DOCTYPE service-group SYSTEM "avahi-service.dtd">
-    <service-group>
-      <name replace-wildcards="yes">Grafana on %h</name>
-      <service>
-        <type>_http._tcp</type>
-        <port>3000</port>
-      </service>
-    </service-group>
-  '';
-
   # grafana configuration
   services.grafana = {
     enable = true;
@@ -33,6 +21,18 @@ in {
       adminPasswordFile = "/run/secrets/grafana_admin_password";
     };
   };
+
+  services.avahi.extraServiceFiles.grafana = ''
+    <?xml version="1.0" standalone='no'?><!--*-nxml-*-->
+    <!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+    <service-group>
+      <name replace-wildcards="yes">Grafana on %h</name>
+      <service>
+        <type>_http._tcp</type>
+        <port>${toString config.services.grafana.port}</port>
+      </service>
+    </service-group>
+  '';
 
   # nginx reverse proxy
   services.nginx.virtualHosts."grafana.pi4-nixos.local" = {
