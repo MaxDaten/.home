@@ -41,4 +41,6 @@ in {
       proxyWebsockets = true;
     };
   };
+
+  users.users.prometheus.extraGroups = [config.users.groups.video.name];
 }
