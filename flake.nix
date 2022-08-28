@@ -49,6 +49,7 @@
           ./users/jloos
           ./nixos/modules/pi4-sd-image.nix
           ./nixos/modules/system.nix
+          ./nixos/modules/network
           ./nixos/modules/my-networks
           # Secret Management
           sops-nix.nixosModules.sops
@@ -58,6 +59,9 @@
             sops.age.keyFile = "/var/lib/sops-nix/key.txt";
             sops.age.generateKey = true;
           }
+
+          ./nixos/modules/system-dashboard
+
           # User environment managed by Home Manager
           home-manager.nixosModules.home-manager
           {
