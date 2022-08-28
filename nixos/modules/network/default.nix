@@ -19,6 +19,9 @@
 
   services.nginx = {
     enable = true;
+    recommendedOptimisation = true;
+    recommendedGzipSettings = true;
+    recommendedProxySettings = true;
   };
 
   # Open ports in the firewall.
