@@ -5,6 +5,10 @@
 }: let
   grafanaUriPath = "/dashboard/";
 in {
+  sops.secrets.grafana_admin_password = {
+    owner = "grafana";
+  };
+
   services.avahi.extraServiceFiles.grafana = ''
     <?xml version="1.0" standalone='no'?><!--*-nxml-*-->
     <!DOCTYPE service-group SYSTEM "avahi-service.dtd">
@@ -23,6 +27,11 @@ in {
     port = 3000;
     addr = "127.0.0.1";
     rootUrl = "%(protocol)s://%(domain)s:%(http_port)s${grafanaUriPath}";
+
+    security = {
+      adminUser = "jloos";
+      adminPasswordFile = "/run/secrets/grafana_admin_password";
+    };
   };
 
   # nginx reverse proxy
