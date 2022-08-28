@@ -10,14 +10,22 @@ in {
     exporters = {
       node = {
         enable = true;
-        enabledCollectors = ["systemd"];
+        enabledCollectors = [
+          "systemd"
+          "processes"
+          "meminfo_numa"
+          "time"
+          "powersupplyclass"
+          "pressure"
+          "loadavg"
+        ];
         port = 9092;
       };
     };
 
     scrapeConfigs = [
       {
-        job_name = "pi4-nixos";
+        job_name = "prometheus";
         static_configs = [
           {
             targets = ["127.0.0.1:${toString config.services.prometheus.exporters.node.port}"];
