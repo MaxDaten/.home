@@ -35,6 +35,8 @@
           age
           ssh-to-age
           dig
+
+          stress
         ];
       };
     });
