@@ -34,6 +34,7 @@
           sops
           age
           ssh-to-age
+          dig
         ];
       };
     });
