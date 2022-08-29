@@ -89,10 +89,10 @@ For me details follow documentation of sops-nix.
 - [x] Integrate already present home-manager managed home configs for `users.jloos`
 - [x] Secret management via [sops-nix](https://github.com/Mic92/sops-nix)
   - <https://xeiaso.net/blog/nixos-encrypted-secrets-2021-01-20>
-- [ ] Hardware Dashboard
+- [X] Hardware Dashboard
   - [x] Grafana
-  - [ ] Prometheus
-- [ ] Add cacheix
+  - [X] Prometheus
+- [ ] Add cachix
 - [ ] SOPS for Installer Image? => Pin HOST key?
 - [ ] Home-Bridge
 - [ ] Remote building on pi4

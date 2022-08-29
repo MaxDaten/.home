@@ -37,6 +37,7 @@
           dig
 
           stress
+          speedtest-cli
         ];
       };
     });
