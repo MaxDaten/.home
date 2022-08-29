@@ -92,6 +92,8 @@ For me details follow documentation of sops-nix.
 - [X] Hardware Dashboard
   - [x] Grafana
   - [X] Prometheus
+  - [ ] Provision Dashboard via nix
+- [x] Network printing
 - [ ] Add cachix
 - [ ] SOPS for Installer Image? => Pin HOST key?
 - [ ] Home-Bridge
