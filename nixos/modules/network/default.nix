@@ -10,6 +10,7 @@
     ipv6 = false;
     publish = {
       enable = true;
+      userServices = true;
       addresses = true;
       domain = true;
       hinfo = true;
@@ -26,6 +27,11 @@
 
   networking.firewall.enable = true;
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [80];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [
+    80
+    631 # CUPS
+  ];
+  networking.firewall.allowedUDPPorts = [
+    631 # CUPS
+  ];
 }
