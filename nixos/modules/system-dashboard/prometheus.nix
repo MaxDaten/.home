@@ -15,6 +15,7 @@ in {
           "processes"
           "meminfo_numa"
           "time"
+          "hwmon"
           "powersupplyclass"
           "pressure"
           "loadavg"
