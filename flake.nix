@@ -38,6 +38,8 @@
 
           stress
           speedtest-cli
+
+          node2nix
         ];
       };
     });
