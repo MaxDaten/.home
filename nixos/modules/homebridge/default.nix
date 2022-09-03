@@ -12,7 +12,7 @@ with lib; let
     bridge = {
       name = "Homebridge 2D83";
       username = "0E:DE:6C:64:2D:83";
-      port = 51766;
+      port = cfg.bridgePort;
       pin = "906-88-561";
       advertiser = "avahi";
     };
@@ -20,7 +20,7 @@ with lib; let
       {
         platform = "config";
         name = "Config";
-        port = cfg.port;
+        port = cfg.uiPort;
         sudo = false; # prevent upgrading of plugins & homebridge because we want to be pure
         log = {
           method = "systemd";
@@ -64,11 +64,19 @@ in {
         '';
       };
 
-      port = mkOption {
+      uiPort = mkOption {
         type = types.int;
         default = 8581;
         description = ''
           Ports used by homebridge web ui.
+        '';
+      };
+
+      bridgePort = mkOption {
+        type = types.int;
+        default = 51766;
+        description = ''
+          Ports used by homebridge for kit integration.
         '';
       };
     };
@@ -93,6 +101,7 @@ in {
       path = [
         pkgs.nodejs
         pkgs.bash
+        homebridge-packages
       ];
 
       preStart = ''
@@ -121,8 +130,13 @@ in {
     };
 
     networking.firewall = mkIf cfg.openFirewall {
-      allowedTCPPorts = [cfg.port 51373];
-      allowedUDPPorts = [cfg.port];
+      allowedTCPPorts = [
+        cfg.uiPort
+        cfg.bridgePort
+      ];
+      allowedUDPPorts = [
+        cfg.uiPort
+      ];
     };
   };
 }
