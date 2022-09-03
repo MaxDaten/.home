@@ -9,22 +9,40 @@ with lib; let
   cfg = config.services.homebridge;
   # https://github.com/oznu/homebridge-config-ui-x/wiki/Manual-Configuration
   configFile = builtins.toFile "config.json" (builtins.toJSON {
-    platforms = {
-      platform = "nixos";
-      name = "homebridge for nixos";
-      port = cfg.port;
-      sudo = false; # prevent upgrading of plugins & homebridge because we want to be pure
-      log = {
-        method = "systemd";
-        service = "homebridge";
-      };
+    bridge = {
+      name = "Homebridge 2D83";
+      username = "0E:DE:6C:64:2D:83";
+      port = 51766;
+      pin = "906-88-561";
+      advertiser = "avahi";
     };
+    platforms = [
+      {
+        platform = "config";
+        name = "Config";
+        port = cfg.port;
+        sudo = false; # prevent upgrading of plugins & homebridge because we want to be pure
+        log = {
+          method = "systemd";
+          service = "homebridge";
+        };
+      }
+    ];
   });
 
   homebridge-packages = pkgs.symlinkJoin {
     name = "homebridge-all";
     paths = builtins.attrValues (import ./package {inherit pkgs;});
   };
+
+  homebridgeEnv = pkgs.writeText "homebridge.env" ''
+    HOMEBRIDGE_OPTS="-I -U ${cfg.workDir}"
+    UIX_STORAGE_PATH="${cfg.workDir}"
+    DEBUG="*"
+
+    HOMEBRIDGE_CONFIG_UI_TERMINAL=1
+    DISABLE_OPENCOLLECTIVE=true
+  '';
 in {
   options = {
     services.homebridge = {
@@ -68,7 +86,8 @@ in {
 
     systemd.services.homebridge = {
       description = "Homebridge Service";
-      after = ["network-online.target"];
+      wants = ["network-online.target"];
+      after = ["syslog.target" "network-online.target"];
       wantedBy = ["multi-user.target"];
 
       path = [
@@ -76,28 +95,28 @@ in {
         pkgs.bash
       ];
 
-      preStart = let
-        copyConfig = ''
-          rm -f "${cfg.workDir}/config.json"
-          ln -s ${configFile} "${cfg.workDir}/config.json"
-        '';
-      in
-        copyConfig;
+      preStart = ''
+        rm -f "${cfg.workDir}/config.json"
+        ln -s ${configFile} "${cfg.workDir}/config.json"
+      '';
 
+      # Adoption of linux installer:
+      # https://github.com/oznu/homebridge-config-ui-x/blob/master/src/bin/platforms/linux.ts#L689
       serviceConfig = {
-        Type = "forking";
+        Type = "simple";
         User = "homebridge";
         Group = "homebridge";
 
         WorkingDirectory = cfg.workDir;
-        ExecStart = "/run/wrappers/bin/sudo ${homebridge-packages}/bin/hb-service start";
-        ExecReload = "/run/wrappers/bin/sudo ${homebridge-packages}/bin/hbq-service restart";
-        ExecStop = "/run/wrappers/bin/sudo ${homebridge-packages}/bin/hb-service stop";
-        # StandardOutput = "append:${cfg.workDir}/logs.log";
-        # StandardError = "append:${cfg.workDir}/logs.log";
+        EnvironmentFile = homebridgeEnv;
+
+        # preStart = "-${homebridge-packages}/bin/hb-service before-start $HOMEBRIDGE_OPTS";
+        ExecStart = "${homebridge-packages}/bin/hb-service run $HOMEBRIDGE_OPTS";
 
         KillSignal = "SIGQUIT";
-        Restart = "on-failure";
+        KillMode = "process";
+        Restart = "always";
+        RestartSec = 3;
       };
     };
 
