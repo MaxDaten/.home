@@ -11,7 +11,8 @@
 in
   nodePackages
   // {
-    homebridge = nodePackages.homebridge.override {
-      buildInputs = [pkgs.openssl];
-    };
+    homebridge = builtins.mapAttrs (name: value:
+      value.override {
+        buildInputs = [pkgs.openssl];
+      });
   }

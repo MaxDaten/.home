@@ -69,7 +69,7 @@
           ./nixos/modules/system-dashboard
           ./nixos/modules/homebridge
           {
-            services.homebridge.enable = false;
+            services.homebridge.enable = true;
             services.homebridge.openFirewall = true;
           }
 

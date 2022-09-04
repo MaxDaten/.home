@@ -1,7 +1,8 @@
 [
     "homebridge",
-    "homebridge-hue",
+    "homebridge-hue2",
     "homebridge-dyson-link",
     "homebridge-wol",
+    "homebridge-xiaomi-roborock-vacuum",
     "homebridge-config-ui-x"
 ]
