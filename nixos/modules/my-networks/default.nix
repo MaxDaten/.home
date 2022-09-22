@@ -18,7 +18,7 @@
       };
       "Player Two" = {
         psk = "@PLAYER_TWO@";
-        priority = 90;
+        priority = 50;
       };
     };
   };
