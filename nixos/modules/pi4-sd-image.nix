@@ -10,8 +10,9 @@
 
   sdImage = {
     compressImage = false;
+    # /boot partition
     # This might need to be increased when deploying multiple configurations.
-    firmwareSize = 128;
+    firmwareSize = 512;
     populateRootCommands = "mkdir -p ./files/var/empty";
   };
 }
