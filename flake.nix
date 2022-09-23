@@ -95,6 +95,8 @@
               imports = [(./. + "/users/jloos/home.nix")];
             };
           }
+
+          ./nixos/modules/snowflake
         ];
       };
 
