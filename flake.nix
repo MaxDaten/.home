@@ -13,6 +13,7 @@
     url = github:Mic92/sops-nix;
     inputs.nixpkgs.follows = "nixpkgs";
   };
+  inputs.devshell.url = "github:numtide/devshell";
 
   outputs = {
     self,
@@ -22,14 +23,17 @@
     vscode-server,
     home-manager,
     sops-nix,
+    devshell,
   }: let
     devShells = flake-utils.lib.eachDefaultSystem (system: let
       pkgs = import nixpkgs {
         inherit system;
+
+        overlays = [devshell.overlay];
       };
     in {
-      devShells.default = pkgs.mkShell {
-        buildInputs = with pkgs; [
+      devShells.default = pkgs.devshell.mkShell {
+        packages = with pkgs; [
           sops
           age
           ssh-to-age
@@ -40,6 +44,13 @@
 
           node2nix
         ];
+
+        devshell.startup.load-user-sops-age-key-files = {
+          text = ''
+            export SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt";
+            export SOPS_AGE_KEY_DIRECTORY="$HOME/.config/sops/age";
+          '';
+        };
       };
     });
   in
