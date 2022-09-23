@@ -4,8 +4,8 @@
   lib,
   ...
 }: {
-  boot.loader.timeout = 1;
-  boot.loader.grub.configurationLimit = 10;
+  boot.loader.timeout = 3;
+  boot.loader.grub.configurationLimit = 5;
 
   environment.systemPackages = with pkgs; [
     # system tools
