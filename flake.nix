@@ -23,18 +23,17 @@
     home-manager,
     sops-nix,
   }: let
-    system = "aarch64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
-
     devShells = flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs {
+        inherit system;
+      };
     in {
       devShells.default = pkgs.mkShell {
         buildInputs = with pkgs; [
           sops
           age
           ssh-to-age
-          dig
+          # age # currently broken
 
           stress
           speedtest-cli
@@ -46,7 +45,7 @@
   in
     {
       nixosConfigurations.pi4-nixos = nixpkgs.lib.nixosSystem {
-        inherit system;
+        system = "aarch64-linux";
         specialArgs = {
           inherit nixos-hardware;
         };
