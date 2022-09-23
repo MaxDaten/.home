@@ -7,7 +7,7 @@
 }: let
   nixos-vscode-server = fetchTarball {
     url = "https://github.com/msteen/nixos-vscode-server/tarball/master";
-    sha256 = "sha256:00ki5z2svrih9j9ipl8dm3dl6hi9wgibydsfa7rz2mdw9p0370yl";
+    sha256 = "sha256:1qga1cmpavyw90xap5kfz8i6yz85b0blkkwvl00sbaxqcgib2rvv";
   };
 
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
