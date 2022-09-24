@@ -35,6 +35,10 @@
   # NTP time sync.
   services.timesyncd.enable = true;
 
+  # Virtualisation, enable emulation of other systems
+  virtualisation.libvirtd.enable = true;
+  security.polkit.enable = true;
+
   # Nix System
   nix = {
     settings = {

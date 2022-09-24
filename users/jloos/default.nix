@@ -10,6 +10,7 @@
       "wheel"
       "networkmanager"
       "lp"
+      "libvirtd"
       config.users.groups.keys.name # Allow access to secrets
     ];
 
