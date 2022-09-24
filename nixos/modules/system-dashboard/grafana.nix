@@ -4,6 +4,15 @@
   ...
 }: let
   grafanaUriPath = "/dashboard/";
+  raspberryDashboardSrc = pkgs.fetchFromGitHub {
+    owner = "rfmoz";
+    repo = "grafana-dashboards";
+    rev = "214a8242ba60e913d3ded03f4db572f290528d45";
+    sparseCheckout = ''
+      prometheus/node-exporter-full.json
+    '';
+    sha256 = "sha256-ngpNBd1t+/LaEHEEU07rpEgQBV2fNDG3nrNF7uabtYk=";
+  };
 in {
   sops.secrets.grafana_admin_password = {
     owner = "grafana";
@@ -29,6 +38,15 @@ in {
       name = "Prometheus";
       type = "prometheus";
       url = "http://127.0.0.1:${toString config.services.prometheus.port}";
+    }
+  ];
+
+  services.grafana.provision.dashboards = [
+    {
+      # https://grafana.com/docs/grafana/latest/datasources/prometheus/
+      name = "Raspberry PI Dashboard";
+      type = "file";
+      options.path = "${raspberryDashboardSrc}/prometheus";
     }
   ];
 
