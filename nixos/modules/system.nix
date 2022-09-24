@@ -7,6 +7,8 @@
   boot.loader.timeout = 3;
   boot.loader.grub.configurationLimit = 5;
 
+  boot.kernelModules = ["kvm-amd" "kvm-intel"];
+
   environment.systemPackages = with pkgs; [
     # system tools
     libraspberrypi

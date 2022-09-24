@@ -11,6 +11,7 @@
       "networkmanager"
       "lp"
       "libvirtd"
+      "qemu-libvirtd"
       config.users.groups.keys.name # Allow access to secrets
     ];
 

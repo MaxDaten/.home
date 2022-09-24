@@ -24,7 +24,7 @@
     home-manager,
     sops-nix,
     devshell,
-  }: let
+  } @ inputs: let
     devShells = flake-utils.lib.eachDefaultSystem (system: let
       pkgs = import nixpkgs {
         inherit system;
