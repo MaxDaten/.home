@@ -12,7 +12,7 @@ in {
   # grafana configuration
   services.grafana = {
     enable = true;
-    port = 3000;
+    port = 2342;
     addr = "127.0.0.1";
     rootUrl = "%(protocol)s://%(domain)s:%(http_port)s${grafanaUriPath}";
 
@@ -21,6 +21,16 @@ in {
       adminPasswordFile = "/run/secrets/grafana_admin_password";
     };
   };
+
+  services.grafana.provision.enable = true;
+  services.grafana.provision.datasources = [
+    {
+      # https://grafana.com/docs/grafana/latest/datasources/prometheus/
+      name = "Prometheus";
+      type = "prometheus";
+      url = "http://127.0.0.1:${toString config.services.prometheus.port}";
+    }
+  ];
 
   services.avahi.extraServiceFiles.grafana = ''
     <?xml version="1.0" standalone='no'?><!--*-nxml-*-->
