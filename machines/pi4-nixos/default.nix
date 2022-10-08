@@ -46,6 +46,8 @@
       experimental-features = ["nix-command" "flakes"];
       max-jobs = 4;
       cores = 4;
+      system-features = ["kvm" "nixos-test" "benchmark" "big-parallel"];
+      extra-platforms = ["x86_64-linux"];
     };
     gc = {
       automatic = true;
