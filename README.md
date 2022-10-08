@@ -109,12 +109,12 @@ For me details follow documentation of sops-nix.
 - [X] Hardware Dashboard
   - [x] Grafana
   - [X] Prometheus
-  - [ ] Provision Dashboard via nix
+  - [x] Provision Dashboard via nix
 - [x] Network printing
-- [ ] Home-Bridge
+- [x] Home-Bridge
   - <https://github.com/SquircleSpace/nixos-configuration/tree/master/homebridge>
   - [x] Pin package
-  - [ ] Service not starting
+  - [x] Service not starting
 - [ ] Add cachix
 - [ ] SOPS for Installer Image? => Pin HOST key?
 - [ ] Remote building on pi4
