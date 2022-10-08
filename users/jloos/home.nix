@@ -51,8 +51,6 @@ in {
       pwgen
       neofetch
 
-      broot
-
       # Data Structures
       jq
       yq
@@ -110,10 +108,10 @@ in {
       }
     ];
   };
-
+  programs.broot.enable = true;
   programs.fish = {
     enable = true;
-
+    # vendor-completions.enable = true;
     plugins = [
       {
         # https://github.com/oh-my-fish/plugin-peco
@@ -195,7 +193,7 @@ in {
     shellAbbrs = {
       hm = "home-manager";
       hme = "home-manager edit";
-      hms = "NIXPKGS_ALLOW_BROKEN=1 home-manager switch";
+      hms = "home-manager switch";
       gitco = "git checkout";
       gitrb = "git rebase --autostash";
       gitcm = "git commit -m";
@@ -308,7 +306,9 @@ in {
 
   programs.bat.enable = true;
   programs.bash.enable = true;
+  programs.bash.enableCompletion = true;
   programs.zsh.enable = true;
+  programs.zsh.enableCompletion = true;
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
