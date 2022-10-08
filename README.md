@@ -10,10 +10,16 @@ TBD
 
 On your macos read the [flake section of home-manager](https://nix-community.github.io/home-manager/index.html#ch-nix-flakes).
 
-Currently run:
+To apply new configuration currently run:
 
 ```sh
 home-manager switch --flake '.#jloos-macos'
+```
+
+Update dependencies:
+
+```sh
+nix flake update
 ```
 
 ## Raspberry Pi 4 NixOS
