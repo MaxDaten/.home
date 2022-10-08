@@ -45,12 +45,16 @@
           node2nix
         ];
 
-        devshell.startup.load-user-sops-age-key-files = {
-          text = ''
-            export SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt";
-            export SOPS_AGE_KEY_DIRECTORY="$HOME/.config/sops/age";
-          '';
-        };
+        env = [
+          {
+            name = "SOPS_AGE_KEY_FILE";
+            eval = "$HOME/.config/sops/age/keys.txt";
+          }
+          {
+            name = "SOPS_AGE_KEY_DIRECTORY";
+            eval = "$HOME/.config/sops/age";
+          }
+        ];
       };
     });
   in
