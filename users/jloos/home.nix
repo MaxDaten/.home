@@ -5,12 +5,6 @@
   headless ? true,
   ...
 }: let
-  nixos-vscode-server = fetchTarball {
-    url = "https://github.com/msteen/nixos-vscode-server/tarball/master";
-    sha256 = "sha256:1qga1cmpavyw90xap5kfz8i6yz85b0blkkwvl00sbaxqcgib2rvv";
-  };
-
-  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
   darwinPackages = with pkgs; [
     terminal-notifier
   ];
@@ -21,10 +15,6 @@
     nerdfonts
   ];
 in {
-  imports = [
-    "${nixos-vscode-server}/modules/vscode-server/home.nix"
-  ];
-
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
@@ -39,7 +29,7 @@ in {
   # paths it should manage.
   home.username = "jloos";
   home.homeDirectory =
-    if isDarwin
+    if pkgs.stdenv.isDarwin
     then "/Users/jloos"
     else "/home/jloos";
 
@@ -85,10 +75,8 @@ in {
       kustomize
       dive # Analyze docker layer
     ]
-    ++ lib.optional isDarwin darwinPackages
-    ++ lib.optional (!headless) guiPackages;
-
-  services.vscode-server.enable = true;
+    ++ lib.optionals (pkgs.stdenv.isDarwin) darwinPackages
+    ++ lib.optionals (!headless) guiPackages;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -98,7 +86,7 @@ in {
 
   home.sessionVariables = {
     EDITOR =
-      if isDarwin
+      if pkgs.stdenv.isDarwin
       then "code --wait"
       else "vim";
   };
@@ -145,7 +133,6 @@ in {
           owner = "oh-my-fish";
           repo = "plugin-foreign-env";
           rev = "b3dd471bcc885b597c3922e4de836e06415e52dd";
-          # SRI hash
           hash = "sha256-er1KI2xSUtTlQd9jZl1AjqeArrfBxrgBLcw5OqinuAM=";
         };
       }
@@ -243,8 +230,7 @@ in {
         bind \cr 'peco_select_history (commandline -b)'
       end
 
-      set -gx PROJECT_PATHS ~/Workspace/buzzar ~/Workspace/kmo ~/Workspace/gitops
-      # set -gx EDITOR code
+      set -gx PROJECT_PATHS ~/Workspace/buzzar ~/Workspace/nix-workspace ~/Workspace/gitops
 
       # done
       set __done_enabled

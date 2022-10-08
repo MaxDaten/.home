@@ -92,13 +92,40 @@
               headless = true;
             };
             home-manager.users.jloos = {
-              imports = [(./. + "/users/jloos/home.nix")];
+              imports = [
+                (./. + "/users/jloos/home.nix")
+              ];
             };
           }
+
+          vscode-server.nixosModule
+          (
+            {
+              config,
+              pkgs,
+              ...
+            }: {
+              services.vscode-server.enable = true;
+            }
+          )
 
           ./nixos/modules/snowflake
         ];
       };
+
+      homeConfigurations.jloos-macos = let
+        system = "aarch64-darwin";
+      in
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.${system};
+          extraSpecialArgs = {
+            headless = false;
+          };
+
+          modules = [
+            ./users/jloos/home.nix
+          ];
+        };
 
       packages.aarch64-linux.default = self.nixosConfigurations.pi4-nixos.config.system.build.sdImage;
     }
