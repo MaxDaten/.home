@@ -6,6 +6,16 @@ Inspired by <DAlperin/dotfiles>.
 
 TBD
 
+## Home-Manager
+
+On your macos read the [flake section of home-manager](https://nix-community.github.io/home-manager/index.html#ch-nix-flakes).
+
+Currently run:
+
+```sh
+home-manager switch --flake '.#jloos-macos'
+```
+
 ## Raspberry Pi 4 NixOS
 
 Flake based nixos configuration including building a customized install image via docker (mildly inspired by <https://github.com/zefhemel/nix-docker>).
@@ -59,12 +69,13 @@ systemctl --user start auto-fix-vscode-server.service
 
 ### Secret Management
 
-(sops)[https://github.com/mozilla/sops] & (sops-nix)[https://github.com/Mic92/sops-nix] is used to manage secrets consumed by nixos.
+[sops](https://github.com/mozilla/sops) & [sops-nix](https://github.com/Mic92/sops-nix) is used to manage secrets consumed by nixos.
 
 You have to follow these steps to allow yourself to edit secrets:
 
 1. Get your age compatible key from ssh `./generate-sops-keys.sh`
 2. Add your key to `./.sops.yaml`:
+
   ```yaml
   keys:
     - &user age1m2xmznzaswlsyyrndx5q55tzcdzuxc0nmnawu0q8mnve8vjatyhsn2z6rc
