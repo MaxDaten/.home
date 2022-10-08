@@ -1,9 +1,7 @@
 {...}: {
-  imports = [
-    <nixpkgs/nixos/modules/virtualisation/google-compute-image.nix>
-  ];
   virtualisation.libvirtd.enable = true;
   security.polkit.enable = true;
+
   security.sudo.wheelNeedsPassword = false;
   users.extraUsers.jloos = {
     isNormalUser = true;

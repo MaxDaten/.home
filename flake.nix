@@ -127,7 +127,18 @@
           ];
         };
 
+      nixosConfigurations."nixbuilder.qwiz.buzz" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = inputs;
+
+        modules = [
+          "${nixpkgs}/nixos/modules/virtualisation/google-compute-image.nix"
+          ./machines/nixbuilder/configuration.nix
+        ];
+      };
+
       packages.aarch64-linux.default = self.nixosConfigurations.pi4-nixos.config.system.build.sdImage;
+      packages.x86_64-linux.googleComputeImage = self.nixosConfigurations."nixbuilder.qwiz.buzz".config.system.build.googleComputeImage;
     }
     // devShells;
 }
