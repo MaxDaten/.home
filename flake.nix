@@ -43,6 +43,7 @@
           speedtest-cli
 
           node2nix
+          rsync
         ];
 
         env = [
