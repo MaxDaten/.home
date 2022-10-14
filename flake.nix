@@ -37,7 +37,7 @@
           sops
           age
           ssh-to-age
-          # age # currently broken
+          age
 
           stress
           speedtest-cli
