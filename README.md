@@ -101,6 +101,72 @@ cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age
 
 For me details follow documentation of sops-nix.
 
+## Setup Remote Building
+
+Main documentation about remote building:
+
+- <https://nixos.wiki/wiki/Distributed_build>
+- <https://nixos.org/manual/nix/stable/advanced-topics/distributed-builds.html>
+
+I had some hoops to jump to get it working, now here my way with a concrete example based on this flake setup.
+
+Scenario:
+
+You want to build the pi4 installer image from `jloos-macos` on `pi4-nixos` via:
+
+```sh
+# Will work after setup
+nix build .#packages.aarch64-linux.default --system 'aarch64-linux' --max-jobs 0
+```
+
+The macos default nix installation runs via nix-daemon. The nix-daemon runs as root. The root of `jloos-macos` needs to be able to access `pi4-nixos` via ssh and nix has to be configured with `pi4-nixos` as a remote builder.
+
+### 1. Configure pi4-nixos as a remote builder
+
+```conf
+# /etc/nix/nix.conf
+builders = @/etc/nix/machines
+# Allow macos user jloos to perform remote builds
+truested-users = root jloos
+```
+
+```conf
+# /etc/nix/machines
+# Last part is generated via: pi4-nixos$ base64 -w0 /etc/ssh/ssh_host_ed25519_key.pub
+ssh://pi4-nixos aarch64-linux - 4 2 nixos-test,benchmark,big-parallel,kvm - c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUwva0lMK1VGcG1Rb1YwemREQ1BvdmQ1alFZSkNvbEpXNlVrbmQzV0FKZFggcm9vdEBwaTQtbml4b3MK 
+```
+
+### 2. Allow root@macos access to pi4-nixos
+
+Generated a ssh key for root on macos
+
+```bash
+jloos@macos$ sudo ssh-keygen -t ed25519
+jloos@macos$ sudo cat /var/root/.ssh/id_ed25519.pub
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIPxyE0ilAv126v5gVToRTiH8dha0wquEvI3ZMZpPNvK root@macos
+```
+
+Add public key to pi4-nixos roots authorizedKeys in [nixos/modules/system.nix](nixos/modules/system.nix).
+
+```nix
+users.extraUsers.root.openssh.authorizedKeys.keys = [
+  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIPxyE0ilAv126v5gVToRTiH8dha0wquEvI3ZMZpPNvK root@macos"
+];
+```
+
+and allow root login at [machines/pi4-nixos/default.nix](machines/pi4-nixos/default.nix):
+
+```nix
+services.openssh.permitRootLogin = "yes";
+```
+
+Hopefully this command should be able to build the image on `pi4-nixos`:
+
+```sh
+# Will work after setup
+nix build .#packages.aarch64-linux.default --system 'aarch64-linux' --max-jobs 0
+```
+
 ## TODO
 
 - [x] Integrate already present home-manager managed home configs for `users.jloos`
@@ -115,6 +181,6 @@ For me details follow documentation of sops-nix.
   - <https://github.com/SquircleSpace/nixos-configuration/tree/master/homebridge>
   - [x] Pin package
   - [x] Service not starting
+- [x] Remote building on pi4
 - [ ] Add cachix
 - [ ] SOPS for Installer Image? => Pin HOST key?
-- [ ] Remote building on pi4
