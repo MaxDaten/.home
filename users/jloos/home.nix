@@ -87,12 +87,6 @@ in {
       if pkgs.stdenv.isDarwin
       then "code --wait"
       else "vim";
-
-    PROJECT_PATHS = [
-      "$HOME/Workspace/buzzar"
-      "$HOME/Workspace/kmo"
-      "$HOME/Workspace/gitops"
-    ];
   };
 
   programs.tmux = {
@@ -234,6 +228,8 @@ in {
       function fish_user_key_bindings
         bind \cr 'peco_select_history (commandline -b)'
       end
+
+      set -gx PROJECT_PATHS ~/Workspace/buzzar ~/Workspace/kmo ~/Workspace/gitops
 
       # done
       set __done_enabled
