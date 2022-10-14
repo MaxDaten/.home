@@ -50,6 +50,7 @@
       cores = 4;
       system-features = ["kvm" "nixos-test" "benchmark" "big-parallel"];
       extra-platforms = ["x86_64-linux"];
+      trusted-users = [ "root" "jloos" "@wheel" ];
     };
     gc = {
       automatic = true;
