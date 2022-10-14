@@ -39,6 +39,8 @@
   virtualisation.libvirtd.enable = true;
   security.polkit.enable = true;
 
+  # Allow remote nix
+  services.openssh.permitRootLogin = "yes";
   # Nix System
   nix = {
     settings = {
