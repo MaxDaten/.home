@@ -92,6 +92,19 @@ in
         else "vim";
     };
 
+    programs.ssh.enable = true;
+    programs.ssh.matchBlocks = {
+      "pi4-nixos" = {
+        hostname = "pi4-nixos";
+        user = "jloos";
+      };
+
+      "maandr" = {
+        hostname = "maandr.de";
+        user = "root";
+      };
+    };
+
     programs.tmux = {
       enable = true;
       tmuxinator.enable = true;
