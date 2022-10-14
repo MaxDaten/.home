@@ -207,8 +207,8 @@ in
           tay = "terraform apply --yes";
         }
         (mkIf isDarwin {
-          hme = "home-manager edit --flake 'path:~/Workspace/.home/.#jloos-macos'";
-          hms = "home-manager switch --flake 'path:~Workspace/.home/.#jloos-macos'";
+          hme = "home-manager edit --flake ${config.home.homeDirectory}/Workspace/.home/#jloos-macos";
+          hms = "home-manager switch --flake ${config.home.homeDirectory}/Workspace/.home/#jloos-macos";
         })
       ];
 
