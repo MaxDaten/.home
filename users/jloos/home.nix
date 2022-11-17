@@ -41,6 +41,7 @@ in
         gnupg
         direnv
         htop
+        duf
 
         peco
 
