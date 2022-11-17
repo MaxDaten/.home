@@ -21,13 +21,15 @@ in {
   # grafana configuration
   services.grafana = {
     enable = true;
-    port = 2342;
-    addr = "127.0.0.1";
-    rootUrl = "%(protocol)s://%(domain)s:%(http_port)s${grafanaUriPath}";
+    settings = {
+      server.http_port = 2342;
+      server.http_addr = "127.0.0.1";
+      server.root_url = "%(protocol)s://%(domain)s:%(http_port)s${grafanaUriPath}";
 
-    security = {
-      adminUser = "jloos";
-      adminPasswordFile = "/run/secrets/grafana_admin_password";
+      security = {
+        admin_user = "jloos";
+        admin_password = "$__file{/run/secrets/grafana_admin_password}";
+      };
     };
   };
 
@@ -57,7 +59,7 @@ in {
       <name replace-wildcards="yes">Grafana on %h</name>
       <service>
         <type>_http._tcp</type>
-        <port>${toString config.services.grafana.port}</port>
+        <port>${toString config.services.grafana.settings.server.http_port}</port>
       </service>
     </service-group>
   '';
@@ -65,7 +67,7 @@ in {
   # nginx reverse proxy
   services.nginx.virtualHosts."grafana.pi4-nixos.local" = {
     locations."${grafanaUriPath}" = {
-      proxyPass = "http://127.0.0.1:${toString config.services.grafana.port}/";
+      proxyPass = "http://127.0.0.1:${toString config.services.grafana.settings.server.http_port}/";
       proxyWebsockets = true;
     };
   };
