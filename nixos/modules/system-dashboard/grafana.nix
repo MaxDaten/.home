@@ -34,23 +34,31 @@ in {
   };
 
   services.grafana.provision.enable = true;
-  services.grafana.provision.datasources = [
-    {
-      # https://grafana.com/docs/grafana/latest/datasources/prometheus/
-      name = "Prometheus";
-      type = "prometheus";
-      url = "http://127.0.0.1:${toString config.services.prometheus.port}";
-    }
-  ];
+  services.grafana.provision.datasources.settings = {
+    apiVersion = 1;
 
-  services.grafana.provision.dashboards = [
-    {
-      # https://grafana.com/docs/grafana/latest/datasources/prometheus/
-      name = "Raspberry PI Dashboard";
-      type = "file";
-      options.path = "${raspberryDashboardSrc}/prometheus";
-    }
-  ];
+    datasources = [
+      {
+        # https://grafana.com/docs/grafana/latest/datasources/prometheus/
+        name = "Prometheus";
+        type = "prometheus";
+        url = "http://127.0.0.1:${toString config.services.prometheus.port}";
+      }
+    ];
+  };
+
+  services.grafana.provision.dashboards.settings = {
+    apiVersion = 1;
+
+    providers = [
+      {
+        # https://grafana.com/docs/grafana/latest/datasources/prometheus/
+        name = "Raspberry PI Dashboard";
+        type = "file";
+        options.path = "${raspberryDashboardSrc}/prometheus";
+      }
+    ];
+  };
 
   services.avahi.extraServiceFiles.grafana = ''
     <?xml version="1.0" standalone='no'?><!--*-nxml-*-->
