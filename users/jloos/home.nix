@@ -69,6 +69,7 @@ in
         comma
         nixfmt
         alejandra
+        nil # Nix Language Server
 
         # Infrastructure
         awscli2
