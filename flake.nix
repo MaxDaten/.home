@@ -33,7 +33,6 @@
 
         overlays = [
           devshell.overlays.default
-          nil.overlays.default
         ];
       };
     in {
@@ -49,7 +48,7 @@
 
           node2nix
           rsync
-          nil
+          nil.packages.${system}.default
         ];
 
         env = [
@@ -126,9 +125,13 @@
 
       homeConfigurations.jloos-macos = let
         system = "aarch64-darwin";
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [nil.overlays.default];
+        };
       in
         home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.${system};
+          inherit pkgs;
           extraSpecialArgs = {
             headless = false;
           };
