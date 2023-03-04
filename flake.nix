@@ -2,15 +2,16 @@
   description = "Raspberry Pi NixOS";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-  inputs.nixos-hardware.url = github:NixOS/nixos-hardware/master;
+  inputs.nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   inputs.flake-utils.url = "github:numtide/flake-utils";
   inputs.vscode-server.url = "github:msteen/nixos-vscode-server";
+  inputs.nil.url = "github:oxalica/nil";
   inputs.home-manager = {
     url = "github:nix-community/home-manager";
     inputs.nixpkgs.follows = "nixpkgs";
   };
   inputs.sops-nix = {
-    url = github:Mic92/sops-nix;
+    url = "github:Mic92/sops-nix";
     inputs.nixpkgs.follows = "nixpkgs";
   };
   inputs.devshell.url = "github:numtide/devshell";
@@ -24,12 +25,16 @@
     home-manager,
     sops-nix,
     devshell,
+    nil,
   } @ inputs: let
     devShells = flake-utils.lib.eachDefaultSystem (system: let
       pkgs = import nixpkgs {
         inherit system;
 
-        overlays = [devshell.overlays.default];
+        overlays = [
+          devshell.overlays.default
+          nil.overlays.default
+        ];
       };
     in {
       devShells.default = pkgs.devshell.mkShell {
@@ -44,6 +49,7 @@
 
           node2nix
           rsync
+          nil
         ];
 
         env = [
