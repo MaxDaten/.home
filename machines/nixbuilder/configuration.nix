@@ -21,4 +21,6 @@
     "root"
     "@wheel"
   ];
+
+  system.stateVersion = "23.05";
 }

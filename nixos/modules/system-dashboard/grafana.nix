@@ -8,9 +8,9 @@
     owner = "rfmoz";
     repo = "grafana-dashboards";
     rev = "214a8242ba60e913d3ded03f4db572f290528d45";
-    sparseCheckout = ''
-      prometheus/node-exporter-full.json
-    '';
+    sparseCheckout = [
+      "prometheus/node-exporter-full.json"
+    ];
     sha256 = "sha256-ngpNBd1t+/LaEHEEU07rpEgQBV2fNDG3nrNF7uabtYk=";
   };
 in {

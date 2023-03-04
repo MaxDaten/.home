@@ -40,7 +40,7 @@
   security.polkit.enable = true;
 
   # Allow remote nix
-  services.openssh.permitRootLogin = "yes";
+  services.openssh.settings.PermitRootLogin = "yes";
   # Nix System
   nix = {
     settings = {
@@ -50,7 +50,7 @@
       cores = 4;
       system-features = ["kvm" "nixos-test" "benchmark" "big-parallel"];
       extra-platforms = ["x86_64-linux"];
-      trusted-users = [ "root" "jloos" "@wheel" ];
+      trusted-users = ["root" "jloos" "@wheel"];
     };
     gc = {
       automatic = true;
@@ -66,11 +66,5 @@
     '';
   };
 
-  system = {
-    stateVersion = "22.11";
-    # autoUpgrade = {
-    #   enable = true;
-    #   channel = "https://nixos.org/channels/nixos-unstable";
-    # };
-  };
+  system.stateVersion = "23.05";
 }
