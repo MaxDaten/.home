@@ -257,7 +257,7 @@ in
           bind \cr 'peco_select_history (commandline -b)'
         end
 
-        set -gx PROJECT_PATHS ~/Workspace/buzzar ~/Workspace/kmo ~/Workspace/gitops
+        set -gx PROJECT_PATHS ~/Workspace/buzzar ~/Developer/kmo ~/Workspace/gitops
 
         # done
         set __done_enabled
