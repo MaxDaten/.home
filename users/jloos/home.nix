@@ -54,6 +54,7 @@ in
         wget
         pwgen
         neofetch
+        lsd
 
         # Data Structures
         jq
@@ -223,6 +224,7 @@ in
       shellAliases = {
         k = "kubectl";
         br = "broot";
+        ls = "${pkgs.lsd}/bin/lsd -l";
       };
 
       shellInit = ''
