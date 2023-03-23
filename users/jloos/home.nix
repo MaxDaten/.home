@@ -138,6 +138,14 @@ in
       # vendor-completions.enable = true;
       plugins = [
         {
+          name = "fzf-fish";
+          src = pkgs.fishPlugins.fzf-fish.src;
+        }
+        {
+          name = "done";
+          src = pkgs.fishPlugins.done.src;
+        }
+        {
           # https://github.com/oh-my-fish/plugin-peco
           name = "peco";
           src = pkgs.fetchFromGitHub {
@@ -166,17 +174,6 @@ in
             repo = "plugin-pj";
             rev = "43c94f24fd53a55cb6b01400b9b39eb3b6ed7e4e";
             hash = "sha256-/4c/52HLvycTPjuiMKC949XYLPNJUhedd3xEV/ioxfw=";
-          };
-        }
-
-        {
-          # https://github.com/franciscolourenco/done
-          name = "done";
-          src = pkgs.fetchFromGitHub {
-            owner = "franciscolourenco";
-            repo = "done";
-            rev = "d6abb267bb3fb7e987a9352bc43dcdb67bac9f06";
-            hash = "sha256-6oeyN9ngXWvps1c5QAUjlyPDQwRWAoxBiVTNmZ4sG8E=";
           };
         }
 
