@@ -147,6 +147,10 @@ in
           src = pkgs.fishPlugins.done.src;
         }
         {
+          name = "foreign-env";
+          src = pkgs.fishPlugins.foreign-env.src;
+        }
+        {
           # https://github.com/oh-my-fish/plugin-peco
           name = "peco";
           src = pkgs.fetchFromGitHub {
@@ -154,17 +158,6 @@ in
             repo = "plugin-peco";
             rev = "0a3282c9522c4e0102aaaa36f89645d17db78657";
             sha256 = "005r6yar254hkx6cpd2g590na812mq9z9a17ghjl6sbyyxq24jhi";
-          };
-        }
-
-        {
-          # https://github.com/oh-my-fish/plugin-foreign-env
-          name = "foreign-env";
-          src = pkgs.fetchFromGitHub {
-            owner = "oh-my-fish";
-            repo = "plugin-foreign-env";
-            rev = "b3dd471bcc885b597c3922e4de836e06415e52dd";
-            hash = "sha256-er1KI2xSUtTlQd9jZl1AjqeArrfBxrgBLcw5OqinuAM=";
           };
         }
 
