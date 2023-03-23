@@ -155,6 +155,10 @@ in
           src = pkgs.fishPlugins.colored-man-pages.src;
         }
         {
+          name = "autopair";
+          src = pkgs.fishPlugins.autopair.src;
+        }
+        {
           # https://github.com/oh-my-fish/plugin-peco
           name = "peco";
           src = pkgs.fetchFromGitHub {
@@ -164,7 +168,6 @@ in
             sha256 = "005r6yar254hkx6cpd2g590na812mq9z9a17ghjl6sbyyxq24jhi";
           };
         }
-
         {
           name = "pj";
           src = pkgs.fetchFromGitHub {
@@ -172,28 +175,6 @@ in
             repo = "plugin-pj";
             rev = "43c94f24fd53a55cb6b01400b9b39eb3b6ed7e4e";
             hash = "sha256-/4c/52HLvycTPjuiMKC949XYLPNJUhedd3xEV/ioxfw=";
-          };
-        }
-
-        {
-          # https://github.com/lilyball/nix-env.fish
-          name = "nix-env";
-          src = pkgs.fetchFromGitHub {
-            owner = "lilyball";
-            repo = "nix-env.fish";
-            rev = "7b65bd228429e852c8fdfa07601159130a818cfa";
-            hash = "sha256-RG/0rfhgq6aEKNZ0XwIqOaZ6K5S4+/Y5EEMnIdtfPhk=";
-          };
-        }
-
-        {
-          # https://github.com/laughedelic/pisces
-          name = "pisces";
-          src = pkgs.fetchFromGitHub {
-            owner = "laughedelic";
-            repo = "pisces";
-            rev = "e45e0869855d089ba1e628b6248434b2dfa709c4";
-            hash = "sha256-Oou2IeNNAqR00ZT3bss/DbhrJjGeMsn9dBBYhgdafBw=";
           };
         }
       ];
