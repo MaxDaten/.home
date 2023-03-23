@@ -151,6 +151,10 @@ in
           src = pkgs.fishPlugins.foreign-env.src;
         }
         {
+          name = "colored-man-pages";
+          src = pkgs.fishPlugins.colored-man-pages.src;
+        }
+        {
           # https://github.com/oh-my-fish/plugin-peco
           name = "peco";
           src = pkgs.fetchFromGitHub {
