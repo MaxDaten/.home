@@ -292,11 +292,6 @@ in
           pure_msg = "+";
         };
 
-        nodejs = {
-          # Fix missing space after symbol
-          symbol = " ";
-        };
-
         java = {disabled = false;};
 
         gcloud = {disabled = true;};
