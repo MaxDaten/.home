@@ -292,13 +292,13 @@ in
           pure_msg = "+";
         };
 
-        java = {disabled = false;};
+        java.disabled = false;
 
-        gcloud = {disabled = true;};
+        gcloud.disabled = true;
 
-        aws = {disabled = false;};
+        aws.disabled = false;
 
-        scala = {format = "[$symbol($version )]($style) ";};
+        scala.disabled = false;
 
         character = {
           success_symbol = "[➜](bold green)";
