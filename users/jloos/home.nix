@@ -55,6 +55,7 @@ in
         pwgen
         neofetch
         lsd
+        fd
 
         # Data Structures
         jq
@@ -133,15 +134,19 @@ in
       ];
     };
 
+    programs.fzf = let
+      fd = "${pkgs.fd}/bin/fd";
+    in {
+      enable = true;
+      changeDirWidgetCommand = "${fd} --type d --hidden --follow --exclude .git --no-ignore";
+      changeDirWidgetOptions = ["--preview 'tree -C {} | head -200'"];
+    };
+
     programs.broot.enable = true;
     programs.fish = {
       enable = true;
       # vendor-completions.enable = true;
       plugins = [
-        {
-          name = "fzf-fish";
-          src = pkgs.fishPlugins.fzf-fish.src;
-        }
         {
           name = "done";
           src = pkgs.fishPlugins.done.src;
@@ -157,6 +162,17 @@ in
         {
           name = "autopair";
           src = pkgs.fishPlugins.autopair.src;
+        }
+        {
+          # https://github.com/lilyball/nix-env.fish
+          # Setup nix environment in fish shell + completions of packages
+          name = "nix-env";
+          src = pkgs.fetchFromGitHub {
+            owner = "lilyball";
+            repo = "nix-env.fish";
+            rev = "7b65bd228429e852c8fdfa07601159130a818cfa";
+            hash = "sha256-RG/0rfhgq6aEKNZ0XwIqOaZ6K5S4+/Y5EEMnIdtfPhk=";
+          };
         }
         {
           # https://github.com/oh-my-fish/plugin-peco
@@ -206,28 +222,24 @@ in
       };
 
       shellInit = ''
-        # nix
-        if test -e $HOME/.nix-profile/etc/profile.d/nix.sh
-          fenv source $HOME/.nix-profile/etc/profile.d/nix.sh
-        end
-
-        # home-manager
-        set -gpx NIX_PATH "$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels"
-      '';
-
-      interactiveShellInit = ''
-        set fish_greeting "🐡"
-
-        # peco
-        function fish_user_key_bindings
-          bind \cr 'peco_select_history (commandline -b)'
-        end
-
-        set -gx PROJECT_PATHS ~/Workspace/buzzar ~/Developer/kmo ~/Workspace/gitops
-
-        # done
+        set -U fish_greeting
+        set -U PROJECT_PATHS ~/Workspace/buzzar ~/Developer/kmo ~/Workspace/gitops
+        set -U FZF_COMPLETION_TRIGGER '~~'
         set __done_enabled
       '';
+
+      # interactiveShellInit = ''
+      #   set fish_greeting "🐡"
+
+      #   # peco
+      #   function fish_user_key_bindings
+      #     bind \cr 'peco_select_history (commandline -b)'
+      #     fzf_key_bindings
+      #   end
+
+      #   # done
+      #
+      # '';
 
       functions = {
         gitignore = "curl -sL https://www.gitignore.io/api/$argv";
