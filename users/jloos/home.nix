@@ -176,16 +176,6 @@ in
           };
         }
         {
-          # https://github.com/oh-my-fish/plugin-peco
-          name = "peco";
-          src = pkgs.fetchFromGitHub {
-            owner = "oh-my-fish";
-            repo = "plugin-peco";
-            rev = "0a3282c9522c4e0102aaaa36f89645d17db78657";
-            sha256 = "005r6yar254hkx6cpd2g590na812mq9z9a17ghjl6sbyyxq24jhi";
-          };
-        }
-        {
           name = "pj";
           src = pkgs.fetchFromGitHub {
             owner = "oh-my-fish";
