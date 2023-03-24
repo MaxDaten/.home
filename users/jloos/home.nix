@@ -15,6 +15,7 @@
     # fonts
     jetbrains-mono
     nerdfonts
+    hack-font
   ];
 in
   with lib; {
@@ -223,7 +224,7 @@ in
 
       shellInit = ''
         set -U fish_greeting
-        set -U PROJECT_PATHS ~/Workspace/buzzar ~/Developer/kmo ~/Workspace/gitops
+        set -U PROJECT_PATHS ~/Workspace/buzzar ~/Developer/kmo ~/Workspace/gitops ~/Workspace/.home
         set -U FZF_COMPLETION_TRIGGER '~~'
         set __done_enabled
       '';
