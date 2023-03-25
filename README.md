@@ -28,11 +28,23 @@ Flake based nixos configuration including building a customized install image vi
 
 ### Build & Provision Image (arm only)
 
-Run `./build.sh`.
+On macos you need a linux vm to build the image.
 
-This builds an .img based on this flake and writes it onto an sd which the raspberry pi boots from.
+Start it with: `nix run .#builder` (you will logon automatically, you can stop it with `shutdown now` after you are done)
 
-This utilize docker to build an aarch64-linux image. Currently nix cross compilation does not work for me this is why only aarch64 is supported.
+Add following line to `/etc/nix/machines`:
+
+```conf
+ssh-ng://builder@localhost aarch64-linux /etc/nix/builder_ed25519 4 - nixos-test,benchmark,big-parallel,kvm - c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUpCV2N4Yi9CbGFxdDFhdU90RStGOFFVV3JVb3RpQzVxQkorVXVFV2RWQ2Igcm9vdEBuaXhvcwo=
+```
+
+Run:
+
+```sh
+nix build .#packages.aarch64-linux.default --system 'aarch64-linux' --max-jobs 0
+```
+
+to build the image inside the vm. It will be transferred to `./result`.
 
 ### Install NixOS
 

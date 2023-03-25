@@ -141,6 +141,31 @@
           ];
         };
 
+      # https://github.com/NixOS/nixpkgs/blob/1a173c89426ab705aac55872740362bc1a0b6cfd/pkgs/top-level/darwin-packages.nix#LL228C3-L242C9
+      builder = let
+        system = "aarch64-darwin";
+        pkgs = import nixpkgs {inherit system;};
+        toGuest = builtins.replaceStrings ["darwin"] ["linux"];
+
+        nixos = import "${nixpkgs}/nixos" {
+          configuration = {
+            imports = [
+              # https://github.com/NixOS/nixpkgs/blob/6d89aa8f1d238cc5ed97215f7e229b8283bef027/nixos/modules/profiles/macos-builder.nix
+              "${nixpkgs}/nixos/modules/profiles/macos-builder.nix"
+            ];
+
+            virtualisation.host = {inherit pkgs;};
+            virtualisation = {
+              diskSize = pkgs.lib.mkForce (40 * 1024);
+              memorySize = pkgs.lib.mkForce (4 * 1024);
+            };
+          };
+
+          system = toGuest pkgs.hostPlatform.system;
+        };
+      in
+        nixos.config.system.build.macos-builder-installer;
+
       nixosConfigurations."nixbuilder.qwiz.buzz" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = inputs;
@@ -151,8 +176,17 @@
         ];
       };
 
-      packages.aarch64-linux.default = self.nixosConfigurations.pi4-nixos.config.system.build.sdImage;
-      packages.x86_64-linux.googleComputeImage = self.nixosConfigurations."nixbuilder.qwiz.buzz".config.system.build.googleComputeImage;
+      packages.aarch64-linux = {
+        default = self.nixosConfigurations.pi4-nixos.config.system.build.sdImage;
+      };
+
+      packages.aarch64-darwin = {
+        builder = self.builder;
+      };
+
+      packages.x86_64-linux = {
+        googleComputeImage = self.nixosConfigurations."nixbuilder.qwiz.buzz".config.system.build.googleComputeImage;
+      };
     }
     // devShells;
 }

@@ -6,3 +6,6 @@ result*
 
 # Secrets
 **/*secrets.env
+
+nixos.qcow2
+keys/
