@@ -14,6 +14,7 @@
   guiPackages = with pkgs; [
     # fonts
     jetbrains-mono
+    # https://www.nerdfonts.com/
     nerdfonts
     hack-font
   ];
@@ -241,6 +242,8 @@ in
     programs.starship = {
       enable = true;
       enableFishIntegration = true;
+
+      # https://starship.rs/config/
       settings = {
         # Inserts a blank line between shell prompts
         add_newline = true;
@@ -248,6 +251,7 @@ in
         line_break = {disabled = false;};
 
         format = pkgs.lib.concatStrings [
+          "$custom"
           "$directory"
           "$git_branch"
           "$git_status"
@@ -268,6 +272,16 @@ in
           };
         };
 
+        custom = {
+          direnv_basename = {
+            command = "basename \"\${DIRENV_DIR/#-/\~}\"";
+            when = "[[ -n \"$DIRENV_DIR\" ]]"; # Only show when in a direnv directory & loaded env
+            format = "[$output]($style) 🧧";
+            shell = ["bash"];
+            style = "black bold";
+          };
+        };
+
         shell = {
           fish_indicator = "🐡";
           bash_indicator = ">_";
@@ -281,15 +295,7 @@ in
           impure_msg = "";
           pure_msg = "+";
         };
-
-        java.disabled = false;
-
         gcloud.disabled = true;
-
-        aws.disabled = false;
-
-        scala.disabled = false;
-
         character = {
           success_symbol = "[➜](bold green)";
           error_symbol = "[➜](bold red)";
