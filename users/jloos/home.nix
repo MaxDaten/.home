@@ -281,7 +281,7 @@ in
           direnv_basename = {
             command = "basename \"\${DIRENV_DIR/#-/\~}\"";
             when = "[[ -n \"$DIRENV_DIR\" ]]"; # Only show when in a direnv directory & loaded env
-            format = "[$output]($style) ";
+            format = "[$output;]($style) ";
             shell = ["bash"];
             style = "red bold";
           };
