@@ -101,6 +101,7 @@ in
         if pkgs.stdenv.isDarwin
         then "code --wait"
         else "vim";
+      OPENAI_API_KEY = "sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
     };
 
     programs.ssh.enable = true;
@@ -150,9 +151,8 @@ in
     };
 
     programs.broot.enable = true;
+    programs.fish.enable = true;
     programs.fish = {
-      enable = true;
-      # vendor-completions.enable = true;
       plugins = [
         {
           name = "done";
@@ -241,6 +241,20 @@ in
       functions = {
         gitignore = "curl -sL https://www.gitignore.io/api/$argv";
         fish_reload = "source ~/.config/fish/config.fish";
+        hey_gpt = {
+          argumentNames = ["prompt"];
+          body = ''
+            set gpt (curl https://api.openai.com/v1/chat/completions -s \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $OPENAI_API_KEY" \
+            -d '{
+                "model": "gpt-4",
+                "messages": [{"role": "user", "content": "'$prompt'"}],
+                "temperature": 0.7
+            }')
+            echo $gpt | jq -r '.choices[0].message.content'
+          '';
+        };
       };
     };
 
