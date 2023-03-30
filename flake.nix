@@ -27,6 +27,7 @@
     devshell,
     nil,
   } @ inputs: let
+    inherit (self) outputs;
     devShells = flake-utils.lib.eachDefaultSystem (system: let
       pkgs = import nixpkgs {
         inherit system;
@@ -99,11 +100,12 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = {
+              inherit inputs outputs;
               headless = true;
             };
             home-manager.users.jloos = {
               imports = [
-                (./. + "/users/jloos/home.nix")
+                ./users/jloos/home.nix
               ];
             };
           }
@@ -133,6 +135,7 @@
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = {
+            inherit inputs outputs;
             headless = false;
           };
 

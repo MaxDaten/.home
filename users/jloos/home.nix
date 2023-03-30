@@ -2,6 +2,8 @@
   config,
   lib,
   pkgs,
+  inputs,
+  outputs,
   headless ? true,
   ...
 }: let
@@ -42,6 +44,22 @@ in
       if isDarwin
       then "/Users/jloos"
       else "/home/jloos";
+
+    imports = [
+      inputs.sops-nix.homeManagerModules.sops
+    ];
+
+    sops = {
+      defaultSopsFile = ../../secrets/main.yaml;
+      age.sshKeyPaths = ["${config.home.homeDirectory}/.ssh/id_ed25519"];
+      age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+      age.generateKey = true;
+
+      # FIXME: Currently not working
+      secrets.OPENAI_API_KEY = {
+        path = "${config.home.homeDirectory}/.config/openai/OPENAI_API_KEY";
+      };
+    };
 
     home.packages = with pkgs;
       [
@@ -101,7 +119,6 @@ in
         if pkgs.stdenv.isDarwin
         then "code --wait"
         else "vim";
-      OPENAI_API_KEY = "sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
     };
 
     programs.ssh.enable = true;
@@ -151,6 +168,7 @@ in
     };
 
     programs.broot.enable = true;
+
     programs.fish.enable = true;
     programs.fish = {
       plugins = [
@@ -244,6 +262,7 @@ in
         hey_gpt = {
           argumentNames = ["prompt"];
           body = ''
+            set OPENAI_API_KEY (cat ${config.sops.secrets.OPENAI_API_KEY.path})
             set gpt (curl https://api.openai.com/v1/chat/completions -s \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer $OPENAI_API_KEY" \
