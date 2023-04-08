@@ -54,6 +54,7 @@ in
       ./modules/ssh.nix
       ./modules/tmux.nix
       ./modules/programs.nix
+      ./modules/fzf.nix
     ];
 
     sops = {
@@ -126,13 +127,5 @@ in
         if pkgs.stdenv.isDarwin
         then "code --wait"
         else "vim";
-    };
-
-    programs.fzf = let
-      fd = "${pkgs.fd}/bin/fd";
-    in {
-      enable = true;
-      changeDirWidgetCommand = "${fd} --type d --hidden --follow --exclude .git --no-ignore";
-      changeDirWidgetOptions = ["--preview 'tree -C {} | head -200'"];
     };
   }
