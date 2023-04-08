@@ -52,6 +52,7 @@ in
       (import ./modules/fish.nix {inherit pkgs config isDarwin lib;})
       ./modules/vim.nix
       ./modules/ssh.nix
+      ./modules/tmux.nix
     ];
 
     sops = {
@@ -124,26 +125,6 @@ in
         if pkgs.stdenv.isDarwin
         then "code --wait"
         else "vim";
-    };
-
-    programs.tmux = {
-      enable = true;
-      tmuxinator.enable = true;
-      clock24 = true;
-      plugins = with pkgs; [
-        tmuxPlugins.cpu
-        {
-          plugin = tmuxPlugins.resurrect;
-          extraConfig = "set -g @resurrect-strategy-nvim 'session'";
-        }
-        {
-          plugin = tmuxPlugins.continuum;
-          extraConfig = ''
-            set -g @continuum-restore 'on'
-            set -g @continuum-save-interval '60' # minutes
-          '';
-        }
-      ];
     };
 
     programs.fzf = let
