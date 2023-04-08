@@ -51,6 +51,7 @@ in
       ./modules/git.nix
       (import ./modules/fish.nix {inherit pkgs config isDarwin lib;})
       ./modules/vim.nix
+      ./modules/ssh.nix
     ];
 
     sops = {
@@ -123,24 +124,6 @@ in
         if pkgs.stdenv.isDarwin
         then "code --wait"
         else "vim";
-    };
-
-    programs.ssh.enable = true;
-    programs.ssh.matchBlocks = {
-      "pi4-nixos" = {
-        hostname = "pi4-nixos";
-        user = "jloos";
-        identitiesOnly = true;
-        identityFile = [
-          "~/.ssh/id_ed25519"
-          "~/.ssh/id_rsa"
-        ];
-      };
-
-      "maandr" = {
-        hostname = "maandr.de";
-        user = "root";
-      };
     };
 
     programs.tmux = {
