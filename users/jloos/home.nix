@@ -56,6 +56,7 @@ in
       ./modules/programs.nix
       ./modules/fzf.nix
       ./modules/sops.nix
+      (import ./modules/heygpt.nix {inherit pkgs config isDarwin lib;})
     ];
 
     home.packages = with pkgs;
