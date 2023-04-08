@@ -53,6 +53,7 @@ in
       ./modules/vim.nix
       ./modules/ssh.nix
       ./modules/tmux.nix
+      ./modules/programs.nix
     ];
 
     sops = {
@@ -134,14 +135,4 @@ in
       changeDirWidgetCommand = "${fd} --type d --hidden --follow --exclude .git --no-ignore";
       changeDirWidgetOptions = ["--preview 'tree -C {} | head -200'"];
     };
-
-    programs.broot.enable = true;
-    programs.bat.enable = true;
-    programs.bash.enable = true;
-    programs.bash.enableCompletion = true;
-    programs.zsh.enable = true;
-    programs.zsh.enableCompletion = true;
-
-    programs.direnv.enable = true;
-    programs.direnv.nix-direnv.enable = true;
   }
