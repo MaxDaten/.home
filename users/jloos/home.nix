@@ -50,6 +50,7 @@ in
       ./modules/starship.nix
       ./modules/git.nix
       (import ./modules/fish.nix {inherit pkgs config isDarwin lib;})
+      ./modules/vim.nix
     ];
 
     sops = {
@@ -179,31 +180,4 @@ in
 
     programs.direnv.enable = true;
     programs.direnv.nix-direnv.enable = true;
-
-    # Vim
-    programs.neovim = {
-      enable = true;
-      vimAlias = true;
-      extraConfig = ''
-        colorscheme gruvbox
-      '';
-
-      plugins = with pkgs.vimPlugins; [
-        gruvbox
-
-        # Languages
-        vim-nix
-
-        vim-fish
-
-        vim-go
-
-        vim-pandoc
-        vim-pandoc-syntax
-
-        vim-yaml
-        vim-json
-        vim-markdown
-      ];
-    };
   }
