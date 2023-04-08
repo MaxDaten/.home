@@ -70,7 +70,6 @@ in
 
         # shell tools
         spaceship-prompt
-        htop
         ripgrep
         watch
         tree
