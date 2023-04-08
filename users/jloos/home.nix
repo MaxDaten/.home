@@ -244,49 +244,12 @@ in
         set __done_enabled
       '';
 
-      # interactiveShellInit = ''
-      #   set fish_greeting "🐡"
-
-      #   # peco
-      #   function fish_user_key_bindings
-      #     bind \cr 'peco_select_history (commandline -b)'
-      #     fzf_key_bindings
-      #   end
-
-      #   # done
-      #
-      # '';
-
-      functions = {
+      functions = let
+        gpt_functions = import ./fish-functions/gpt.nix;
+      in {
+        inherit (gpt_functions) hey_gpt data_gpt;
         gitignore = "curl -sL https://www.gitignore.io/api/$argv";
         fish_reload = "source ~/.config/fish/config.fish";
-        # https://kadekillary.work/posts/1000x-eng/
-        hey_gpt = {
-          argumentNames = ["prompt"];
-          body = ''
-            # set OPENAI_API_KEY (cat ${config.sops.secrets.OPENAI_API_KEY.path})
-            set gpt (curl https://api.openai.com/v1/chat/completions -s \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $OPENAI_API_KEY" \
-            -d '{
-                "model": "gpt-3.5-turbo",
-                "messages": [{"role": "user", "content": "'$prompt'"}],
-                "temperature": 0.7,
-                "stream": true
-            }')
-            for text in $gpt
-              if test $text = 'data: [DONE]'
-                break
-              else if string match -q --regex "role" $text
-                continue
-              else if string match -q --regex "content" $text
-                echo -n $text | string replace 'data: ' "" | jq -r -j '.choices[0].delta.content'
-              else
-                continue
-              end
-            end
-          '';
-        };
       };
     };
 
