@@ -5,7 +5,6 @@
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
     age.generateKey = true;
 
-    # FIXME: Currently not working
     secrets.OPENAI_API_KEY = {
       path = "${config.home.homeDirectory}/.config/openai/OPENAI_API_KEY";
     };

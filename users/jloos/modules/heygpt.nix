@@ -2,6 +2,7 @@
   lib,
   pkgs,
   isDarwin,
+  config,
   ...
 }: let
   heygpt = pkgs.rustPlatform.buildRustPackage {
@@ -23,6 +24,11 @@
       license = licenses.mit;
     };
   };
+
+  wrappedHeygpt = pkgs.writeShellScriptBin "heygpt" ''
+    export OPENAI_API_KEY=$(cat ${config.sops.secrets.OPENAI_API_KEY.path})
+    ${heygpt}/bin/heygpt $@
+  '';
 in {
-  home.packages = [heygpt];
+  home.packages = [wrappedHeygpt];
 }
