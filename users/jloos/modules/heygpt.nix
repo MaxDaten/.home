@@ -29,6 +29,11 @@
     export OPENAI_API_KEY=$(cat ${config.sops.secrets.OPENAI_API_KEY.path})
     ${heygpt}/bin/heygpt $@
   '';
+
+  gptcommit = pkgs.writeShellScriptBin "gptcommit" ''
+    export OPENAI_API_KEY=$(cat ${config.sops.secrets.OPENAI_API_KEY.path})
+    ${pkgs.gptcommit}/bin/gptcommit $@
+  '';
 in {
-  home.packages = [wrappedHeygpt];
+  home.packages = [wrappedHeygpt gptcommit];
 }
