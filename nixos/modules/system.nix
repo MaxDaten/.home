@@ -49,7 +49,6 @@
     DefaultEncryption Never
   '';
   services.printing.drivers = [
-    pkgs.gutenprint
     pkgs.brlaser
   ];
 }
