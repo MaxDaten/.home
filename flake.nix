@@ -73,7 +73,6 @@
         };
         modules = [
           ./machines/pi4-nixos
-          ./users/jloos
           ./nixos/modules/pi4-sd-image.nix
           ./nixos/modules/system.nix
           ./nixos/modules/network
@@ -103,12 +102,8 @@
               inherit inputs outputs;
               headless = true;
             };
-            home-manager.users.jloos = {
-              imports = [
-                ./users/jloos/home.nix
-              ];
-            };
           }
+          (import ./users/jloos)
 
           vscode-server.nixosModule
           (

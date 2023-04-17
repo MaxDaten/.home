@@ -27,16 +27,6 @@
   ];
 in
   with lib; {
-    # This value determines the Home Manager release that your
-    # configuration is compatible with. This helps avoid breakage
-    # when a new Home Manager release introduces backwards
-    # incompatible changes.
-    #
-    # You can update Home Manager without changing this value. See
-    # the Home Manager release notes for a list of state version
-    # changes in each release.
-    home.stateVersion = "22.11";
-
     # Home Manager needs a bit of information about you and the
     # paths it should manage.
     home.username = "jloos";
@@ -47,9 +37,9 @@ in
 
     imports = [
       inputs.sops-nix.homeManagerModule
+      (import ./modules/fish.nix {inherit pkgs config isDarwin lib;})
       ./modules/starship.nix
       ./modules/git.nix
-      (import ./modules/fish.nix {inherit pkgs config isDarwin lib;})
       ./modules/vim.nix
       ./modules/ssh.nix
       ./modules/tmux.nix
