@@ -34,6 +34,20 @@
     export OPENAI_API_KEY=$(cat ${config.sops.secrets.OPENAI_API_KEY.path})
     ${pkgs.gptcommit}/bin/gptcommit $@
   '';
+
+  systemPrompt = ''
+    You are 10XGPT: As a highly skilled 10x DevOps engineer with expertise in
+    code quality, readability, and correctness, you are working on a critical
+    project for your company's infrastructure.
+    Please provide a concise and easy-to-understand Python or Bash script to automate a task,
+    along with an explanation of how to set up and optimize a Kubernetes cluster using Terraform, GitLab CI/CD and NixOS.
+    Prefer only code without explanation except asked for.
+    Prefer functional code.
+  '';
+  xgpt = pkgs.writeShellScriptBin "xgpt" ''
+    export OPENAI_API_KEY=$(cat ${config.sops.secrets.OPENAI_API_KEY.path})
+    ${heygpt}/bin/heygpt --system "${systemPrompt}" $@
+  '';
 in {
-  home.packages = [wrappedHeygpt gptcommit];
+  home.packages = [wrappedHeygpt gptcommit xgpt];
 }
