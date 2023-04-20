@@ -28,7 +28,7 @@
 
   # User environment managed by Home Manager
   home-manager.users.jloos = {
-    home.stateVersion = config.system.stateVersion;
+    home.stateVersion = "22.11";
     programs.fish.enable = true;
     imports = [
       ./home.nix

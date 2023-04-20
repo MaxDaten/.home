@@ -101,6 +101,7 @@ in
     # Configurations
     programs.man.generateCaches = true; # Allow man completions
 
+    home.stateVersion = "22.11";
     home.sessionVariables = {
       EDITOR =
         if pkgs.stdenv.isDarwin
