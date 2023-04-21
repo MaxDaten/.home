@@ -59,6 +59,8 @@
         tay = "terraform apply --yes";
         # Handy for nix shells with deep folder structures
         cdr = "cd $PRJ_ROOT";
+        h = "heygpt";
+        x = "xgpt";
       }
       (lib.mkIf isDarwin {
         hme = "home-manager edit --flake ${config.home.homeDirectory}/Workspace/.home/#jloos-macos";
