@@ -59,8 +59,6 @@
         tay = "terraform apply --yes";
         # Handy for nix shells with deep folder structures
         cdr = "cd $PRJ_ROOT";
-        h = "heygpt";
-        x = "xgpt";
       }
       (lib.mkIf isDarwin {
         hme = "home-manager edit --flake ${config.home.homeDirectory}/Workspace/.home/#jloos-macos";
@@ -72,13 +70,13 @@
       k = "kubectl";
       br = "broot";
       ls = "${pkgs.lsd}/bin/lsd -l";
-      h = "hey_gpt";
+      h = "heygpt";
+      x = "xgpt";
     };
 
     shellInit = ''
       set -U fish_greeting
-      set -U PROJECT_PATHS ~/Workspace/buzzar ~/Developer/kmo ~/Workspace/gitops ~/Workspace/.home
-      set -U FZF_COMPLETION_TRIGGER '~~'
+      set -U PROJECT_PATHS ~/Workspace/buzzar ~/Developer/kmo ~/Workspace/gitops ~/Workspace/.home ~/Developer
       set __done_enabled
     '';
 
