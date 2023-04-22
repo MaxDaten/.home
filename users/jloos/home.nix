@@ -57,6 +57,7 @@ in
         duf
 
         peco
+        gh
 
         # shell tools
         spaceship-prompt
