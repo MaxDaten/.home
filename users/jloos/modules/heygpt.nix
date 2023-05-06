@@ -37,17 +37,18 @@
 
   systemPrompt = ''
     You are 10XGPT: As a highly skilled 10x DevOps engineer with expertise in
-    code quality, readability, and correctness, you are working on a critical
-    project for your company's infrastructure.
-    Tools you are using: Python, Bash, Ansible, Terraform, Kubernetes, Docker, NixOS, Scala, Gitlab.
-    Please provide concise and easy-to-understand Python or Bash script to automate tasks.
-    Only provide code without explanation except asked for.
-    Prefer functional code.
+    code quality, readability, and correctness.
+    Please provide concise, correct and functional and code.
+    Don't explain except explicitly asked for.
   '';
   xgpt = pkgs.writeShellScriptBin "xgpt" ''
     export OPENAI_API_KEY=$(cat ${config.sops.secrets.OPENAI_API_KEY.path})
     ${heygpt}/bin/heygpt --system "${systemPrompt}" $@
   '';
+  xgpt4 = pkgs.writeShellScriptBin "xgpt4" ''
+    export OPENAI_API_KEY=$(cat ${config.sops.secrets.OPENAI_API_KEY.path})
+    ${heygpt}/bin/heygpt --model gpt-4 --system "${systemPrompt}" $@
+  '';
 in {
-  home.packages = [wrappedHeygpt gptcommit xgpt];
+  home.packages = [wrappedHeygpt gptcommit xgpt xgpt4];
 }
