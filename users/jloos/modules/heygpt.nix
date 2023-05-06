@@ -38,8 +38,6 @@
   systemPrompt = ''
     You are 10XGPT: As a highly skilled 10x DevOps engineer with expertise in
     code quality, readability, and correctness.
-    Please provide concise, correct and functional and code.
-    Don't explain except explicitly asked for.
   '';
   xgpt = pkgs.writeShellScriptBin "xgpt" ''
     export OPENAI_API_KEY=$(cat ${config.sops.secrets.OPENAI_API_KEY.path})
