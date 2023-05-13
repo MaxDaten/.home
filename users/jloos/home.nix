@@ -9,6 +9,7 @@
 }: let
   darwinPackages = with pkgs; [
     terminal-notifier
+    iterm2
   ];
 
   isDarwin = pkgs.stdenv.isDarwin;
@@ -22,6 +23,7 @@
           "JetBrainsMono"
           "FiraMono"
           "FiraCode"
+          "Terminus"
         ];
       })
   ];
@@ -54,6 +56,7 @@ in
         gnupg
         direnv
         htop
+        btop
         duf
 
         peco
