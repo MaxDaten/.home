@@ -57,11 +57,11 @@
   '';
   xgpt = pkgs.writeShellScriptBin "xgpt" ''
     export OPENAI_API_KEY=$(cat ${config.sops.secrets.OPENAI_API_KEY.path})
-    ${heygpt}/bin/heygpt --system "${systemPrompt}" $@
+    ${heygpt}/bin/heygpt --system --temperature 0.2 "${systemPrompt}" $@
   '';
   xgpt4 = pkgs.writeShellScriptBin "xgpt4" ''
     export OPENAI_API_KEY=$(cat ${config.sops.secrets.OPENAI_API_KEY.path})
-    ${heygpt}/bin/heygpt --model gpt-4 --system "${systemPrompt}" $@
+    ${heygpt}/bin/heygpt --model gpt-4 --temperature 0.2 --system "${systemPrompt}" $@
   '';
 in {
   home.packages = [wrappedHeygpt gptcommit xgpt xgpt4];
