@@ -56,7 +56,6 @@ in
         gnupg
         direnv
         htop
-        btop
         duf
 
         peco
@@ -104,6 +103,12 @@ in
 
     # Configurations
     programs.man.generateCaches = true; # Allow man completions
+
+    programs.btop.enable = true;
+    # https://github.com/aristocratos/btop#configurability
+    programs.btop.settings = {
+      truecolor = !isDarwin;
+    };
 
     home.stateVersion = "22.11";
     home.sessionVariables = {
