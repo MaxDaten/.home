@@ -107,7 +107,7 @@ in
     programs.btop.enable = true;
     # https://github.com/aristocratos/btop#configurability
     programs.btop.settings = {
-      truecolor = !isDarwin;
+      # truecolor = !isDarwin;
     };
 
     home.stateVersion = "22.11";
