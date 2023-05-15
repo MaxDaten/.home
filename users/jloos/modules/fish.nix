@@ -71,7 +71,7 @@
       br = "broot";
       ls = "${pkgs.lsd}/bin/lsd -l";
       h = "heygpt";
-      x = "xgpt";
+      x = "xgpt4";
     };
 
     shellInit = ''
