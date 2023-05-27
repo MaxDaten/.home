@@ -1,5 +1,6 @@
-{...}: {
+{pkgs, ...}: {
   programs.ssh.enable = true;
+  programs.ssh.package = pkgs.openssh;
   programs.ssh.matchBlocks = {
     "pi4-nixos" = {
       hostname = "pi4-nixos";
