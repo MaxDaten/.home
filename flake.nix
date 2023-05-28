@@ -87,11 +87,11 @@
           }
 
           ./nixos/modules/system-dashboard
-          ./nixos/modules/homebridge
-          {
-            services.homebridge.enable = true;
-            services.homebridge.openFirewall = true;
-          }
+          # ./nixos/modules/homebridge
+          # {
+          #   services.homebridge.enable = true;
+          #   services.homebridge.openFirewall = true;
+          # }
 
           # User environment managed by Home Manager
           home-manager.nixosModules.home-manager
