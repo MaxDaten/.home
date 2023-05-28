@@ -110,7 +110,7 @@ in
       # truecolor = !isDarwin;
     };
 
-    home.stateVersion = "22.11";
+    home.stateVersion = "23.05";
     home.sessionVariables = {
       EDITOR =
         if pkgs.stdenv.isDarwin
