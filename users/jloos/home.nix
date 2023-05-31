@@ -3,7 +3,6 @@
   lib,
   pkgs,
   inputs,
-  outputs,
   headless ? true,
   ...
 }: let
@@ -71,6 +70,7 @@ in
         neofetch
         lsd
         fd
+        yubikey-manager
 
         # Data Structures
         jq
