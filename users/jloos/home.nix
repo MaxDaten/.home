@@ -94,6 +94,7 @@ in
         kubectl
         kustomize
         dive # Analyze docker layer
+        lazydocker # k9s for docker
       ]
       ++ lib.optionals (pkgs.stdenv.isDarwin) darwinPackages
       ++ lib.optionals (!headless) guiPackages;
