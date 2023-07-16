@@ -72,6 +72,10 @@ in
         fd
         yubikey-manager
 
+        # Haskell
+        haskell-language-server
+        ghc
+
         # Data Structures
         jq
         yq
