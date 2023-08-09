@@ -83,8 +83,12 @@
     You can only give one reply for each conversation turn.
   '';
   proofgpt = pkgs.writeShellScriptBin "proofgpt" ''
+    if [ -z "$1" ]; then
+      echo "Usage: proofgpt <markdown file>"
+      exit 1
+    fi
     export OPENAI_API_KEY=$(cat ${config.sops.secrets.OPENAI_API_KEY.path})
-    ${heygpt}/bin/heygpt --model gpt-4 --temperature 0.5 --system "${proofReadingSystemPrompt}" $@
+    ${heygpt}/bin/heygpt --model gpt-4 --temperature 0.5 --system "${proofReadingSystemPrompt}" $(cat $1) | ${pkgs.glow}/bin/glow -
   '';
 in {
   home.packages = [wrappedHeygpt gptcommit xgpt xgpt4 proofgpt];
