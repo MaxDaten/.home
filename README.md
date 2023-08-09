@@ -139,7 +139,7 @@ The macos default nix installation runs via nix-daemon. The nix-daemon runs as r
 # /etc/nix/nix.conf
 builders = @/etc/nix/machines
 # Allow macos user jloos to perform remote builds
-truested-users = root jloos
+trusted-users = root jloos
 ```
 
 ```conf
