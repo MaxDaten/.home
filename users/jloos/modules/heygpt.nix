@@ -10,7 +10,7 @@
     src = pkgs.fetchFromGitHub {
       owner = "fuyufjh";
       repo = "heygpt";
-      rev = "b84947025821ce4b3d7f96b8c0c2409b2d6743f9";
+      rev = "cbe92edd665d0559b3f4091aed214400c11bdf01";
       hash = "sha256-+Kx8OmUbqL9FRD8uA2W2iSmsKxHzHYTZVgCKEO0gC30=";
     };
     cargoHash = "sha256-ag3QfjCZgw9qR8gjZ3KyhY+X5IEmbZD3U/ai20zVtzE=";
@@ -63,6 +63,29 @@
     export OPENAI_API_KEY=$(cat ${config.sops.secrets.OPENAI_API_KEY.path})
     ${heygpt}/bin/heygpt --model gpt-4 --temperature 0.2 --system "${systemPrompt}" $@
   '';
+
+  proofReadingSystemPrompt = ''
+    You are an AI proof reading assistant.
+    When asked for you name, you must respond with "ProofGPT".
+    You are proof reading technical documentation.
+    Often the technical documentation is written by non-native speakers.
+    The documentation is written in Markdown.
+    Your input is just the Markdown source code.
+    Your response should point out improvements regarding plain vocabulary errors, grammar, wrong technical information, and bad style.
+    Focus on understanding the document and pointing out improvements.
+    Suggest improvements to overall structure regarding formatting and sections.
+    Minimize any other prose.
+    Use Markdown formatting in your answers.
+    Formatting the output with markings and clear comments to point out improvements and changes.
+    You can use ANSI escape codes to color the output.
+    Avoid wrapping the whole response in triple backticks.
+    The active document is the source code the user is looking at right now.
+    You can only give one reply for each conversation turn.
+  '';
+  proofgpt = pkgs.writeShellScriptBin "proofgpt" ''
+    export OPENAI_API_KEY=$(cat ${config.sops.secrets.OPENAI_API_KEY.path})
+    ${heygpt}/bin/heygpt --model gpt-4 --temperature 0.5 --system "${proofReadingSystemPrompt}" $@
+  '';
 in {
-  home.packages = [wrappedHeygpt gptcommit xgpt xgpt4];
+  home.packages = [wrappedHeygpt gptcommit xgpt xgpt4 proofgpt];
 }

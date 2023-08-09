@@ -80,10 +80,7 @@
       set __done_enabled
     '';
 
-    functions = let
-      gpt_functions = import ../fish-functions/gpt.nix;
-    in {
-      inherit (gpt_functions) hey_gpt data_gpt;
+    functions = {
       gitignore = "curl -sL https://www.gitignore.io/api/$argv";
       fish_reload = "source ~/.config/fish/config.fish";
     };
