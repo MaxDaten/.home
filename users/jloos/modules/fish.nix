@@ -53,7 +53,6 @@
         gitcm = "git commit -m";
         gitca = "git commit --amend --no-edit";
         pjo = "pj open";
-        awse = "code --new-window ~/.aws/credentials ~/.aws/config";
         tp = "terraform plan";
         ta = "terraform apply";
         tay = "terraform apply --yes";
@@ -61,8 +60,7 @@
         cdr = "cd $PRJ_ROOT";
       }
       (lib.mkIf isDarwin {
-        hme = "home-manager edit --flake ${config.home.homeDirectory}/Workspace/.home/#jloos-macos";
-        hms = "home-manager switch --flake ${config.home.homeDirectory}/Workspace/.home/#jloos-macos";
+        nix-switch = "nix run nix-darwin -- switch --flake ${config.home.homeDirectory}/Workspace/.home/";
       })
     ];
 

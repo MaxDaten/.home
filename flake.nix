@@ -1,7 +1,11 @@
 {
-  description = "Raspberry Pi NixOS";
+  description = "Personal NixOS configuration";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+  inputs.nix-darwin.url = "github:lnl7/nix-darwin";
+  inputs.nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
   inputs.nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   inputs.flake-utils.url = "github:numtide/flake-utils";
   inputs.vscode-server.url = "github:msteen/nixos-vscode-server";
@@ -19,6 +23,7 @@
   outputs = {
     self,
     nixpkgs,
+    nix-darwin,
     nixos-hardware,
     flake-utils,
     vscode-server,
@@ -66,6 +71,24 @@
     });
   in
     {
+      # hostname -s
+      darwinConfigurations.macos = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        modules = [
+          ./machines/macos/configuration.nix
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = {
+              inherit inputs outputs;
+              headless = false;
+            };
+            home-manager.users.jloos = import ./users/jloos/home.nix;
+          }
+        ];
+      };
+
       nixosConfigurations.pi4-nixos = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         specialArgs = {
@@ -117,60 +140,6 @@
           )
 
           ./nixos/modules/snowflake
-        ];
-      };
-
-      homeConfigurations.jloos-macos = let
-        system = "aarch64-darwin";
-        pkgs = import nixpkgs {
-          inherit system;
-          overlays = [nil.overlays.default];
-        };
-      in
-        home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = {
-            inherit inputs outputs;
-            headless = false;
-          };
-
-          modules = [
-            ./users/jloos/home.nix
-          ];
-        };
-
-      # https://github.com/NixOS/nixpkgs/blob/1a173c89426ab705aac55872740362bc1a0b6cfd/pkgs/top-level/darwin-packages.nix#LL228C3-L242C9
-      builder = let
-        system = "aarch64-darwin";
-        pkgs = import nixpkgs {inherit system;};
-        toGuest = builtins.replaceStrings ["darwin"] ["linux"];
-
-        nixos = import "${nixpkgs}/nixos" {
-          configuration = {
-            imports = [
-              # https://github.com/NixOS/nixpkgs/blob/6d89aa8f1d238cc5ed97215f7e229b8283bef027/nixos/modules/profiles/macos-builder.nix
-              "${nixpkgs}/nixos/modules/profiles/macos-builder.nix"
-            ];
-
-            virtualisation.host = {inherit pkgs;};
-            virtualisation = {
-              diskSize = pkgs.lib.mkForce (40 * 1024);
-              memorySize = pkgs.lib.mkForce (4 * 1024);
-            };
-          };
-
-          system = toGuest pkgs.hostPlatform.system;
-        };
-      in
-        nixos.config.system.build.macos-builder-installer;
-
-      nixosConfigurations."nixbuilder.qwiz.buzz" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = inputs;
-
-        modules = [
-          "${nixpkgs}/nixos/modules/virtualisation/google-compute-image.nix"
-          ./machines/nixbuilder/configuration.nix
         ];
       };
 

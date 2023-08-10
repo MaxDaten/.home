@@ -33,7 +33,7 @@ in
     home.username = "jloos";
     home.homeDirectory =
       if isDarwin
-      then "/Users/jloos"
+      then lib.mkForce "/Users/jloos"
       else "/home/jloos";
 
     imports = [

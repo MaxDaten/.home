@@ -2,7 +2,8 @@
   programs.k9s = {
     enable = true;
 
-    # Not supported?
+    # Use generators!
+    # https://gist.github.com/jmatsushita/5c50ef14b4b96cb24ae5268dab613050#file-home-nix-L52
     plugins = {
       # https://github.com/derailed/k9s/issues/364
       pinologs = {

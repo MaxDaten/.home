@@ -1,5 +1,9 @@
 # System settings of user
-{config, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   users.extraUsers.jloos = {
     isNormalUser = true;
     extraGroups = [
@@ -12,7 +16,7 @@
     ];
 
     # FIXME: Currently broken
-    # shell = pkgs.fish;
+    shell = pkgs.fish;
 
     hashedPassword = "$6$H9kP.kHWqSBn1rE4$huEYYhX0UrpsCCViIwWFHinRJnMVjgSbOoynKF0t79Itlb5ReqAztQDm.Q.t5LXl/70vuVnCx8bXf3nLJHd1S0";
     openssh.authorizedKeys.keys = [
