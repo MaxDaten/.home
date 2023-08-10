@@ -14,8 +14,6 @@
       "qemu-libvirtd"
       config.users.groups.keys.name # Allow access to secrets
     ];
-
-    # FIXME: Currently broken
     shell = pkgs.fish;
 
     hashedPassword = "$6$H9kP.kHWqSBn1rE4$huEYYhX0UrpsCCViIwWFHinRJnMVjgSbOoynKF0t79Itlb5ReqAztQDm.Q.t5LXl/70vuVnCx8bXf3nLJHd1S0";
