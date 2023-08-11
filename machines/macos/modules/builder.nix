@@ -11,8 +11,9 @@
       "${nixpkgs}/nixos/modules/profiles/macos-builder.nix"
       {
         virtualisation.host.pkgs = pkgs;
-        virtualisation.diskSize = lib.mkForce (40 * 1024);
-        virtualisation.memorySize = lib.mkForce (4 * 1024);
+        virtualisation.darwin-builder.diskSize = lib.mkForce (40 * 1024);
+        virtualisation.darwin-builder.memorySize = lib.mkForce (4 * 1024);
+        virtualisation.darwin-builder.workingDirectory = "/var/lib/darwin-builder";
         system.nixos.revision = lib.mkForce null;
       }
     ];
@@ -52,7 +53,6 @@ in {
       RunAtLoad = true;
       StandardOutPath = "/var/log/darwin-builder.log";
       StandardErrorPath = "/var/log/darwin-builder.log";
-      WorkingDirectory = "/etc/nix/";
     };
   };
 }
