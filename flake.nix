@@ -79,7 +79,7 @@
         };
         modules = [
           ./machines/macos/configuration.nix
-          ./machines/macos/modules/builder.nix
+          ./machines/macos/modules/linux-builder.nix
 
           home-manager.darwinModules.home-manager
           {
@@ -145,6 +145,16 @@
           )
 
           ./nixos/modules/snowflake
+        ];
+      };
+
+      nixosConfigurations."nixbuilder.qwiz.buzz" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = inputs;
+
+        modules = [
+          "${nixpkgs}/nixos/modules/virtualisation/google-compute-image.nix"
+          ./machines/nixbuilder/configuration.nix
         ];
       };
 
