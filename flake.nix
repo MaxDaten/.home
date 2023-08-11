@@ -3,8 +3,8 @@
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-  inputs.nix-darwin.url = "github:lnl7/nix-darwin";
-  inputs.nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+  inputs.darwin.url = "github:lnl7/nix-darwin";
+  inputs.darwin.inputs.nixpkgs.follows = "nixpkgs";
 
   inputs.nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   inputs.flake-utils.url = "github:numtide/flake-utils";
@@ -23,7 +23,7 @@
   outputs = {
     self,
     nixpkgs,
-    nix-darwin,
+    darwin,
     nixos-hardware,
     flake-utils,
     vscode-server,
@@ -72,10 +72,15 @@
   in
     {
       # hostname -s
-      darwinConfigurations.macos = nix-darwin.lib.darwinSystem {
+      darwinConfigurations.macos = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
+        specialArgs = {
+          inherit inputs outputs;
+        };
         modules = [
           ./machines/macos/configuration.nix
+          ./machines/macos/modules/builder.nix
+
           home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;

@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   # https://daiderd.com/nix-darwin/manual/index.html
   nixpkgs.hostPlatform = "aarch64-darwin";
 
@@ -19,6 +15,7 @@
     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
   ];
   nix.settings.trusted-users = [
+    "root"
     "@admin"
   ];
   nix.configureBuildUsers = true;
@@ -31,7 +28,8 @@
   nix.settings.keep-derivations = true;
   nix.settings.warn-dirty = false;
   nix.settings.build-users-group = "nixbld";
-  nix.settings.extra-platforms = lib.optionalString (pkgs.system == "aarch64-darwin") "x86_64-darwin aarch64-darwin";
+  nix.settings.builders-use-substitutes = true;
+  # nix.settings.extra-platforms = lib.optionalString (pkgs.system == "aarch64-darwin") "x86_64-darwin aarch64-darwin";
 
   # init nix in zsh & fish
   programs.zsh.enable = true;

@@ -17,5 +17,14 @@
       hostname = "maandr.de";
       user = "root";
     };
+
+    "linux-builder" = {
+      hostname = "localhost";
+      user = "builder";
+      port = 31022;
+      extraOptions = {
+        HostKeyAlias = "linux-builder";
+      };
+    };
   };
 }
