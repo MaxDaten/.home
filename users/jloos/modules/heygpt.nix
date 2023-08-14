@@ -11,9 +11,9 @@
       owner = "fuyufjh";
       repo = "heygpt";
       rev = "cbe92edd665d0559b3f4091aed214400c11bdf01";
-      hash = "sha256-+Kx8OmUbqL9FRD8uA2W2iSmsKxHzHYTZVgCKEO0gC30=";
+      hash = "sha256-Gtbb0G7tV+cjbq/74dnZKIwWZgNfSJl0My6F4OmAdhU=";
     };
-    cargoHash = "sha256-ag3QfjCZgw9qR8gjZ3KyhY+X5IEmbZD3U/ai20zVtzE=";
+    cargoHash = "sha256-E1K8N7CEO/1gYrhkQ5awaynldWBunnnaBmAZzvnaXx4=";
 
     buildInputs = [pkgs.openssl] ++ lib.optionals isDarwin [pkgs.darwin.apple_sdk.frameworks.Security];
     nativeBuildInputs = [pkgs.pkg-config];
@@ -27,11 +27,13 @@
 
   wrappedHeygpt = pkgs.writeShellScriptBin "heygpt" ''
     export OPENAI_API_KEY=$(cat ${config.sops.secrets.OPENAI_API_KEY.path})
+    export OPENAI_API_BASE="https://api.openai.com/v1"
     ${heygpt}/bin/heygpt $@
   '';
 
   gptcommit = pkgs.writeShellScriptBin "gptcommit" ''
     export OPENAI_API_KEY=$(cat ${config.sops.secrets.OPENAI_API_KEY.path})
+    export OPENAI_API_BASE="https://api.openai.com/v1"
     ${pkgs.gptcommit}/bin/gptcommit $@
   '';
 
@@ -57,10 +59,12 @@
   '';
   xgpt = pkgs.writeShellScriptBin "xgpt" ''
     export OPENAI_API_KEY=$(cat ${config.sops.secrets.OPENAI_API_KEY.path})
+    export OPENAI_API_BASE="https://api.openai.com/v1"
     ${heygpt}/bin/heygpt --system --temperature 0.2 "${systemPrompt}" $@
   '';
   xgpt4 = pkgs.writeShellScriptBin "xgpt4" ''
     export OPENAI_API_KEY=$(cat ${config.sops.secrets.OPENAI_API_KEY.path})
+    export OPENAI_API_BASE="https://api.openai.com/v1"
     ${heygpt}/bin/heygpt --model gpt-4 --temperature 0.2 --system "${systemPrompt}" $@
   '';
 
@@ -88,6 +92,7 @@
       exit 1
     fi
     export OPENAI_API_KEY=$(cat ${config.sops.secrets.OPENAI_API_KEY.path})
+    export OPENAI_API_BASE="https://api.openai.com/v1"
     ${heygpt}/bin/heygpt --model gpt-4 --temperature 0.5 --system "${proofReadingSystemPrompt}" $(cat $1) | ${pkgs.glow}/bin/glow -
   '';
 in {
