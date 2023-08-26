@@ -101,6 +101,7 @@ in
         kustomize
         dive # Analyze docker layer
         lazydocker # k9s for docker
+        skopeo # inspect docker images without docker daemon
       ]
       ++ lib.optionals (pkgs.stdenv.isDarwin) darwinPackages
       ++ lib.optionals (!headless) guiPackages;
