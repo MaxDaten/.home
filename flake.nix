@@ -162,10 +162,6 @@
         default = self.nixosConfigurations.pi4-nixos.config.system.build.sdImage;
       };
 
-      packages.aarch64-darwin = {
-        builder = self.builder;
-      };
-
       packages.x86_64-linux = {
         googleComputeImage = self.nixosConfigurations."nixbuilder.qwiz.buzz".config.system.build.googleComputeImage;
       };
