@@ -29,6 +29,7 @@
   nix.settings.warn-dirty = false;
   nix.settings.build-users-group = "nixbld";
   nix.settings.builders-use-substitutes = true;
+  nix.settings.allow-import-from-derivation = true;
   # nix.settings.extra-platforms = lib.optionalString (pkgs.system == "aarch64-darwin") "x86_64-darwin aarch64-darwin";
 
   # init nix in zsh & fish
