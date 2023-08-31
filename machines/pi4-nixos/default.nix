@@ -3,6 +3,7 @@
   lib,
   ...
 }: {
+  system.stateVersion = "23.11";
   imports = [
     ./fixup-allow-missing-modules.nix
     nixos-hardware.nixosModules.raspberry-pi-4
@@ -63,6 +64,4 @@
       keep-derivations = true
     '';
   };
-
-  system.stateVersion = "23.05";
 }
