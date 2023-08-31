@@ -56,6 +56,7 @@ in
         direnv
         htop
         duf
+        xz
 
         peco
         gh
