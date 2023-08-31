@@ -4,6 +4,7 @@
   pkgs,
   ...
 }: {
+  programs.fish.enable = true;
   users.extraUsers.jloos = {
     isNormalUser = true;
     extraGroups = [
