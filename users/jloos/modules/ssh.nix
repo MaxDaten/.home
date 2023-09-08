@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   programs.ssh.enable = true;
   programs.ssh.package = pkgs.openssh;
   programs.ssh.matchBlocks = {

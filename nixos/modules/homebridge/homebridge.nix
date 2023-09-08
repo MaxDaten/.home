@@ -1,9 +1,8 @@
 # Following: https://github.com/SamirHafez/config/blob/ef14103d4fb31d9e95264b05c78b57a1201b3c65/pi/modules/homebridge.nix
-{
-  config,
-  pkgs,
-  lib,
-  ...
+{ config
+, pkgs
+, lib
+, ...
 }:
 with lib; let
   cfg = config.services.homebridge;
@@ -34,9 +33,10 @@ with lib; let
 
   homebridge-packages = pkgs.symlinkJoin {
     name = "homebridge-all";
-    paths = builtins.attrValues (import ./package {inherit pkgs;});
+    paths = builtins.attrValues (import ./package { inherit pkgs; });
   };
-in {
+in
+{
   options = {
     services.homebridge = {
       enable = mkEnableOption "Homebridge Server";
@@ -80,16 +80,16 @@ in {
       group = "homebridge";
       home = cfg.workDir;
       createHome = true;
-      extraGroups = ["wheel"];
+      extraGroups = [ "wheel" ];
       isSystemUser = true;
     };
-    users.groups.homebridge = {};
+    users.groups.homebridge = { };
 
     systemd.services.homebridge = {
       description = "Homebridge Service";
-      wants = ["network-online.target"];
-      after = ["syslog.target" "network-online.target"];
-      wantedBy = ["multi-user.target"];
+      wants = [ "network-online.target" ];
+      after = [ "syslog.target" "network-online.target" ];
+      wantedBy = [ "multi-user.target" ];
 
       path = [
         pkgs.nodejs

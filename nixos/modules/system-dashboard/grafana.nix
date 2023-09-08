@@ -1,8 +1,8 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
+{ config
+, pkgs
+, ...
+}:
+let
   grafanaUriPath = "/dashboard/";
   raspberryDashboardSrc = pkgs.fetchFromGitHub {
     owner = "rfmoz";
@@ -13,7 +13,8 @@
     ];
     sha256 = "sha256-ngpNBd1t+/LaEHEEU07rpEgQBV2fNDG3nrNF7uabtYk=";
   };
-in {
+in
+{
   sops.secrets.grafana_admin_password = {
     owner = "grafana";
   };
@@ -80,5 +81,5 @@ in {
     };
   };
 
-  users.users.prometheus.extraGroups = [config.users.groups.video.name];
+  users.users.prometheus.extraGroups = [ config.users.groups.video.name ];
 }

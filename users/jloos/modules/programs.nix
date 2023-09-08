@@ -1,4 +1,4 @@
-{...}: {
+{ ... }: {
   programs.broot.enable = true;
   programs.bat.enable = true;
   programs.bash.enable = true;

@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   programs.git = {
     enable = true;
     userName = "Jan-Philip Loos";
@@ -23,9 +23,9 @@
         excludesfile = (pkgs.writeText ".gitignore" (builtins.readFile ./global.gitignore)).outPath;
       };
 
-      pull = {rebase = false;};
+      pull = { rebase = false; };
 
-      init = {defaultBranch = "main";};
+      init = { defaultBranch = "main"; };
     };
   };
 }

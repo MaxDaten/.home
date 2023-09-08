@@ -1,8 +1,7 @@
 # System settings of user
-{
-  config,
-  pkgs,
-  ...
+{ config
+, pkgs
+, ...
 }: {
   programs.fish.enable = true;
   users.extraUsers.jloos = {

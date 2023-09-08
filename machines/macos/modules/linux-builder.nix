@@ -1,10 +1,10 @@
-{...}: {
+{ ... }: {
   nix.linux-builder.enable = true;
   nix.linux-builder.maxJobs = 16;
   # When bootstrapping, comment modules out to use the binary cache version
   nix.linux-builder.modules = [
     (
-      {config, ...}: {
+      { config, ... }: {
         virtualisation.darwin-builder.diskSize = 50 * 1024;
         virtualisation.darwin-builder.memorySize = 4 * 1024;
       }

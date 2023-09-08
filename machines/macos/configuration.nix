@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   # https://daiderd.com/nix-darwin/manual/index.html
   nixpkgs.hostPlatform = "aarch64-darwin";
 

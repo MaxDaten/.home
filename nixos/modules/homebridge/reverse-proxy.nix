@@ -1,13 +1,13 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
+{ config
+, pkgs
+, lib
+, ...
 }:
 with lib; let
   homebridgeUriPath = "/homebridge/";
   cfg = config.services.homebridge;
-in {
+in
+{
   # nginx reverse proxy
   services.nginx.virtualHosts."homebridge.pi4-nixos.local" = mkIf cfg.enable {
     locations."${homebridgeUriPath}" = {

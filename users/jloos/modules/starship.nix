@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   programs.starship = {
     enable = true;
     enableFishIntegration = true;
@@ -8,7 +8,7 @@
       # Inserts a blank line between shell prompts
       add_newline = true;
 
-      line_break = {disabled = false;};
+      line_break = { disabled = false; };
 
       format = pkgs.lib.concatStrings [
         "$custom"
@@ -37,7 +37,7 @@
           command = "basename \"\${DIRENV_DIR/#-/\~}\"";
           when = "[[ -n \"$DIRENV_DIR\" ]]"; # Only show when in a direnv directory & loaded env
           format = "[$output;]($style) ";
-          shell = ["bash"];
+          shell = [ "bash" ];
           style = "red bold";
         };
       };
@@ -48,7 +48,7 @@
         disabled = false;
       };
 
-      docker_context = {disabled = true;};
+      docker_context = { disabled = true; };
 
       nix_shell = {
         format = "$symbol$state";

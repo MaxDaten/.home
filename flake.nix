@@ -20,56 +20,61 @@
   };
   inputs.devshell.url = "github:numtide/devshell";
 
-  outputs = {
-    self,
-    nixpkgs,
-    darwin,
-    nixos-hardware,
-    flake-utils,
-    vscode-server,
-    home-manager,
-    sops-nix,
-    devshell,
-    nil,
-  } @ inputs: let
-    inherit (self) outputs;
-    devShells = flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = import nixpkgs {
-        inherit system;
+  outputs =
+    { self
+    , nixpkgs
+    , darwin
+    , nixos-hardware
+    , flake-utils
+    , vscode-server
+    , home-manager
+    , sops-nix
+    , devshell
+    , nil
+    ,
+    } @ inputs:
+    let
+      inherit (self) outputs;
+      devShells = flake-utils.lib.eachDefaultSystem (system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
 
-        overlays = [
-          devshell.overlays.default
-        ];
-      };
-    in {
-      devShells.default = pkgs.devshell.mkShell {
-        packages = with pkgs; [
-          sops
-          age
-          ssh-to-age
-          age
+            overlays = [
+              devshell.overlays.default
+            ];
+          };
+        in
+        {
+          devShells.default = pkgs.devshell.mkShell {
+            packages = with pkgs; [
+              sops
+              age
+              ssh-to-age
+              age
 
-          stress
-          speedtest-cli
+              stress
+              speedtest-cli
 
-          node2nix
-          rsync
-          nil.packages.${system}.default
-        ];
+              node2nix
+              rsync
+              nil.packages.${system}.default
+              nixpkgs-fmt
+            ];
 
-        env = [
-          {
-            name = "SOPS_AGE_KEY_FILE";
-            eval = "$HOME/.config/sops/age/keys.txt";
-          }
-          {
-            name = "SOPS_AGE_KEY_DIRECTORY";
-            eval = "$HOME/.config/sops/age";
-          }
-        ];
-      };
-    });
-  in
+            env = [
+              {
+                name = "SOPS_AGE_KEY_FILE";
+                eval = "$HOME/.config/sops/age/keys.txt";
+              }
+              {
+                name = "SOPS_AGE_KEY_DIRECTORY";
+                eval = "$HOME/.config/sops/age";
+              }
+            ];
+          };
+        });
+    in
     {
       # hostname -s
       darwinConfigurations.macos = darwin.lib.darwinSystem {
@@ -109,7 +114,7 @@
           sops-nix.nixosModules.sops
           {
             sops.defaultSopsFile = ./secrets/pi4-nixos.yaml;
-            sops.age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+            sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
             sops.age.keyFile = "/var/lib/sops-nix/key.txt";
             sops.age.generateKey = true;
           }
@@ -135,10 +140,9 @@
 
           vscode-server.nixosModule
           (
-            {
-              config,
-              pkgs,
-              ...
+            { config
+            , pkgs
+            , ...
             }: {
               services.vscode-server.enable = true;
             }

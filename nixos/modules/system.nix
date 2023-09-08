@@ -1,8 +1,8 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   boot.loader.timeout = 3;
   boot.loader.grub.configurationLimit = 5;
 
-  boot.kernelModules = ["kvm-amd" "kvm-intel"];
+  boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
 
   environment.systemPackages = with pkgs; [
     # system tools
@@ -40,8 +40,8 @@
   # Printing
   services.printing.enable = true;
   services.printing.browsing = true;
-  services.printing.listenAddresses = ["*:631"];
-  services.printing.allowFrom = ["all"];
+  services.printing.listenAddresses = [ "*:631" ];
+  services.printing.allowFrom = [ "all" ];
   services.printing.defaultShared = true;
   services.printing.extraConf = ''
     DefaultEncryption Never

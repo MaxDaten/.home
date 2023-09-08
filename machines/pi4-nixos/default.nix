@@ -1,7 +1,6 @@
-{
-  nixos-hardware,
-  lib,
-  ...
+{ nixos-hardware
+, lib
+, ...
 }: {
   system.stateVersion = "23.11";
   imports = [
@@ -29,7 +28,7 @@
   };
 
   # Wireless networking (2). Enables `wpa_supplicant` on boot.
-  systemd.services.wpa_supplicant.wantedBy = lib.mkOverride 10 ["default.target"];
+  systemd.services.wpa_supplicant.wantedBy = lib.mkOverride 10 [ "default.target" ];
 
   # NTP time sync.
   services.timesyncd.enable = true;
@@ -44,12 +43,12 @@
   nix = {
     settings = {
       auto-optimise-store = true;
-      experimental-features = ["nix-command" "flakes"];
+      experimental-features = [ "nix-command" "flakes" ];
       max-jobs = 4;
       cores = 4;
-      system-features = ["kvm" "nixos-test" "benchmark" "big-parallel"];
-      extra-platforms = ["x86_64-linux"];
-      trusted-users = ["root" "jloos" "@wheel"];
+      system-features = [ "kvm" "nixos-test" "benchmark" "big-parallel" ];
+      extra-platforms = [ "x86_64-linux" ];
+      trusted-users = [ "root" "jloos" "@wheel" ];
     };
     gc = {
       automatic = true;

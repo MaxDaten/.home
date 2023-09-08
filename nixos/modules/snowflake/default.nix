@@ -1,8 +1,7 @@
 # Following: https://blog.tokudan.de/tor-snowflake-on-nixos
-{
-  config,
-  pkgs,
-  ...
+{ config
+, pkgs
+, ...
 }: {
   # sudo machinectl shell snowflake $(which journalctl) -fu snowflake
   # systemctl status container@snowflake.service
@@ -11,7 +10,7 @@
     ephemeral = true;
     config = {
       systemd.services.snowflake = {
-        wantedBy = ["multi-user.target"];
+        wantedBy = [ "multi-user.target" ];
         serviceConfig = {
           IPAccounting = "yes";
           ExecStart = "${pkgs.snowflake}/bin/proxy";

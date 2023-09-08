@@ -1,4 +1,4 @@
-{...}: {
+{ ... }: {
   virtualisation.libvirtd.enable = true;
   security.polkit.enable = true;
 
@@ -9,7 +9,7 @@
     home = "/home/jloos";
     description = "jloos";
     group = "users";
-    extraGroups = ["wheel" "libvirtd"];
+    extraGroups = [ "wheel" "libvirtd" ];
     useDefaultShell = true;
     hashedPassword = "$6$H9kP.kHWqSBn1rE4$huEYYhX0UrpsCCViIwWFHinRJnMVjgSbOoynKF0t79Itlb5ReqAztQDm.Q.t5LXl/70vuVnCx8bXf3nLJHd1S0";
     openssh.authorizedKeys.keys = [

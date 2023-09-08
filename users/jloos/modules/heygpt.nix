@@ -1,10 +1,10 @@
-{
-  lib,
-  pkgs,
-  isDarwin,
-  config,
-  ...
-}: let
+{ lib
+, pkgs
+, isDarwin
+, config
+, ...
+}:
+let
   heygpt = pkgs.rustPlatform.buildRustPackage {
     name = "heygpt";
     src = pkgs.fetchFromGitHub {
@@ -15,8 +15,8 @@
     };
     cargoHash = "sha256-E1K8N7CEO/1gYrhkQ5awaynldWBunnnaBmAZzvnaXx4=";
 
-    buildInputs = [pkgs.openssl] ++ lib.optionals isDarwin [pkgs.darwin.apple_sdk.frameworks.Security];
-    nativeBuildInputs = [pkgs.pkg-config];
+    buildInputs = [ pkgs.openssl ] ++ lib.optionals isDarwin [ pkgs.darwin.apple_sdk.frameworks.Security ];
+    nativeBuildInputs = [ pkgs.pkg-config ];
 
     meta = with lib; {
       description = "A simple command line tool to interact with GPT";
@@ -69,22 +69,52 @@
   '';
 
   proofReadingSystemPrompt = ''
-    You are an AI proof reading assistant.
-    When asked for you name, you must respond with "ProofGPT".
-    You are proof reading technical documentation.
-    Often the technical documentation is written by non-native speakers.
-    The documentation is written in Markdown.
-    Your input is just the Markdown source code.
-    Your response should point out improvements regarding plain vocabulary errors, grammar, wrong technical information, and bad style.
-    Focus on understanding the document and pointing out improvements.
-    Suggest improvements to overall structure regarding formatting and sections.
-    Minimize any other prose.
-    Use Markdown formatting in your answers.
-    Formatting the output with markings and clear comments to point out improvements and changes.
-    You can use ANSI escape codes to color the output.
-    Avoid wrapping the whole response in triple backticks.
-    The active document is the source code the user is looking at right now.
-    You can only give one reply for each conversation turn.
+        Given some text, make it clearer.
+
+    Do not rewrite it entirely. Just make it clearer and more readable.
+
+    Take care to emulate the original text's tone, style, and meaning.
+
+    Approach it like an editor — not a rewriter.
+
+    To do this, first, you will write a quick summary of the key points of the original text that need to be conveyed. This is to make sure you always keep the original, intended meaning in mind, and don't stray away from it while editing.
+
+    Then, you will write a new draft. Next, you will evaluate the draft, and reflect on how it can be improved.
+
+    Then, write another draft, and do the same reflection process.
+
+    Then, do this one more time.
+
+    After writing the three drafts, with all of the revisions so far in mind, write your final, best draft.
+
+    Do so in this format:
+    ===
+    # Meaning
+    $meaning_bulleted_summary
+
+    # Round 1
+        ## Draft
+            ``$draft_1``
+        ## Reflection
+            ``$reflection_1``
+
+    # Round 2
+        ## Draft
+            ``$draft_2``
+        ## Reflection
+            ``$reflection_2``
+
+    # Round 3
+        ## Draft
+            ``$draft_3``
+        ## Reflection
+            ``$reflection_3``
+
+    # Final Draft
+        ``$final_draft``
+    ===
+
+    To improve your text, you'll need to go through three rounds of writing and reflection. For each round, write a draft, evaluate it, and then reflect on how it could be improved. Once you've done this three times, you'll have your final, best draft.
   '';
   proofgpt = pkgs.writeShellScriptBin "proofgpt" ''
     if [ -z "$1" ]; then
@@ -95,6 +125,7 @@
     export OPENAI_API_BASE="https://api.openai.com/v1"
     ${heygpt}/bin/heygpt --model gpt-4 --temperature 0.5 --system "${proofReadingSystemPrompt}" $(cat $1) | ${pkgs.glow}/bin/glow -
   '';
-in {
-  home.packages = [wrappedHeygpt gptcommit xgpt xgpt4 proofgpt];
+in
+{
+  home.packages = [ wrappedHeygpt gptcommit xgpt xgpt4 proofgpt ];
 }

@@ -1,9 +1,8 @@
-{
-  pkgs,
-  isDarwin,
-  config,
-  lib,
-  ...
+{ pkgs
+, isDarwin
+, config
+, lib
+, ...
 }: {
   programs.fish.enable = true;
   programs.fish = {

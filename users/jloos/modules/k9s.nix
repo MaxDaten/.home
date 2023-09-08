@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   programs.k9s = {
     enable = true;
 
@@ -10,7 +10,7 @@
         shortCut = "Shift-L";
         confirm = false;
         description = "Logs (pino)";
-        scopes = ["po"];
+        scopes = [ "po" ];
         command = "${pkgs.sh}/bin/sh";
         background = false;
         args = [

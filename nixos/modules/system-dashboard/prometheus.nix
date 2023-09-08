@@ -1,10 +1,11 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
+{ config
+, pkgs
+, ...
+}:
+let
   prometheusUriPath = "/prometheus/";
-in {
+in
+{
   services.prometheus.enable = true;
   services.prometheus = {
     exporters = {
@@ -29,7 +30,7 @@ in {
         job_name = "node-exporter";
         static_configs = [
           {
-            targets = ["127.0.0.1:${toString config.services.prometheus.exporters.node.port}"];
+            targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ];
           }
         ];
       }

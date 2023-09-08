@@ -1,18 +1,18 @@
-{
-  pkgs ?
-    import <nixpkgs> {
-      inherit system;
-    },
-  system ? builtins.currentSystem,
-}: let
+{ pkgs ? import <nixpkgs> {
+    inherit system;
+  }
+, system ? builtins.currentSystem
+,
+}:
+let
   nodePackages = import ./default.nix {
     inherit pkgs system;
   };
 in
-  nodePackages
+nodePackages
   // {
-    homebridge = builtins.mapAttrs (name: value:
-      value.override {
-        buildInputs = [pkgs.openssl];
-      });
-  }
+  homebridge = builtins.mapAttrs (name: value:
+    value.override {
+      buildInputs = [ pkgs.openssl ];
+    });
+}
