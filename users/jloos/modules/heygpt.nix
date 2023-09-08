@@ -68,8 +68,9 @@ let
     ${heygpt}/bin/heygpt --model gpt-4 --temperature 0.2 --system "${systemPrompt}" $@
   '';
 
+  # https://twitter.com/mattshumer_/status/1700169043406123294?s=12&t=ehfEd_UTxxjNAPRNeNTEyA
   proofReadingSystemPrompt = ''
-        Given some text, make it clearer.
+    Given some text, make it clearer.
 
     Do not rewrite it entirely. Just make it clearer and more readable.
 
@@ -115,6 +116,7 @@ let
     ===
 
     To improve your text, you'll need to go through three rounds of writing and reflection. For each round, write a draft, evaluate it, and then reflect on how it could be improved. Once you've done this three times, you'll have your final, best draft.
+    ---
   '';
   proofgpt = pkgs.writeShellScriptBin "proofgpt" ''
     if [ -z "$1" ]; then
