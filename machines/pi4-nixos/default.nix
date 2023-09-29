@@ -18,6 +18,12 @@
       device = "/dev/disk/by-label/NIXOS_SD";
       fsType = "ext4";
     };
+
+    # Timecapsule
+    "/mnt/timecapsule" = {
+      device = "/dev/disk/by-label/TIMECAPSULE";
+      fsType = "ext4";
+    };
   };
 
   networking = {
