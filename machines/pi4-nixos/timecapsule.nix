@@ -14,8 +14,9 @@ in
 
   services.samba = {
     enable = true;
+    openFirewall = true;
     shares = {
-      tm_share = {
+      timemachine = {
         path = mount;
         "valid users" = "jloos";
         public = "no";
@@ -23,8 +24,34 @@ in
         "force user" = "jloos";
         "fruit:aapl" = "yes";
         "fruit:time machine" = "yes";
+        "fruit:time machine max size" = "1500G";
         "vfs objects" = "catia fruit streams_xattr";
       };
     };
   };
+
+  # https://sterba.dev/posts/raspi-as-time-capsule/
+  services.avahi.extraServiceFiles.timecapsule = ''
+    <?xml version="1.0" standalone='no'?><!--*-nxml-*-->
+    <!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+    <service-group>
+      <name replace-wildcards="yes">%h</name>
+      <service>
+        <type>_smb._tcp</type>
+        <port>445</port>
+      </service>
+      <service>
+        <type>_device-info._tcp</type>
+        <port>9</port>
+        <txt-record>model=TimeCapsule8,119</txt-record>
+      </service>
+      <service>
+        <type>_adisk._tcp</type>
+        <port>9</port>
+        <txt-record>dk0=adVN=timemachine,adVF=0x82</txt-record>
+        <txt-record>sys=adVF=0x100</txt-record>
+      </service>
+    </service-group>
+  '';
+
 }
