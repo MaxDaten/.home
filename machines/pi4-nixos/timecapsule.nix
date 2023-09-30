@@ -1,16 +1,13 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: let
+{ config
+, pkgs
+, lib
+, ...
+}:
+let
   mount = "/mnt/timecapsule";
-in {
-  fileSystems.mount = {
-    device = "/dev/disk/by-label/TIMECAPSULE";
-    fsType = "ext4";
-    options = ["uid=${config.users.groups.timecapsule.uid},gid=${config.users.groups.timecapsule.gid}"];
-  };
+in
+{
+  fileSystems."${mount}".label = "TIMECAPSULE";
 
   users = {
     groups.timemachine = {
