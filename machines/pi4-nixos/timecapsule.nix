@@ -1,5 +1,6 @@
 { config
 , pkgs
+, lib
 , ...
 }:
 let
@@ -12,6 +13,21 @@ in
     fsType = "ext4";
   };
 
+  users = {
+    groups.timemachine = {
+      gid = 2500;
+    };
+
+    users.timemachine = {
+      isSystemUser = true;
+      uid = 2500;
+      group = "timemachine";
+      home = mount;
+      shell = pkgs.bash;
+      password = "abc123";
+    };
+  };
+
   services.samba = {
     enable = true;
     openFirewall = true;
@@ -19,9 +35,11 @@ in
       timemachine = {
         path = mount;
         "valid users" = "jloos";
+        "force user" = "timemachine";
+        "force group" = "timemachine";
+        browseable = "yes";
         public = "no";
         writeable = "yes";
-        "force user" = "jloos";
         "fruit:aapl" = "yes";
         "fruit:time machine" = "yes";
         "fruit:time machine max size" = "1500G";
