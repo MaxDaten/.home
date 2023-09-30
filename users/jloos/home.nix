@@ -103,10 +103,10 @@ with lib; {
       dive # Analyze docker layer
       lazydocker # k9s for docker
       skopeo # inspect docker images without docker daemon
-      (lib.debug.traceVal (import (fetchTarball {
+      (import (fetchTarball {
         url = "https://install.devenv.sh/latest";
         sha256 = "sha256:0wj5455mk0kgm4vnvqia6x4qhkwwf3cn07pdsd4wmfdbp9rxr44a";
-      }))).packages.${pkgs.stdenv.system}.default
+      })).packages.${pkgs.stdenv.system}.default
     ]
     ++ lib.optionals (pkgs.stdenv.isDarwin) darwinPackages
     ++ lib.optionals (!headless) guiPackages;
