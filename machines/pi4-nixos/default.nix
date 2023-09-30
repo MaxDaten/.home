@@ -1,5 +1,6 @@
 { nixos-hardware
 , lib
+, config
 , ...
 }: {
   system.stateVersion = "23.11";
@@ -20,7 +21,10 @@
       fsType = "ext4";
     };
 
-    "/mnt/timecapsule".label = "TIMECAPSULE";
+    "/mnt/timecapsule" = {
+      label = "TIMECAPSULE";
+      options = [ "uid=${config.users.groups.timecapsule.uid},gid=${config.users.groups.timecapsule.gid}" ];
+    };
   };
 
   networking = {
