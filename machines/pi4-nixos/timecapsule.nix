@@ -9,6 +9,7 @@ in {
   fileSystems.mount = {
     device = "/dev/disk/by-label/TIMECAPSULE";
     fsType = "ext4";
+    options = ["uid=${config.users.groups.timecapsule.uid},gid=${config.users.groups.timecapsule.gid}"];
   };
 
   users = {
@@ -21,8 +22,6 @@ in {
       uid = 2500;
       group = "timemachine";
       home = mount;
-      shell = pkgs.bash;
-      password = "abc123";
     };
   };
 
@@ -32,7 +31,7 @@ in {
     shares = {
       timemachine = {
         path = mount;
-        "valid users" = "jloos timemachine";
+        "valid users" = "jloos @timemachine";
         "force user" = "timemachine";
         "force group" = "timemachine";
         "ea support" = "yes";
