@@ -6,6 +6,7 @@
   imports = [
     ./fixup-allow-missing-modules.nix
     nixos-hardware.nixosModules.raspberry-pi-4
+    ./timecapsule.nix
   ];
 
   fileSystems = lib.mkForce {
@@ -16,12 +17,6 @@
     };
     "/" = {
       device = "/dev/disk/by-label/NIXOS_SD";
-      fsType = "ext4";
-    };
-
-    # Timecapsule
-    "/mnt/timecapsule" = {
-      device = "/dev/disk/by-label/TIMECAPSULE";
       fsType = "ext4";
     };
   };
