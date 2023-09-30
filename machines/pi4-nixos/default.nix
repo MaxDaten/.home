@@ -23,7 +23,7 @@
 
     "/mnt/timecapsule" = {
       label = "TIMECAPSULE";
-      options = [ "uid=${config.users.groups.timecapsule.uid},gid=${config.users.groups.timecapsule.gid}" ];
+      options = [ "uid=2500,gid=2500" ];
     };
   };
 
