@@ -1,13 +1,11 @@
-{ config
-, pkgs
-, lib
-, ...
-}:
-let
-  mount = "/mnt/timecapsule";
-in
 {
-
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  mount = "/mnt/timecapsule";
+in {
   fileSystems.mount = {
     device = "/dev/disk/by-label/TIMECAPSULE";
     fsType = "ext4";
@@ -34,15 +32,22 @@ in
     shares = {
       timemachine = {
         path = mount;
-        "valid users" = "jloos";
+        "valid users" = "jloos timemachine";
         "force user" = "timemachine";
         "force group" = "timemachine";
+        "ea support" = "yes";
         browseable = "yes";
         public = "no";
         writeable = "yes";
         "fruit:aapl" = "yes";
+        "fruit:metadata" = "stream";
         "fruit:time machine" = "yes";
         "fruit:time machine max size" = "1500G";
+        "fruit:posix_rename" = "yes";
+        "fruit:veto_appledouble" = "no";
+        "fruit:nfs_aces" = "no";
+        "fruit:wipe_intentionally_left_blank_rfork" = "yes";
+        "fruit:delete_empty_adfiles" = "yes";
         "vfs objects" = "catia fruit streams_xattr";
       };
     };
@@ -69,5 +74,4 @@ in
       </service>
     </service-group>
   '';
-
 }
