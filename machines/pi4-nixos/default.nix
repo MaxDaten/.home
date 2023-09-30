@@ -7,7 +7,7 @@
   imports = [
     ./fixup-allow-missing-modules.nix
     nixos-hardware.nixosModules.raspberry-pi-4
-    ./timecapsule.nix
+    # ./timecapsule.nix
   ];
 
   fileSystems = lib.mkForce {
@@ -21,10 +21,10 @@
       fsType = "ext4";
     };
 
-    "/mnt/timecapsule" = {
-      label = "TIMECAPSULE";
-      options = [ "uid=2500,gid=2500" ];
-    };
+    # "/mnt/timecapsule" = {
+    #   label = "TIMECAPSULE";
+    #   options = [ "uid=2500,gid=2500" ];
+    # };
   };
 
   networking = {
