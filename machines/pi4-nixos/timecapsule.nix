@@ -7,7 +7,6 @@ let
   mount = "/mnt/timecapsule";
 in {
   
-  fileSystems."${mount}".label = "TIMECAPSULE";
   # fileSystems.mount = {
   #   device = "/dev/disk/by-label/TIMECAPSULE";
   #   fsType = "ext4";
