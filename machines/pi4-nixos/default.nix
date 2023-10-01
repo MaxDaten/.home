@@ -21,10 +21,10 @@
       fsType = "ext4";
     };
 
-    "/mnt/timecapsule" = {
-      label = "TIMECAPSULE";
-      options = [ "uid=2500" "gid=2500" ];
-    };
+    # "/mnt/timecapsule" = {
+    #  label = "TIMECAPSULE";
+    #  options = [ "uid=2500" "gid=2500" ];
+    # };
   };
 
   networking = {
