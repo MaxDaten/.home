@@ -1,6 +1,9 @@
 { pkgs, ... }: {
   boot.loader.timeout = 3;
   boot.loader.grub.configurationLimit = 5;
+  boot.loader.generic-extlinux-compatible.enable = false;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.enable = true;
 
   boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
 
