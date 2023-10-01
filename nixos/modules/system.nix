@@ -1,10 +1,14 @@
 { pkgs, lib, ... }: {
-  boot.loader.timeout = 3;
-  boot.loader.grub.configurationLimit = 5;
-  boot.loader.grub.enable = lib.mkForce true;
-  boot.loader.generic-extlinux-compatible.enable = lib.mkForce false;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.systemd-boot.enable = true;
+  boot.loader = {
+    timeout = 3;
+    generic-extlinux-compatible.enable = lib.mkForce true;
+    # efi.canTouchEfiVariables = true;
+    # systemd-boot.enable = true;
+    grub = {
+      enable = lib.mkForce true;
+      configurationLimit = 5;
+    };
+  };
 
   boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
 
