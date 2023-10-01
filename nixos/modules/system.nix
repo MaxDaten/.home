@@ -1,7 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   boot.loader.timeout = 3;
   boot.loader.grub.configurationLimit = 5;
-  boot.loader.generic-extlinux-compatible.enable = false;
+  boot.loader.grub.enable = lib.mkForce true;
+  boot.loader.generic-extlinux-compatible.enable = lib.mkForce false;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.enable = true;
 
