@@ -2,10 +2,12 @@
   boot.loader = {
     timeout = 3;
     generic-extlinux-compatible.enable = lib.mkForce true;
-    # efi.canTouchEfiVariables = true;
-    # systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+    systemd-boot.enable = true;
     grub = {
       enable = lib.mkForce true;
+      device = "nodev";
+      efiSupport = true;
       configurationLimit = 5;
     };
   };
