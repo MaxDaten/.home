@@ -59,7 +59,9 @@
         cdr = "cd $PRJ_ROOT";
       }
       (lib.mkIf isDarwin {
-        nix-switch = "nix run nix-darwin -- switch --flake ${config.home.homeDirectory}/Workspace/.home/";
+        # Install nix-darwin (initially)
+        # nix run nix-darwin -- switch --flake ${config.home.homeDirectory}/Workspace/.home/"
+        nix-switch = "darwin-rebuild switch --flake ${config.home.homeDirectory}/Workspace/.home/";
       })
     ];
 
