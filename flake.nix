@@ -76,8 +76,8 @@
         });
     in
     {
-      # hostname -s
-      darwinConfigurations.macos = darwin.lib.darwinSystem {
+      # scutil --get LocalHostName
+      darwinConfigurations."MacBook-Pro" = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         specialArgs = {
           inherit inputs outputs;
