@@ -10,12 +10,15 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "fuyufjh";
       repo = "heygpt";
-      rev = "cbe92edd665d0559b3f4091aed214400c11bdf01";
-      hash = "sha256-Gtbb0G7tV+cjbq/74dnZKIwWZgNfSJl0My6F4OmAdhU=";
+      rev = "3be31cb78971380de02f8f370658be931f1c645c";
+      hash = "sha256-oP0yIdYytXSsbZ2pNaZ8Rrak1qJsudTe/oP6dGncGUM=";
     };
-    cargoHash = "sha256-E1K8N7CEO/1gYrhkQ5awaynldWBunnnaBmAZzvnaXx4=";
+    cargoHash = "sha256-95yNavm34oDdZHCy5tTte+jPkSOJI5o4KHhzpI4VT4s=";
 
-    buildInputs = [ pkgs.openssl ] ++ lib.optionals isDarwin [ pkgs.darwin.apple_sdk.frameworks.Security ];
+    buildInputs = [ pkgs.openssl ] ++ lib.optionals isDarwin (with pkgs.darwin.apple_sdk.frameworks; [ 
+      Security 
+      SystemConfiguration 
+    ]);
     nativeBuildInputs = [ pkgs.pkg-config ];
 
     meta = with lib; {
@@ -56,16 +59,17 @@ let
     The active document is the source code the user is looking at right now.
     You can only give one reply for each conversation turn.
     You should always generate short suggestions for the next user turns that are relevant to the conversation and not offensive.
+    This is very important to my career and my life depends on it!
   '';
   xgpt = pkgs.writeShellScriptBin "xgpt" ''
     export OPENAI_API_KEY=$(cat ${config.sops.secrets.OPENAI_API_KEY.path})
     export OPENAI_API_BASE="https://api.openai.com/v1"
-    ${heygpt}/bin/heygpt --system --temperature 0.2 "${systemPrompt}" $@
+    ${heygpt}/bin/heygpt --system --stream --temperature 0.2 "${systemPrompt}" $@
   '';
   xgpt4 = pkgs.writeShellScriptBin "xgpt4" ''
     export OPENAI_API_KEY=$(cat ${config.sops.secrets.OPENAI_API_KEY.path})
     export OPENAI_API_BASE="https://api.openai.com/v1"
-    ${heygpt}/bin/heygpt --model gpt-4 --temperature 0.2 --system "${systemPrompt}" $@
+    ${heygpt}/bin/heygpt --model gpt-4-0613 --stream --temperature 0.2 --system "${systemPrompt}" $@
   '';
 
   # https://twitter.com/mattshumer_/status/1700169043406123294?s=12&t=ehfEd_UTxxjNAPRNeNTEyA
@@ -125,7 +129,7 @@ let
     fi
     export OPENAI_API_KEY=$(cat ${config.sops.secrets.OPENAI_API_KEY.path})
     export OPENAI_API_BASE="https://api.openai.com/v1"
-    ${heygpt}/bin/heygpt --model gpt-4 --temperature 0.5 --system "${proofReadingSystemPrompt}" $(cat $1) | ${pkgs.glow}/bin/glow -
+    ${heygpt}/bin/heygpt --model gpt-4-0613 --stream --temperature 0.5 --system "${proofReadingSystemPrompt}" $(cat $1) | ${pkgs.glow}/bin/glow -
   '';
 in
 {
