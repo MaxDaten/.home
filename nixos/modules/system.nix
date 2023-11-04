@@ -1,15 +1,13 @@
 { pkgs, lib, ... }: {
 
-  # boot.growPartition = true;
+  boot.growPartition = true;
   boot.loader = {
     timeout = 3;
-    generic-extlinux-compatible.enable = lib.mkForce true;
-    efi.canTouchEfiVariables = true;
-    # systemd-boot.enable = true;
+    efi.canTouchEfiVariables = false;
     grub = {
-      enable = lib.mkForce true;
       device = "nodev";
       efiSupport = true;
+      efiInstallAsRemovable = true;
       configurationLimit = 5;
     };
   };
