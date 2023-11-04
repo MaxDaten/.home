@@ -1,7 +1,8 @@
 {
   description = "Personal NixOS configuration";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+  inputs.nixos.url = "github:NixOS/nixpkgs?rev=50a7139fbd1acd4a3d4cfa695e694c529dd26f3a";
 
   inputs.darwin.url = "github:lnl7/nix-darwin";
   inputs.darwin.inputs.nixpkgs.follows = "nixpkgs";
@@ -23,6 +24,7 @@
   outputs =
     { self
     , nixpkgs
+    , nixos
     , darwin
     , nixos-hardware
     , flake-utils
@@ -99,7 +101,7 @@
         ];
       };
 
-      nixosConfigurations.pi4-nixos = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.pi4-nixos = nixos.lib.nixosSystem {
         system = "aarch64-linux";
         specialArgs = {
           inherit nixos-hardware;
