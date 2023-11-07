@@ -15,9 +15,9 @@ let
     };
     cargoHash = "sha256-95yNavm34oDdZHCy5tTte+jPkSOJI5o4KHhzpI4VT4s=";
 
-    buildInputs = [ pkgs.openssl ] ++ lib.optionals isDarwin (with pkgs.darwin.apple_sdk.frameworks; [ 
-      Security 
-      SystemConfiguration 
+    buildInputs = [ pkgs.openssl ] ++ lib.optionals isDarwin (with pkgs.darwin.apple_sdk.frameworks; [
+      Security
+      SystemConfiguration
     ]);
     nativeBuildInputs = [ pkgs.pkg-config ];
 
@@ -69,7 +69,7 @@ let
   xgpt4 = pkgs.writeShellScriptBin "xgpt4" ''
     export OPENAI_API_KEY=$(cat ${config.sops.secrets.OPENAI_API_KEY.path})
     export OPENAI_API_BASE="https://api.openai.com/v1"
-    ${heygpt}/bin/heygpt --model gpt-4-0613 --stream --temperature 0.2 --system "${systemPrompt}" $@
+    ${heygpt}/bin/heygpt --model gpt-4-1106-preview --stream --temperature 0.2 --system "${systemPrompt}" $@
   '';
 
   # https://twitter.com/mattshumer_/status/1700169043406123294?s=12&t=ehfEd_UTxxjNAPRNeNTEyA
@@ -129,7 +129,7 @@ let
     fi
     export OPENAI_API_KEY=$(cat ${config.sops.secrets.OPENAI_API_KEY.path})
     export OPENAI_API_BASE="https://api.openai.com/v1"
-    ${heygpt}/bin/heygpt --model gpt-4-0613 --stream --temperature 0.5 --system "${proofReadingSystemPrompt}" $(cat $1) | ${pkgs.glow}/bin/glow -
+    ${heygpt}/bin/heygpt --model gpt-4-1106-preview --stream --temperature 0.5 --system "${proofReadingSystemPrompt}" $(cat $1) | ${pkgs.glow}/bin/glow -
   '';
 in
 {
