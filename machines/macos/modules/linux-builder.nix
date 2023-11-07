@@ -1,6 +1,6 @@
 { ... }: {
   nix.linux-builder.enable = true;
-  nix.linux-builder.maxJobs = 4;
+  nix.linux-builder.maxJobs = 8;
   # When bootstrapping, comment modules out to use the binary cache version
   nix.linux-builder.modules = [
     (
