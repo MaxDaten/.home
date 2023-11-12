@@ -24,7 +24,7 @@
 
   nix.buildMachines = [
     {
-      hostName = "nixbuilder.qwiz.buzz";
+      hostName = "hydra.m.briends.cloud";
       system = "x86_64-linux";
       maxJobs = 4;
       speedFactor = 2;
