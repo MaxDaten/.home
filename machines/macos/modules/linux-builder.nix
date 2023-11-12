@@ -5,8 +5,8 @@
   nix.linux-builder.modules = [
     (
       { config, ... }: {
-        virtualisation.darwin-builder.diskSize = 50 * 1024;
-        virtualisation.darwin-builder.memorySize = 4 * 1024;
+        virtualisation.darwin-builder.diskSize = 60 * 1024;
+        virtualisation.darwin-builder.memorySize = 16 * 1024;
       }
     )
   ];
