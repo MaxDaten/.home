@@ -26,5 +26,10 @@
         HostKeyAlias = "linux-builder";
       };
     };
+
+    "hydra.m.briends.cloud" = {
+      hostname = "hydra.m.briends.cloud";
+      user = "jloos";
+    };
   };
 }
