@@ -87,6 +87,7 @@
         modules = [
           ./machines/macos/configuration.nix
           ./machines/macos/modules/linux-builder.nix
+          ./nixos/modules/build-machines.nix
 
           home-manager.darwinModules.home-manager
           {
@@ -112,6 +113,7 @@
           ./nixos/modules/system.nix
           ./nixos/modules/network
           ./nixos/modules/my-networks
+          ./nixos/modules/build-machines.nix
           # Secret Management
           sops-nix.nixosModules.sops
           {
