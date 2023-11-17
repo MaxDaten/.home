@@ -1,9 +1,20 @@
-{ ... }: {
+{ pkgs, ... }: {
 
   nix.buildMachines = [
     {
       hostName = "hydra.m.briends.cloud";
       system = "x86_64-linux";
+      sshUser = "jloos";
+      sshKey = "/Users/jloos/.ssh/id_rsa";
+      # Generated with `base64 -w0 ~/.ssh/id_rsa.pub`
+      publicHostKey =
+        let
+          hostkey = ./hydra.m.briends.cloud.pub;
+          encoded = pkgs.runCommandLocal "base64_encoded_hostkey" { } ''
+            ${pkgs.libb64}/bin/base64 -e ${hostkey} $out;
+          '';
+        in
+        "${builtins.readFile encoded}";
       maxJobs = 4;
       speedFactor = 2;
       supportedFeatures = [
