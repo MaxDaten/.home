@@ -29,7 +29,7 @@
 
     "hydra.m.briends.cloud" = {
       hostname = "hydra.m.briends.cloud";
-      user = "jloos";
+      user = "jloos_papego_de";
     };
   };
 }

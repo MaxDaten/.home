@@ -4,7 +4,7 @@
     {
       hostName = "hydra.m.briends.cloud";
       system = "x86_64-linux";
-      sshUser = "jloos";
+      sshUser = "jloos_papego_de";
       sshKey = "/Users/jloos/.ssh/id_rsa";
       # Generated with `base64 -w0 ~/.ssh/id_rsa.pub`
       publicHostKey =
