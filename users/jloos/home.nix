@@ -9,6 +9,7 @@ let
   darwinPackages = with pkgs; [
     terminal-notifier
     iterm2
+    raycast
   ];
 
   isDarwin = pkgs.stdenv.isDarwin;

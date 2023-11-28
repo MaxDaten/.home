@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   # https://daiderd.com/nix-darwin/manual/index.html
   nixpkgs.hostPlatform = "aarch64-darwin";
+  nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = [
     pkgs.fish
