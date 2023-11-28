@@ -4,9 +4,8 @@
     {
       hostName = "hydra.m.briends.cloud";
       system = "x86_64-linux";
-      sshUser = "jloos_papego_de";
+      sshUser = "jloos";
       sshKey = "/Users/jloos/.ssh/id_rsa";
-      # Generated with `base64 -w0 ~/.ssh/id_rsa.pub`
       publicHostKey =
         let
           hostkey = ./hydra.m.briends.cloud.pub;
