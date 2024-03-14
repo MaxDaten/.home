@@ -23,7 +23,7 @@
 
   nix.package = pkgs.nixUnstable;
   # Enable experimental nix command and flakes
-  nix.settings.experimental-features = "nix-command flakes";
+  nix.settings.experimental-features = "nix-command flakes repl-flake auto-allocate-uids auto-allocate-uids";
   nix.settings.auto-optimise-store = true;
   nix.settings.keep-outputs = true;
   nix.settings.keep-derivations = true;

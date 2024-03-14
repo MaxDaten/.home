@@ -1,7 +1,7 @@
 {
   description = "Personal NixOS configuration";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   inputs.nixos.url = "github:NixOS/nixpkgs?rev=50a7139fbd1acd4a3d4cfa695e694c529dd26f3a";
 
   inputs.darwin.url = "github:lnl7/nix-darwin";
@@ -12,7 +12,7 @@
   inputs.vscode-server.url = "github:msteen/nixos-vscode-server";
   inputs.nil.url = "github:oxalica/nil";
   inputs.home-manager = {
-    url = "github:nix-community/home-manager/release-23.11";
+    url = "github:nix-community/home-manager/master";
     inputs.nixpkgs.follows = "nixpkgs";
   };
   inputs.sops-nix = {
@@ -86,7 +86,7 @@
         };
         modules = [
           ./machines/macos/configuration.nix
-          ./machines/macos/modules/linux-builder.nix
+          # ./machines/macos/modules/linux-builder.nix
           ./nixos/modules/build-machines.nix
 
           home-manager.darwinModules.home-manager
