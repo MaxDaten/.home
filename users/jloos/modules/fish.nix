@@ -71,6 +71,9 @@
       ls = "${pkgs.lsd}/bin/lsd -l";
       h = "heygpt";
       x = "xgpt4";
+      "cpx" = "gh copilot explain";
+      "cps" = "gh copilot suggest -t shell";
+      "cpgit" = "gh copilot suggest -t git";
     };
 
     shellInit = ''
