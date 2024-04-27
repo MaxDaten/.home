@@ -78,7 +78,7 @@
 
     shellInit = ''
       set -U fish_greeting
-      set -U PROJECT_PATHS ~/Workspace/buzzar ~/Developer/kmo ~/Workspace/gitops ~/Workspace/.home ~/Developer
+      set -U PROJECT_PATHS ~/Developer/buzzar ~/Developer/gitops ~/Workspace/.home ~/Developer
       set __done_enabled
     '';
 
