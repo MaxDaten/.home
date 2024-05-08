@@ -26,10 +26,7 @@
       kubernetes = {
         disabled = false;
         format = "[\\[$symbol$context( \\($namespace\\))\\]]($style) ";
-        context_aliases = {
-          "k8s-cluster01.prelive.kmo.zone" = "kmo-prelive";
-          "k8s-cluster01.live.kmo.zone" = "kmo-live";
-        };
+        context_aliases = {};
       };
 
       custom = {
