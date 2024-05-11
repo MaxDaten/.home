@@ -11,9 +11,13 @@
 
   nix.settings.substituters = [
     "https://cache.nixos.org/"
+    "https://cache.nixos.org/"
+    "https://briendsgmbh.cachix.org"
   ];
   nix.settings.trusted-public-keys = [
     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+    # setup authtoken via `cachix authtoken <token>`
+    "briendsgmbh.cachix.org-1:gJT1XP1/F3dNEwqyWOBsZ11uFKTvDKaMQA/dFhs/ywE="
   ];
   nix.settings.trusted-users = [
     "root"
