@@ -5,6 +5,7 @@
 
   environment.systemPackages = [
     pkgs.fish
+    pkgs.git
   ];
 
   environment.loginShell = pkgs.fish;
