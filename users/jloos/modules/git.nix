@@ -10,11 +10,12 @@
       mainbranch = "!git remote show origin | sed -n '/HEAD branch/s/.*: //p'";
       switch-default = "!git switch $(git mainbranch)";
       sd = "switch-default";
-      synced = "!git pull origin $(git mainbranch) --rebase";
+      sync = "!git pull origin $(git mainbranch) --rebase";
       update = "!git pull origin $(git rev-parse --abbrev-ref HEAD) --rebase";
       squash = "!git rebase -v -i $(git mainbranch)";
       publish = "push origin HEAD --force-with-lease";
       pub = "publish";
+      amend = "commit --amend --no-edit";
     };
 
     extraConfig = {
