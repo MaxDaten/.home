@@ -8,7 +8,6 @@
     pkgs.git
   ];
 
-  environment.loginShell = pkgs.fish;
 
   nix.settings.substituters = [
     "https://cache.nixos.org/"
@@ -39,8 +38,10 @@
   # nix.settings.extra-platforms = lib.optionalString (pkgs.system == "aarch64-darwin") "x86_64-darwin aarch64-darwin";
 
   # init nix in zsh & fish
-  programs.zsh.enable = true;
+  # programs.zsh.enable = true;
   programs.fish.enable = true;
+  environment.shells = with pkgs; [ bashInteractive fish zsh ];
+  environment.loginShell = pkgs.fish;
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
