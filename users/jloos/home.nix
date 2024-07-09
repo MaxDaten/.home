@@ -98,7 +98,7 @@ with lib; {
       nil # Nix Language Server
 
       # Infrastructure
-      awscli2
+      # awscli2 # currently broken
       google-cloud-sdk
       kubectl
       kustomize

@@ -41,7 +41,7 @@
   # programs.zsh.enable = true;
   programs.fish.enable = true;
   environment.shells = with pkgs; [ bashInteractive fish zsh ];
-  environment.loginShell = pkgs.fish;
+  environment.loginShell = "${pkgs.fish}/bin/fish --login";
   environment.variables.LANG = "en_US.UTF-8";
 
   # Auto upgrade nix package and the daemon service.
