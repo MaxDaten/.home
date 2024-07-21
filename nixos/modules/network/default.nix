@@ -3,8 +3,8 @@
 , ...
 }: {
   services.avahi = {
-    nssmdns = true;
     enable = true;
+    nssmdns4 = true;
     ipv4 = true;
     ipv6 = false;
     publish = {
