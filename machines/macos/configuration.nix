@@ -27,14 +27,16 @@
 
   nix.package = pkgs.nix;
   # Enable experimental nix command and flakes
-  nix.settings.experimental-features = "nix-command flakes repl-flake auto-allocate-uids auto-allocate-uids";
-  nix.settings.auto-optimise-store = true;
-  nix.settings.keep-outputs = true;
-  nix.settings.keep-derivations = true;
-  nix.settings.warn-dirty = false;
-  nix.settings.build-users-group = "nixbld";
-  nix.settings.builders-use-substitutes = true;
-  nix.settings.allow-import-from-derivation = true;
+  nix.settings = {
+    experimental-features = "nix-command flakes repl-flake auto-allocate-uids auto-allocate-uids";
+    auto-optimise-store = false;
+    keep-outputs = true;
+    keep-derivations = true;
+    warn-dirty = false;
+    build-users-group = "nixbld";
+    builders-use-substitutes = true;
+    allow-import-from-derivation = true;
+  };
   # nix.settings.extra-platforms = lib.optionalString (pkgs.system == "aarch64-darwin") "x86_64-darwin aarch64-darwin";
 
   # init nix in zsh & fish
