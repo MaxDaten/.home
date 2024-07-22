@@ -4,8 +4,10 @@
   inputs.nixos.url = "github:NixOS/nixpkgs?rev=50a7139fbd1acd4a3d4cfa695e694c529dd26f3a";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-  inputs.darwin.url = "github:lnl7/nix-darwin";
-  inputs.darwin.inputs.nixpkgs.follows = "nixpkgs";
+  inputs.darwin = {
+    url = "github:lnl7/nix-darwin";
+    nixpkgs.follows = "nixpkgs";
+  };
 
   inputs.nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   inputs.flake-utils.url = "github:numtide/flake-utils";
