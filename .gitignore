@@ -10,3 +10,4 @@ result*
 nixos.qcow2
 keys/
 .idea/
+.devenv
