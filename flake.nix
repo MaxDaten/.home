@@ -1,32 +1,36 @@
 {
   description = "Personal NixOS configuration";
 
-  inputs.nixos.url = "github:NixOS/nixpkgs?rev=50a7139fbd1acd4a3d4cfa695e694c529dd26f3a";
+  inputs = {
+    nixos.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixos-darwin.url = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
+  
+    darwin = {
+      url = "github:lnl7/nix-darwin";
+      inputs.nixpkgs.follows = "nixos-darwin";
+    };
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-  inputs.darwin = {
-    url = "github:lnl7/nix-darwin";
-    nixpkgs.follows = "nixpkgs";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    flake-utils.url = "github:numtide/flake-utils";
+    vscode-server.url = "github:msteen/nixos-vscode-server";
+    nil.url = "github:oxalica/nil";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    devshell.url = "github:numtide/devshell";
   };
-
-  inputs.nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-  inputs.flake-utils.url = "github:numtide/flake-utils";
-  inputs.vscode-server.url = "github:msteen/nixos-vscode-server";
-  inputs.nil.url = "github:oxalica/nil";
-  inputs.home-manager = {
-    url = "github:nix-community/home-manager/master";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
-  inputs.sops-nix = {
-    url = "github:Mic92/sops-nix";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
-  inputs.devshell.url = "github:numtide/devshell";
 
   outputs =
     { self
     , nixpkgs
     , nixos
+    , nixos-darwin
     , darwin
     , nixos-hardware
     , flake-utils
@@ -88,7 +92,7 @@
         };
         modules = [
           ./machines/macos/configuration.nix
-          # ./machines/macos/modules/linux-builder.nix
+          ./machines/macos/modules/linux-builder.nix
           ./nixos/modules/build-machines.nix
 
           home-manager.darwinModules.home-manager
