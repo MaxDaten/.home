@@ -107,7 +107,7 @@ with lib; {
       skopeo # inspect docker images without docker daemon
       (import (fetchTarball {
         url = "https://install.devenv.sh/latest";
-        sha256 = "sha256:0i9mnsdh3wjpd6zzddkb3mvs9vpbk861vwi464qs3506ijyw2dkr";
+        sha256 = "sha256:0crbzs9axvvvswm4qphx6snz77xhh67qgy2wlil5xpr2hm7i3wdb";
       })).packages.${pkgs.stdenv.system}.default
     ]
     ++ lib.optionals (pkgs.stdenv.isDarwin) darwinPackages

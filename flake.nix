@@ -9,9 +9,8 @@
       };
 
       # Nix Derivations
-      nixos.url = "github:NixOS/nixpkgs/nixos-24.05";
-      nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-      nixos-darwin.url = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
+      nixpkgs.url = "nixpkgs/nixpkgs-unstable";
+      nixos-darwin.url = "nixpkgs/nixpkgs-24.05-darwin";
 
 
       darwin = {
@@ -22,9 +21,11 @@
       flake-parts.url = "github:hercules-ci/flake-parts";
 
       # System Tools
-      nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+      nixos-hardware = {
+        url = "github:NixOS/nixos-hardware/master";
+      };
       home-manager = {
-        url = "github:nix-community/home-manager/release-24.05";
+        url = "github:nix-community/home-manager/master";
         inputs.nixpkgs.follows = "nixpkgs";
       };
       sops-nix = {
@@ -44,31 +45,28 @@
 
   outputs =
     { self
-    , nixos
     , nixpkgs
     , nixos-darwin
     , darwin
     , flake-parts
-    , nixos-hardware
     , home-manager
     , sops-nix
     , devenv
     , nil
-    , vscode-server
     , ...
     } @ inputs:
     let
       inherit (self) outputs;
     in
-    flake-parts.lib.mkFlake { inherit inputs; } {
+    flake-parts.lib.mkFlake { inherit inputs; } (top-level@{ self, withSystem, lib, ... }: {
       imports = [
         inputs.devenv.flakeModule
+        ./hosts/pi4-nixos/default.nix
       ];
 
       systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
 
       perSystem = { config, self', inputs', pkgs, system, ... }: {
-
         devenv.shells.default = {
           devenv.root =
             let
@@ -82,20 +80,11 @@
 
           packages = [
           ];
+
         };
       };
 
       flake = {
-
-        packages = {
-          aarch64-linux = {
-            pi4-nixos-sd-image = self.nixosConfigurations.pi4-nixos.config.system.build.sdImage;
-            default = self.nixosConfigurations.pi4-nixos-sd-image;
-          };
-        };
-
-        apps = { };
-
         #   # scutil --get LocalHostName
         darwinConfigurations = {
           "MacBook-Pro" = darwin.lib.darwinSystem {
@@ -106,8 +95,8 @@
             };
 
             modules = [
-              ./machines/macos/configuration.nix
-              ./machines/macos/modules/linux-builder.nix
+              ./hosts/macos/configuration.nix
+              ./hosts/macos/modules/linux-builder.nix
               ./nixos/modules/build-machines.nix
 
               home-manager.darwinModules.home-manager
@@ -124,68 +113,9 @@
           };
         };
 
-        nixosConfigurations = {
-          pi4-nixos = nixos.lib.nixosSystem {
-            system = "aarch64-linux";
-
-            specialArgs = {
-              inherit nixos-hardware;
-            };
-
-            modules = [
-              ./machines/pi4-nixos
-              ./nixos/modules/pi4-sd-image.nix
-              ./nixos/modules/system.nix
-              ./nixos/modules/network
-              ./nixos/modules/my-networks
-              ./nixos/modules/build-machines.nix
-              # Secret Management
-              sops-nix.nixosModules.sops
-              {
-                sops.defaultSopsFile = ./secrets/pi4-nixos.yaml;
-                sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-                sops.age.keyFile = "/var/lib/sops-nix/key.txt";
-                sops.age.generateKey = true;
-              }
-
-              ./nixos/modules/system-dashboard
-              # ./nixos/modules/homebridge
-              # {
-              #   services.homebridge.enable = true;
-              #   services.homebridge.openFirewall = true;
-              # }
-
-              # User environment managed by Home Manager
-              home-manager.nixosModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.extraSpecialArgs = {
-                  inherit inputs outputs;
-                  headless = true;
-                };
-              }
-              (import ./users/jloos)
-
-              vscode-server.nixosModule
-              (
-                { config
-                , pkgs
-                , ...
-                }: {
-                  services.vscode-server.enable = true;
-                  services.vscode-server.nodejsPackage = pkgs.nodejs_20;
-                }
-              )
-
-              ./nixos/modules/snowflake
-            ];
-          };
-        };
-
         homeManagerModules = { };
       };
-    };
+    });
 
   #   packages = {
   #     aarch64-linux =
