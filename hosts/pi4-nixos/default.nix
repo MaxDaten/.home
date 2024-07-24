@@ -58,8 +58,35 @@ in {
     
     packages.aarch64-linux.pi4-nixos-sd-image = self.nixosConfigurations.pi4-nixos.config.system.build.sdImage;
 
-    apps.aarch64-darwin.flash-pi4-nixos-sd-image.program = withSystem "aarch64-darwin" ({pkgs, ...}: pkgs.writeShellScriptBin "flash-sd-card" ''
-      echo "Flashing SD card: ${self.nixosConfigurations.pi4-nixos.config.system.build.sdImage}"
-    '');
+    apps.aarch64-darwin.flash-pi4-nixos-sd-image.program = withSystem "aarch64-darwin" ({pkgs, ...}: pkgs.writeShellApplication {
+      name = "flash-pi4-nixos-sd-image";
+      runtimeInputs = [ ];
+      text = ''
+        IMAGE_FILE="${self.nixosConfigurations.pi4-nixos.config.system.build.sdImage}/sd-image/${self.nixosConfigurations.pi4-nixos.config.sdImage.imageName}"
+        echo "Flashing SD card: $IMAGE_FILE"
+        read -p "Write image $IMAGE_FILE? (This may take a while) [yn]: " -r WRITE_IMAGE
+
+        case $WRITE_IMAGE in
+          [Yy]* ) 
+              echo "✍️ Write image to sd card"
+              diskutil list
+              
+              read -p "Enter device: " -r TARGET_SD
+              
+              echo "Unmounting disk to allow writing to disk"
+              sudo diskutil unmount "$TARGET_SD" || true
+              sudo diskutil unmountDisk "$TARGET_SD"
+
+              echo "Start writing to disk"
+              sudo dd if="$IMAGE_FILE" of="$TARGET_SD" bs=8M conv=fsync status=progress
+
+              echo "Done... ejecting sd"
+              sudo diskutil eject "$TARGET_SD"
+              ;;
+          * ) exit;;
+        esac
+
+      '';
+    });
   };
 }
