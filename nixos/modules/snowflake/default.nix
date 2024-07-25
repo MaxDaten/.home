@@ -9,6 +9,8 @@
     autoStart = true;
     ephemeral = true;
     config = {
+      # https://discourse.nixos.org/t/warning-system-stateversion-is-not-set/19493/2
+      system.stateVersion = config.system.stateVersion;
       systemd.services.snowflake = {
         wantedBy = [ "multi-user.target" ];
         serviceConfig = {
