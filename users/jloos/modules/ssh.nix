@@ -8,8 +8,8 @@
       identitiesOnly = true;
       identityFile = [
         "~/.ssh/id_ed25519_sk"
-        # "~/.ssh/id_ed25519"
-        # "~/.ssh/id_rsa"
+        "~/.ssh/id_ed25519"
+        "~/.ssh/id_rsa"
       ];
     };
 
