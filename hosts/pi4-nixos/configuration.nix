@@ -9,6 +9,7 @@
     ./modules/nix-config.nix
     ./modules/printing.nix
     ./modules/network.nix
+    ./modules/vscode-server.nix
     ../../nixos/modules/my-networks
     ../../nixos/modules/snowflake
     # ./timecapsule.nix

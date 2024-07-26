@@ -1,13 +1,21 @@
-{ self, withSystem, inputs, lib, options, flake-parts-lib, specialArgs, ...
-} @ top-level: 
+{ self
+, withSystem
+, inputs
+, lib
+, options
+, flake-parts-lib
+, specialArgs
+, ...
+} @ top-level:
 let
   system = "aarch64-linux";
   inherit (inputs.nixpkgs) lib;
-in {
+in
+{
   flake = {
 
-    nixosConfigurations.pi4-nixos = 
-      withSystem system ({ pkgs, inputs', ... } @ ctx: 
+    nixosConfigurations.pi4-nixos =
+      withSystem system ({ pkgs, inputs', ... } @ ctx:
         let
           specialArgs = {
             inherit inputs;
@@ -21,18 +29,18 @@ in {
 
           modules = [
             inputs.nixos-hardware.nixosModules.raspberry-pi-4
+            inputs.disko.nixosModules.disko
             ./configuration.nix
             ./sd-image.nix
-            inputs.sops-nix.nixosModules.sops {
+            inputs.sops-nix.nixosModules.sops
+            {
               sops.defaultSopsFile = ./secrets.yaml;
               sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
               sops.age.keyFile = "/var/lib/sops-nix/key.txt";
               sops.age.generateKey = true;
             }
-            inputs.vscode-server.nixosModule {
-              services.vscode-server.enable = true;
-              services.vscode-server.nodejsPackage = pkgs.nodejs_20;
-            }
+            inputs.vscode-server.nixosModule
+
             # ./nixos/modules/build-machines.nix
 
             # ./nixos/modules/system-dashboard
