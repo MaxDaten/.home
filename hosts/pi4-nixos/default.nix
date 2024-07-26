@@ -29,7 +29,6 @@ in
 
           modules = [
             inputs.nixos-hardware.nixosModules.raspberry-pi-4
-            inputs.disko.nixosModules.disko
             ./configuration.nix
             ./sd-image.nix
             inputs.sops-nix.nixosModules.sops
