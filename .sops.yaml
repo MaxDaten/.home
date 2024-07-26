@@ -5,7 +5,7 @@
 keys:
   - &jloos-macos age1scdp7nz77538w8sxk863nywywfqej6q5adrtp8fp3vpzfcxm4ajsk7vtxh
   - &jloos-pi4-nixos age16tfay9f7ruvepxmtltvju8dfue9ws7la9g8sjjenam064cc2zsps93g8nj
-  - &pi4-nixos age15y3e9xeanfkn6zyv3e9r7tr3flukz684thnattnwjd95ncv02y0qp9ssgv
+  - &pi4-nixos age139w70q7am6wu4ztjh2zwwj0nrzsgg680dpguf89fssn96g4wjccqs9vwy6
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
     key_groups:
@@ -13,7 +13,7 @@ creation_rules:
           - *jloos-pi4-nixos
           - *jloos-macos
           - *pi4-nixos
-  - path_regex: ^secrets.yaml$
+  - path_regex: ^.*/secrets.yaml$
     key_groups:
       - age:
           - *jloos-pi4-nixos
