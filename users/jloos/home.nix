@@ -125,7 +125,7 @@ with lib; {
     # truecolor = !isDarwin;
   };
 
-  home.stateVersion = "23.05";
+  home.stateVersion = "24.05";
   home.sessionVariables = {
     EDITOR =
       if pkgs.stdenv.isDarwin
