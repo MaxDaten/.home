@@ -193,4 +193,3 @@ nix build .#packages.aarch64-linux.default --system 'aarch64-linux' --max-jobs 0
   - [x] Service not starting
 - [x] Remote building on pi4
 - [ ] Add cachix
-- [ ] SOPS for Installer Image? => Pin HOST key?
