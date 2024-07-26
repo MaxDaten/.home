@@ -10,7 +10,7 @@
 
       # Nix Derivations
       nixpkgs.url = "nixpkgs/nixpkgs-unstable";
-      nixos-darwin.url = "nixpkgs/nixpkgs-24.05-darwin";
+      nixos-darwin.url = "nixpkgs/nixpkgs-unstable";
 
 
       darwin = {
@@ -73,14 +73,28 @@
               devenvRootFileContent = builtins.readFile inputs.devenv-root.outPath;
             in
             pkgs.lib.mkIf (devenvRootFileContent != "") devenvRootFileContent;
-          
+
           name = ".home shell";
-          
+
           imports = [ ];
 
-          packages = [
+          packages = with pkgs; [
+            sops
+            age
+            ssh-to-age
+            age
+
+            stress
+            speedtest-cli
+
+            node2nix
+            rsync
+            nil.packages.${system}.default
+            nixpkgs-fmt
           ];
 
+          env.SOPS_AGE_KEY_FILE = "/Users/jloos/.config/sops/age/keys.txt";
+          env.SOPS_AGE_KEY_DIRECTORY = "/Users/jloos/.config/sops/age";
         };
       };
 
