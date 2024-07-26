@@ -29,6 +29,7 @@ let
   ];
 in
 with lib; {
+  home.stateVersion = "24.05";
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "jloos";
@@ -125,7 +126,6 @@ with lib; {
     # truecolor = !isDarwin;
   };
 
-  home.stateVersion = "24.05";
   home.sessionVariables = {
     EDITOR =
       if pkgs.stdenv.isDarwin
