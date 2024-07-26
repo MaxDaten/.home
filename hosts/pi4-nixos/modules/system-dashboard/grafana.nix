@@ -5,13 +5,14 @@
 let
   grafanaUriPath = "/dashboard/";
   raspberryDashboardSrc = pkgs.fetchFromGitHub {
+    # https://github.com/rfmoz/grafana-dashboards
     owner = "rfmoz";
     repo = "grafana-dashboards";
-    rev = "214a8242ba60e913d3ded03f4db572f290528d45";
+    rev = "cad8539cc4c4ed043935e69b9c1ec23e551806f4";
     sparseCheckout = [
       "prometheus/node-exporter-full.json"
     ];
-    sha256 = "sha256-ngpNBd1t+/LaEHEEU07rpEgQBV2fNDG3nrNF7uabtYk=";
+    sha256 = "sha256-9BYujV2xXRRDvNI4sjimZEB4Z2TY/0WhwJRh5P122rs=";
   };
 in
 {

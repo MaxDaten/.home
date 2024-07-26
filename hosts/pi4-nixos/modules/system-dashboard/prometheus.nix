@@ -13,13 +13,10 @@ in
         enable = true;
         enabledCollectors = [
           "systemd"
+          "wifi"
+          "ksmd"
           "processes"
           "meminfo_numa"
-          "time"
-          "hwmon"
-          "powersupplyclass"
-          "pressure"
-          "loadavg"
         ];
         port = 9000;
       };
