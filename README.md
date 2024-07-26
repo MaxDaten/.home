@@ -70,9 +70,7 @@ sudo nixos-rebuild switch --flake github:MaxDaten/.home/<commit-sha>
 or remotely:
 
 ```bash
-nixos-rebuild --flake .#pi4-nixos \
-  --target-host pi4-nixos --build-host pi4-nixos \
-  switch
+nix run .#nixos-switch-pi4-nixos
 ```
 
 ### Use Visual Studio Code remotely
@@ -94,15 +92,15 @@ You have to follow these steps to allow yourself to edit secrets:
 1. Get your age compatible key from ssh `./generate-sops-keys.sh`
 2. Add your key to `./.sops.yaml`:
 
-  ```yaml
-  keys:
-    - &user age1m2xmznzaswlsyyrndx5q55tzcdzuxc0nmnawu0q8mnve8vjatyhsn2z6rc
-  creation_rules:
-    - path_regex: secrets/[^/]+\.yaml$
-      key_groups:
+```yaml
+keys:
+  - &user age1m2xmznzaswlsyyrndx5q55tzcdzuxc0nmnawu0q8mnve8vjatyhsn2z6rc
+creation_rules:
+  - path_regex: secrets/[^/]+\.yaml$
+    key_groups:
       - age:
-        - *user
-  ```
+          - *user
+```
 
 The machine to consume secrets has to be imported via it's host key:
 
@@ -145,7 +143,7 @@ trusted-users = root jloos
 ```conf
 # /etc/nix/machines
 # Last part is generated via: pi4-nixos$ base64 -w0 /etc/ssh/ssh_host_ed25519_key.pub
-ssh://pi4-nixos aarch64-linux - 4 2 nixos-test,benchmark,big-parallel,kvm - c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUwva0lMK1VGcG1Rb1YwemREQ1BvdmQ1alFZSkNvbEpXNlVrbmQzV0FKZFggcm9vdEBwaTQtbml4b3MK 
+ssh://pi4-nixos aarch64-linux - 4 2 nixos-test,benchmark,big-parallel,kvm - c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUwva0lMK1VGcG1Rb1YwemREQ1BvdmQ1alFZSkNvbEpXNlVrbmQzV0FKZFggcm9vdEBwaTQtbml4b3MK
 ```
 
 ### 2. Allow root@macos access to pi4-nixos
@@ -184,9 +182,9 @@ nix build .#packages.aarch64-linux.default --system 'aarch64-linux' --max-jobs 0
 - [x] Integrate already present home-manager managed home configs for `users.jloos`
 - [x] Secret management via [sops-nix](https://github.com/Mic92/sops-nix)
   - <https://xeiaso.net/blog/nixos-encrypted-secrets-2021-01-20>
-- [X] Hardware Dashboard
+- [x] Hardware Dashboard
   - [x] Grafana
-  - [X] Prometheus
+  - [x] Prometheus
   - [x] Provision Dashboard via nix
 - [x] Network printing
 - [x] Home-Bridge
