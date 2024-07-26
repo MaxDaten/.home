@@ -12,6 +12,26 @@ let
   inherit (inputs.nixpkgs) lib;
 in
 {
+  perSystem = { config, self', inputs', pkgs, system, ... }: {
+
+    apps.nixos-switch-pi4-nixos.program =
+      let
+        script = pkgs.writeShellApplication {
+          name = "nixos-switch-pi4-nixos";
+          # https://www.haskellforall.com/2023/01/announcing-nixos-rebuild-new-deployment.html
+          text = ''
+            ${lib.getExe pkgs.nixos-rebuild} switch \
+              --flake .#pi4-nixos \
+              --target-host "pi4-nixos" \
+              --use-remote-sudo \
+              --build-host pi4-nixos \
+              --fast
+          '';
+        };
+      in
+      lib.getExe script;
+  };
+
   flake = {
 
     nixosConfigurations.pi4-nixos =

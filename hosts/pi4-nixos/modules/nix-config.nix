@@ -1,6 +1,6 @@
 { pkgs, lib, ... }: {
 
-   # Nix System
+  # Nix System
   nix = {
     settings = {
       auto-optimise-store = true;
