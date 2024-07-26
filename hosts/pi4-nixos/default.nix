@@ -63,10 +63,10 @@ in
           ];
         }
       );
-    
+
     packages.aarch64-linux.pi4-nixos-sd-image = self.nixosConfigurations.pi4-nixos.config.system.build.sdImage;
 
-    apps.aarch64-darwin.flash-pi4-nixos-sd-image.program = withSystem "aarch64-darwin" ({pkgs, ...}: pkgs.writeShellApplication {
+    apps.aarch64-darwin.flash-pi4-nixos-sd-image.program = withSystem "aarch64-darwin" ({ pkgs, ... }: pkgs.writeShellApplication {
       name = "flash-pi4-nixos-sd-image";
       runtimeInputs = [ ];
       text = ''
@@ -86,7 +86,8 @@ in
               sudo diskutil unmountDisk "$TARGET_SD"
 
               echo "Start writing to disk"
-              sudo dd if="$IMAGE_FILE" of="$TARGET_SD" bs=8M conv=fsync status=progress
+              TARGET_SD=$(echo "$TARGET_SD" | sed 's/disk/rdisk/') # Unbuffered write
+              sudo dd if="$IMAGE_FILE" of="$TARGET_SD" conv=fsync bs=4M iflag=fullblock status=progress
 
               echo "Done... ejecting sd"
               sudo diskutil eject "$TARGET_SD"
