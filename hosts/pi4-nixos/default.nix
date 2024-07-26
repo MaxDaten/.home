@@ -60,14 +60,7 @@ in
             }
             inputs.vscode-server.nixosModule
 
-            # ./nixos/modules/build-machines.nix
-
-            # ./nixos/modules/system-dashboard
-            # # ./nixos/modules/homebridge
-            # # {
-            # #   services.homebridge.enable = true;
-            # #   services.homebridge.openFirewall = true;
-            # # }
+            ./modules/system-dashboard
 
             # # User environment managed by Home Manager
             inputs.home-manager.nixosModules.home-manager
@@ -79,6 +72,12 @@ in
               };
             }
             (import ../../users/jloos)
+            # ./nixos/modules/build-machines.nix
+            # # ./nixos/modules/homebridge
+            # # {
+            # #   services.homebridge.enable = true;
+            # #   services.homebridge.openFirewall = true;
+            # # }
           ];
         }
       );

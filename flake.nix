@@ -130,13 +130,4 @@
         homeManagerModules = { };
       };
     });
-
-  #   packages = {
-  #     aarch64-linux =
-  #       {
-  #         default = self.nixosConfigurations.pi4-nixos.config.system.build.sdImage;
-  #       };
-  #   };
-  # }
-  # // devShells;
 }
