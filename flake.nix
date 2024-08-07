@@ -61,7 +61,7 @@
     flake-parts.lib.mkFlake { inherit inputs; } (top-level@{ self, withSystem, lib, ... }: {
       imports = [
         inputs.devenv.flakeModule
-        ./hosts/pi4-nixos/default.nix
+        ./hosts/pi
       ];
 
       systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];

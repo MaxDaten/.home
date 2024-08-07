@@ -8,23 +8,24 @@
 , ...
 } @ top-level:
 let
+  host = "pi";
   system = "aarch64-linux";
   inherit (inputs.nixpkgs) lib;
 in
 {
   perSystem = { config, self', inputs', pkgs, system, ... }: {
 
-    apps.nixos-switch-pi4-nixos.program =
+    apps."nixos-switch-${host}".program =
       let
         script = pkgs.writeShellApplication {
-          name = "nixos-switch-pi4-nixos";
+          name = "nixos-switch-${host}";
           # https://www.haskellforall.com/2023/01/announcing-nixos-rebuild-new-deployment.html
           text = ''
             ${lib.getExe pkgs.nixos-rebuild} switch \
-              --flake .#pi4-nixos \
-              --target-host "pi4-nixos" \
+              --flake .#${host} \
+              --target-host "${host}" \
               --use-remote-sudo \
-              --build-host pi4-nixos \
+              --build-host ${host} \
               --fast
           '';
         };
@@ -34,7 +35,7 @@ in
 
   flake = {
 
-    nixosConfigurations.pi4-nixos =
+    nixosConfigurations.${host} =
       withSystem system ({ pkgs, inputs', ... } @ ctx:
         let
           specialArgs = {
@@ -48,7 +49,7 @@ in
           inherit specialArgs;
 
           modules = [
-            inputs.nixos-hardware.nixosModules.raspberry-pi-4
+            inputs.nixos-hardware.nixosModules.raspberry-pi-5
             ./configuration.nix
             ./sd-image.nix
             inputs.sops-nix.nixosModules.sops
@@ -82,13 +83,13 @@ in
         }
       );
 
-    packages.aarch64-linux.pi4-nixos-sd-image = self.nixosConfigurations.pi4-nixos.config.system.build.sdImage;
+    packages.aarch64-linux."${host}-sd-image" = self.nixosConfigurations.${host}.config.system.build.sdImage;
 
-    apps.aarch64-darwin.flash-pi4-nixos-sd-image.program = withSystem "aarch64-darwin" ({ pkgs, ... }: pkgs.writeShellApplication {
-      name = "flash-pi4-nixos-sd-image";
+    apps.aarch64-darwin."flash-${host}-sd-image".program = withSystem "aarch64-darwin" ({ pkgs, ... }: pkgs.writeShellApplication {
+      name = "flash-${host}-sd-image";
       runtimeInputs = [ ];
       text = ''
-        IMAGE_FILE="${self.nixosConfigurations.pi4-nixos.config.system.build.sdImage}/sd-image/${self.nixosConfigurations.pi4-nixos.config.sdImage.imageName}"
+        IMAGE_FILE="${self.nixosConfigurations.${host}.config.system.build.sdImage}/sd-image/${self.nixosConfigurations.${host}.config.sdImage.imageName}"
         echo "Flashing SD card: $IMAGE_FILE"
         read -p "Write image $IMAGE_FILE? (This may take a while) [yn]: " -r WRITE_IMAGE
 
