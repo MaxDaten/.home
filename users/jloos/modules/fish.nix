@@ -6,22 +6,27 @@
 }: {
   programs.fish.enable = true;
   programs.fish = {
-    plugins = [
+    plugins = with pkgs.fishPlugins; [
+      # https://mynixos.com/search?q=fishPlugins
       {
         name = "done";
-        src = pkgs.fishPlugins.done.src;
+        src = done.src;
       }
       {
         name = "foreign-env";
-        src = pkgs.fishPlugins.foreign-env.src;
+        src = foreign-env.src;
       }
       {
         name = "colored-man-pages";
-        src = pkgs.fishPlugins.colored-man-pages.src;
+        src = colored-man-pages.src;
+      }
+      {
+        name = "fzf";
+        src = fzf.src;
       }
       {
         name = "autopair";
-        src = pkgs.fishPlugins.autopair.src;
+        src = autopair.src;
       }
       {
         # https://github.com/lilyball/nix-env.fish
@@ -71,12 +76,13 @@
       ls = "${pkgs.lsd}/bin/lsd -l";
       h = "heygpt";
       x = "xgpt4";
-      "cpx" = "gh copilot explain";
-      "cps" = "gh copilot suggest -t shell";
-      "cpgit" = "gh copilot suggest -t git";
+      "e!" = "gh copilot explain";
+      "!!" = "gh copilot suggest -t shell";
+      "git!" = "gh copilot suggest -t git";
     };
 
     shellInit = ''
+      set -U fish_trace 2 
       set -U fish_greeting
       set -U PROJECT_PATHS ~/Developer/buzzar ~/Developer/gitops ~/Workspace/.home ~/Developer
       set __done_enabled
