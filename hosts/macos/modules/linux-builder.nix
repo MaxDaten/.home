@@ -6,6 +6,7 @@
   nix.linux-builder.ephemeral = true;
   # When bootstrapping, comment modules out to use the binary cache version
   nix.linux-builder.config = ({ pkgs, ... }: {
+    virtualisation.cores = 8;
     # https://github.com/NixOS/nixpkgs/blob/master/doc/packages/darwin-builder.section.md#darwinlinux-builder-sec-darwin-builder
     virtualisation.darwin-builder.diskSize = 60 * 1024;
     virtualisation.darwin-builder.memorySize = 16 * 1024;
