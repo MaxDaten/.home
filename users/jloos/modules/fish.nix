@@ -3,7 +3,11 @@
 , config
 , lib
 , ...
-}: {
+}:
+let
+  trace = false; # like set -x
+in
+{
   programs.fish.enable = true;
   programs.fish = {
     plugins = with pkgs.fishPlugins; [
@@ -12,10 +16,10 @@
         name = "done";
         src = done.src;
       }
-      {
-        name = "foreign-env";
-        src = foreign-env.src;
-      }
+      # {
+      #   name = "foreign-env";
+      #   src = foreign-env.src;
+      # }
       {
         name = "colored-man-pages";
         src = colored-man-pages.src;
@@ -82,7 +86,7 @@
     };
 
     shellInit = ''
-      set -U fish_trace 2 
+      ${if trace then "set -U fish_trace 2" else "set -e fish_trace"}
       set -U fish_greeting
       set -U PROJECT_PATHS ~/Developer/buzzar ~/Developer/gitops ~/Workspace/.home ~/Developer
       set __done_enabled
