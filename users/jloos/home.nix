@@ -92,7 +92,6 @@ with lib; {
       shellcheck
 
       # Nix tools
-      nixVersions.nix_2_19
       comma
       nixfmt
       alejandra
