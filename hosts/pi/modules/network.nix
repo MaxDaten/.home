@@ -1,7 +1,7 @@
 { pkgs, lib, ... }: {
 
   networking = {
-    hostName = "pi4-nixos";
+    hostName = "pi";
     # networkmanager = {
     #   enable = true;
     # };

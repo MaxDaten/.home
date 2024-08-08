@@ -20,6 +20,11 @@
 
       flake-parts.url = "github:hercules-ci/flake-parts";
 
+      # Raspberry Pi
+      raspberry-pi-nix = {
+        url = "github:nix-community/raspberry-pi-nix/v0.4.0";
+      };
+
       # System Tools
       nixos-hardware = {
         url = "github:NixOS/nixos-hardware/master";
@@ -42,6 +47,19 @@
       vscode-server.url = "github:msteen/nixos-vscode-server";
       nil.url = "github:oxalica/nil";
     };
+
+  nixConfig = {
+    extra-trusted-public-keys = [
+      "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
+      "briendsgmbh.cachix.org-1:gJT1XP1/F3dNEwqyWOBsZ11uFKTvDKaMQA/dFhs/ywE="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+    extra-substituters = [
+      "https://devenv.cachix.org"
+      "https://briendsgmbh.cachix.org"
+      "https://nix-community.cachix.org"
+    ];
+  };
 
   outputs =
     { self
@@ -82,7 +100,6 @@
             sops
             age
             ssh-to-age
-            age
 
             stress
             speedtest-cli
@@ -91,6 +108,7 @@
             rsync
             nil.packages.${system}.default
             nixpkgs-fmt
+            zstd
           ];
 
           env.SOPS_AGE_KEY_FILE = "/Users/jloos/.config/sops/age/keys.txt";

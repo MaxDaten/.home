@@ -1,26 +1,19 @@
 { pkgs, lib, ... }: {
 
   boot.growPartition = true;
-  boot.loader = {
-    timeout = 3;
-    efi.canTouchEfiVariables = false;
-    grub = {
-      efiSupport = true;
-      efiInstallAsRemovable = true;
-      configurationLimit = 5;
-    };
-  };
-
-  boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
+  boot.loader.timeout = 3;
+  # boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
 
   environment.systemPackages = with pkgs; [
     # system tools
     libraspberrypi
+    raspberrypi-eeprom
 
     # minimal tools
     vim
     gitMinimal
     bash
+    ncurses
   ];
 
   # Select internationalisation properties.

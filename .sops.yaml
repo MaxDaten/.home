@@ -4,18 +4,17 @@
 # for a more complex example.
 keys:
   - &jloos-macos age1scdp7nz77538w8sxk863nywywfqej6q5adrtp8fp3vpzfcxm4ajsk7vtxh
-  - &jloos-pi4-nixos age16tfay9f7ruvepxmtltvju8dfue9ws7la9g8sjjenam064cc2zsps93g8nj
-  - &pi4-nixos age139w70q7am6wu4ztjh2zwwj0nrzsgg680dpguf89fssn96g4wjccqs9vwy6
+  - &pi age18ymvgyenksapa2caz9j3kltz5rzc4gcj4z3hkv4vyusdczacjs9qg64vq3
+  - &jloos-pi age1h3tzl40g5gzwtccle4fhsmrpzqp3z4vzmp0ag4s9kh5nl5lvd5mqysur3l
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
     key_groups:
       - age:
-          - *jloos-pi4-nixos
           - *jloos-macos
-          - *pi4-nixos
+          - *pi
+          - *jloos-pi
   - path_regex: ^.*/secrets.yaml$
     key_groups:
       - age:
-          - *jloos-pi4-nixos
           - *jloos-macos
-          - *pi4-nixos
+          - *pi
