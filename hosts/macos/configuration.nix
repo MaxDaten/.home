@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
   # https://daiderd.com/nix-darwin/manual/index.html
   nixpkgs.hostPlatform = "aarch64-darwin";
   nixpkgs.config.allowUnfree = true;
@@ -6,6 +6,7 @@
   environment.systemPackages = [
     pkgs.fish
     pkgs.git
+    pkgs.cachix
   ];
 
 
@@ -40,7 +41,6 @@
   # nix.settings.extra-platforms = lib.optionalString (pkgs.system == "aarch64-darwin") "x86_64-darwin aarch64-darwin";
 
   # init nix in zsh & fish
-  # programs.zsh.enable = true;
   programs.fish.enable = true;
   environment.shells = with pkgs; [ bashInteractive fish zsh ];
   environment.loginShell = "${pkgs.fish}/bin/fish --login";
