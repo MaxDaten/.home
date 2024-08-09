@@ -24,6 +24,7 @@
     fish
     ncurses
     stress
+    fastfetch
   ];
 
   # Select internationalisation properties.
