@@ -79,7 +79,7 @@
     flake-parts.lib.mkFlake { inherit inputs; } (top-level@{ self, withSystem, lib, ... }: {
       imports = [
         inputs.devenv.flakeModule
-        ./hosts/pi
+        ./hosts
       ];
 
       systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
@@ -114,38 +114,6 @@
           env.SOPS_AGE_KEY_FILE = "/Users/jloos/.config/sops/age/keys.txt";
           env.SOPS_AGE_KEY_DIRECTORY = "/Users/jloos/.config/sops/age";
         };
-      };
-
-      flake = {
-        #   # scutil --get LocalHostName
-        darwinConfigurations = {
-          "MacBook-Pro" = darwin.lib.darwinSystem {
-            system = "aarch64-darwin";
-
-            specialArgs = {
-              inherit inputs outputs;
-            };
-
-            modules = [
-              ./hosts/macos/configuration.nix
-              ./hosts/macos/modules/linux-builder.nix
-              ./nixos/modules/build-machines.nix
-
-              home-manager.darwinModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.extraSpecialArgs = {
-                  inherit inputs outputs;
-                  headless = false;
-                };
-                home-manager.users.jloos = import ./users/jloos/home.nix;
-              }
-            ];
-          };
-        };
-
-        homeManagerModules = { };
       };
     });
 }
