@@ -64,7 +64,6 @@
   outputs =
     { self
     , nixpkgs
-    , nixos-darwin
     , darwin
     , flake-parts
     , home-manager
