@@ -8,7 +8,7 @@
       max-jobs = 4;
       cores = 4;
       system-features = [ "kvm" "nixos-test" "benchmark" "big-parallel" ];
-      extra-platforms = [ "x86_64-linux" ];
+      # extra-platforms = [ "x86_64-linux" ];
       trusted-users = [ "root" "jloos" "@wheel" ];
     };
     gc = {

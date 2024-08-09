@@ -4,7 +4,6 @@
     inputs.sops-nix.nixosModules.sops
     ./configuration.nix
     ./pi-config.nix
-    ./system.nix
     ./network.nix
     ./printing.nix
     ./nix-config.nix

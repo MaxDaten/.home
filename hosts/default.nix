@@ -63,7 +63,7 @@ in
               headless = true;
             };
           }
-          (import ../../users/jloos)
+          (import ../users/jloos)
         ];
       };
     };
