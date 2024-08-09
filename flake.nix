@@ -72,48 +72,46 @@
     , devenv
     , nil
     , ...
-    } @ inputs:
-    let
-      inherit (self) outputs;
-    in
-    flake-parts.lib.mkFlake { inherit inputs; } (top-level@{ self, withSystem, lib, ... }: {
-      imports = [
-        inputs.devenv.flakeModule
-        ./hosts
-      ];
+    } @ inputs: flake-parts.lib.mkFlake
+      { inherit inputs; }
+      (top-level@{ self, withSystem, lib, ... }: {
+        imports = [
+          inputs.devenv.flakeModule
+          ./hosts
+        ];
 
-      systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
+        systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
 
-      perSystem = { config, self', inputs', pkgs, system, ... }: {
-        devenv.shells.default = {
-          devenv.root =
-            let
-              devenvRootFileContent = builtins.readFile inputs.devenv-root.outPath;
-            in
-            pkgs.lib.mkIf (devenvRootFileContent != "") devenvRootFileContent;
+        perSystem = { config, self', inputs', pkgs, system, ... }: {
+          devenv.shells.default = {
+            devenv.root =
+              let
+                devenvRootFileContent = builtins.readFile inputs.devenv-root.outPath;
+              in
+              pkgs.lib.mkIf (devenvRootFileContent != "") devenvRootFileContent;
 
-          name = ".home shell";
+            name = ".home shell";
 
-          imports = [ ];
+            imports = [ ];
 
-          packages = with pkgs; [
-            sops
-            age
-            ssh-to-age
+            packages = with pkgs; [
+              sops
+              age
+              ssh-to-age
 
-            stress
-            speedtest-cli
+              stress
+              speedtest-cli
 
-            node2nix
-            rsync
-            nil.packages.${system}.default
-            nixpkgs-fmt
-            zstd
-          ];
+              node2nix
+              rsync
+              nil.packages.${system}.default
+              nixpkgs-fmt
+              zstd
+            ];
 
-          env.SOPS_AGE_KEY_FILE = "/Users/jloos/.config/sops/age/keys.txt";
-          env.SOPS_AGE_KEY_DIRECTORY = "/Users/jloos/.config/sops/age";
+            env.SOPS_AGE_KEY_FILE = "/Users/jloos/.config/sops/age/keys.txt";
+            env.SOPS_AGE_KEY_DIRECTORY = "/Users/jloos/.config/sops/age";
+          };
         };
-      };
-    });
+      });
 }
