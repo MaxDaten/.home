@@ -8,6 +8,8 @@ in
 {
   services.prometheus.enable = true;
   services.prometheus = {
+    globalConfig.scrape_interval = "15s";
+
     exporters = {
       node = {
         enable = true;
