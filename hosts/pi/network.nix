@@ -29,9 +29,12 @@
 
   services.snowflake-proxy.enable = true;
 
-  networking.firewall.enable = true;
-  # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [
-    80
-  ];
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 80 ];
+    allowedUDPPortRanges = [
+      { from = 32768; to = 60999; }
+    ];
+  };
+
 }
