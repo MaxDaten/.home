@@ -16,8 +16,9 @@ in
               text = ''
                 ${lib.getExe pkgs.nixos-rebuild} switch \
                   --flake .#${name} \
-                  --target-host root@pi \
-                  --build-host root@pi \
+                  --target-host pi \
+                  --use-remote-sudo \
+                  --build-host pi \
                   --fast \
               '';
             };

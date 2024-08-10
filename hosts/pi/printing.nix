@@ -1,14 +1,23 @@
 { pkgs, lib, ... }: {
   # Printing
-  services.printing.enable = true;
-  services.printing.browsing = true;
-  services.printing.listenAddresses = [ "*:631" ];
-  services.printing.allowFrom = [ "all" ];
-  services.printing.defaultShared = true;
-  services.printing.extraConf = ''
-    DefaultEncryption Never
-  '';
-  services.printing.drivers = [
-    pkgs.brlaser
+  services.printing = {
+    enable = true;
+    browsing = true;
+    listenAddresses = [ "*:631" ];
+    allowFrom = [ "all" ];
+    defaultShared = true;
+    extraConf = ''
+      DefaultEncryption Never
+    '';
+    drivers = [
+      pkgs.brlaser
+    ];
+  };
+
+  networking.firewall.allowedTCPPorts = [
+    631 # CUPS
+  ];
+  networking.firewall.allowedUDPPorts = [
+    631 # CUPS
   ];
 }

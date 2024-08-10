@@ -8,8 +8,8 @@
     ./printing.nix
     ./nix-config.nix
     ./vscode-server.nix
+    ./system-dashboard
     ../../nixos/modules/my-networks
-    ../../nixos/modules/snowflake
 
     # ./nixos/modules/homebridge
     # {
