@@ -9,6 +9,7 @@
     extraGroups = [
       "wheel"
       "networkmanager"
+      "video"
       "lp"
       "libvirtd"
       "qemu-libvirtd"
