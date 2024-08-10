@@ -10,6 +10,7 @@ let
     terminal-notifier
     iterm2
     raycast
+    warp-terminal
   ];
 
   isDarwin = pkgs.stdenv.isDarwin;
