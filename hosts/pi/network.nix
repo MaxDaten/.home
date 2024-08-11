@@ -2,9 +2,6 @@
 
   networking.hostName = "pi";
 
-  # Wireless networking (2). Enables `wpa_supplicant` on boot.
-  systemd.services.wpa_supplicant.wantedBy = lib.mkOverride 10 [ "default.target" ];
-
   services.avahi = {
     enable = true;
     nssmdns4 = true;
