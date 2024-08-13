@@ -73,7 +73,7 @@
     , ...
     } @ inputs: flake-parts.lib.mkFlake
       { inherit inputs; }
-      (top-level@{ self, withSystem, lib, ... }: {
+      ({ self, withSystem, lib, ... }: {
         imports = [
           inputs.devenv.flakeModule
           ./hosts
