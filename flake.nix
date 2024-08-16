@@ -26,15 +26,16 @@
       };
 
       # System Tools
-      nixos-hardware = {
-        url = "github:NixOS/nixos-hardware/master";
-      };
       home-manager = {
         url = "github:nix-community/home-manager/master";
         inputs.nixpkgs.follows = "nixpkgs";
       };
       sops-nix = {
         url = "github:Mic92/sops-nix";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+      nnf = {
+        url = "github:thelegy/nixos-nftables-firewall";
         inputs.nixpkgs.follows = "nixpkgs";
       };
 

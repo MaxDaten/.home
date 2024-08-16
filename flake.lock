@@ -50,6 +50,27 @@
         "type": "github"
       }
     },
+    "dependencyDagOfSubmodule": {
+      "inputs": {
+        "nixpkgs": [
+          "nnf",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1656615370,
+        "narHash": "sha256-IZDqz1aSySoqf1qtVQg+oJMHfC4IlT55Zoa7EkjvPug=",
+        "owner": "thelegy",
+        "repo": "nix-dependencyDagOfSubmodule",
+        "rev": "98eb563d80b35acafbfc1abb9ccee569c1efb19c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "thelegy",
+        "repo": "nix-dependencyDagOfSubmodule",
+        "type": "github"
+      }
+    },
     "devenv": {
       "inputs": {
         "cachix": "cachix",
@@ -465,22 +486,6 @@
         "type": "indirect"
       }
     },
-    "nixos-hardware": {
-      "locked": {
-        "lastModified": 1723310128,
-        "narHash": "sha256-IiH8jG6PpR4h9TxSGMYh+2/gQiJW9MwehFvheSb5rPc=",
-        "owner": "NixOS",
-        "repo": "nixos-hardware",
-        "rev": "c54cf53e022b0b3c1d3b8207aa0f9b194c24f0cf",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "master",
-        "repo": "nixos-hardware",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1692808169,
@@ -650,6 +655,27 @@
         "type": "indirect"
       }
     },
+    "nnf": {
+      "inputs": {
+        "dependencyDagOfSubmodule": "dependencyDagOfSubmodule",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1715521768,
+        "narHash": "sha256-BQkkBqDemoPRd2a4G94I9w9fNE0IxWtVsQ9SalnNqCQ=",
+        "owner": "thelegy",
+        "repo": "nixos-nftables-firewall",
+        "rev": "2c5a19966b4dfc5ca92df7eb250c68f90be653c8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "thelegy",
+        "repo": "nixos-nftables-firewall",
+        "type": "github"
+      }
+    },
     "poetry2nix": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -741,8 +767,8 @@
         "nil": "nil",
         "nix2container": "nix2container",
         "nixos-darwin": "nixos-darwin",
-        "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_4",
+        "nnf": "nnf",
         "raspberry-pi-nix": "raspberry-pi-nix",
         "sops-nix": "sops-nix",
         "vscode-server": "vscode-server"
