@@ -56,7 +56,7 @@
   security.polkit.enable = true;
 
   hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
+    enable = false;
+    powerOnBoot = false;
   };
 }
