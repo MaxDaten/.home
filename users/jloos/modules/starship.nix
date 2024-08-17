@@ -26,7 +26,7 @@
       kubernetes = {
         disabled = false;
         format = "[\\[$symbol$context( \\($namespace\\))\\]]($style) ";
-        context_aliases = {};
+        context_aliases = { };
       };
 
       custom = {
