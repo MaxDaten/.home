@@ -14,10 +14,12 @@
     ];
   };
 
-  networking.firewall.allowedTCPPorts = [
-    631 # CUPS
-  ];
-  networking.firewall.allowedUDPPorts = [
-    631 # CUPS
-  ];
+  networking.nftables.firewall = {
+    rules.printing = {
+      from = [ "local" ];
+      to = [ "fw" ];
+      allowedTCPPorts = [ 631 ];
+      allowedUDPPorts = [ 631 ];
+    };
+  };
 }

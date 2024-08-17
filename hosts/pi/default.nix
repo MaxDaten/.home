@@ -2,6 +2,7 @@
   imports = [
     inputs.vscode-server.nixosModule
     inputs.sops-nix.nixosModules.sops
+    inputs.nnf.nixosModules.default
     ./configuration.nix
     ./pi-config.nix
     ./network.nix

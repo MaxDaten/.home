@@ -1,4 +1,10 @@
-{ pkgs, lib, ... }: {
+{ pkgs, ... }:
+
+let
+  subnet-mask = "255.255.255.0";
+  subnet = "192.168.178.0/24";
+in
+{
 
   networking.hostName = "pi";
 
@@ -27,11 +33,28 @@
   services.snowflake-proxy.enable = true;
 
   networking.firewall = {
-    enable = true;
     allowedTCPPorts = [ 80 ];
     allowedUDPPortRanges = [
       { from = 32768; to = 60999; }
     ];
   };
 
+  # add nft to systemPackages
+  environment.systemPackages = with pkgs; [
+    nftables
+  ];
+
+  # Zone Based NF Firewall
+  # https://thelegy.github.io/nixos-nftables-firewall/
+  networking.nftables.firewall = {
+    enable = true;
+    snippets.nnf-common.enable = true;
+    zones.uplink = {
+      interfaces = [ "end0" "wlan0" ];
+    };
+    zones.local = {
+      parent = "uplink";
+      ipv4Addresses = [ subnet ];
+    };
+  };
 }
