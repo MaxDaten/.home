@@ -663,15 +663,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1715521768,
-        "narHash": "sha256-BQkkBqDemoPRd2a4G94I9w9fNE0IxWtVsQ9SalnNqCQ=",
-        "owner": "thelegy",
+        "lastModified": 1723930004,
+        "narHash": "sha256-ZjoUdkKsywurzHvPoS6RtlOLrgx67qpmOhxbREDdb2o=",
+        "owner": "maxdaten",
         "repo": "nixos-nftables-firewall",
-        "rev": "2c5a19966b4dfc5ca92df7eb250c68f90be653c8",
+        "rev": "9399e887022fd9dcb93860bd2a024113f2b649b8",
         "type": "github"
       },
       "original": {
-        "owner": "thelegy",
+        "owner": "maxdaten",
         "repo": "nixos-nftables-firewall",
         "type": "github"
       }

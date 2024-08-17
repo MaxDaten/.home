@@ -31,12 +31,10 @@ in
   };
 
   services.snowflake-proxy.enable = true;
+  services.snowflake-proxy.capacity = 32;
 
   networking.firewall = {
-    allowedTCPPorts = [ 80 ];
-    allowedUDPPortRanges = [
-      { from = 32768; to = 60999; }
-    ];
+    allowedTCPPorts = [ 80 433 ];
   };
 
   # add nft to systemPackages
@@ -56,5 +54,25 @@ in
       parent = "uplink";
       ipv4Addresses = [ subnet ];
     };
+
+    rules.snowflake-proxy = {
+      from = "all";
+      to = [ "fw" ];
+      # Stun and Turn
+      allowedUDPPorts = [ 3478 5349 ];
+      allowedTCPPorts = [ 3478 5349 ];
+      allowedUDPPortRanges = [
+        { from = 32768; to = 60999; }
+      ];
+    };
   };
+
+  # ssh only from local
+  networking.nftables.firewall.rules.private-ssh = {
+    from = [ "local" ];
+    to = [ "fw" ];
+    allowedTCPPorts = [ 22 ];
+  };
+
+
 }

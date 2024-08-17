@@ -35,7 +35,7 @@
         inputs.nixpkgs.follows = "nixpkgs";
       };
       nnf = {
-        url = "github:thelegy/nixos-nftables-firewall";
+        url = "github:maxdaten/nixos-nftables-firewall";
         inputs.nixpkgs.follows = "nixpkgs";
       };
 
