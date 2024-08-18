@@ -47,6 +47,7 @@
   environment.variables.LANG = "en_US.UTF-8";
 
   # Auto upgrade nix package and the daemon service.
+  programs.nix-index-database.comma.enable = true;
   services.nix-daemon.enable = true;
   programs.nix-index.enable = true;
 

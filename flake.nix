@@ -38,6 +38,10 @@
         url = "github:maxdaten/nixos-nftables-firewall";
         inputs.nixpkgs.follows = "nixpkgs";
       };
+      nix-index-database = {
+        url = "github:nix-community/nix-index-database";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
 
       # Development environment
       devenv.url = "github:cachix/devenv";
@@ -83,6 +87,9 @@
         systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
 
         perSystem = { config, self', inputs', pkgs, system, ... }: {
+          debug = true;
+          formatter = pkgs.nixpkgs-fmt;
+
           devenv.shells.default = {
             devenv.root =
               let

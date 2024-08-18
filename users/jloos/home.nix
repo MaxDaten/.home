@@ -40,6 +40,7 @@ with lib; {
     else "/home/jloos";
 
   imports = [
+    inputs.nix-index-database.hmModules.nix-index
     inputs.sops-nix.homeManagerModule
     (import ./modules/fish.nix { inherit pkgs config isDarwin lib; })
     ./modules/starship.nix
@@ -52,6 +53,7 @@ with lib; {
     ./modules/sops.nix
     (import ./modules/heygpt.nix { inherit pkgs config isDarwin lib; })
   ];
+
 
   home.packages = with pkgs;
     [
@@ -93,7 +95,6 @@ with lib; {
       shellcheck
 
       # Nix tools
-      comma
       nixfmt
       alejandra
       nil # Nix Language Server
