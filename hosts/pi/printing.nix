@@ -1,9 +1,13 @@
-{ pkgs, ... }: {
+{ pkgs, config, lib, ... }:
+let
+  port = 631;
+in
+{
   # Printing
   services.printing = {
     enable = true;
     browsing = true;
-    listenAddresses = [ "*:631" ];
+    listenAddresses = [ "*:${toString port}" ];
     allowFrom = [ "all" ];
     defaultShared = true;
     extraConf = ''
@@ -18,8 +22,16 @@
     rules.printing = {
       from = [ "local" ];
       to = [ "fw" ];
-      allowedTCPPorts = [ 631 ];
-      allowedUDPPorts = [ 631 ];
+      allowedTCPPorts = [ port ];
+      allowedUDPPorts = [ port ];
+    };
+  };
+
+  # nginx reverse proxy from /printing to localhost:631
+  services.nginx.virtualHosts."${config.networking.fqdnOrHostName}" = lib.mkIf config.services.nginx.enable {
+    locations."/printing/" = {
+      proxyPass = "http://[::1]:${toString port}";
+      recommendedProxySettings = true;
     };
   };
 }

@@ -49,7 +49,7 @@ in
   '';
 
   # nginx reverse proxy
-  services.nginx.virtualHosts."prometheus.pi4-nixos.local" = {
+  services.nginx.virtualHosts."${config.networking.fqdnOrHostName}" = {
     locations."${prometheusUriPath}" = {
       proxyPass = "http://127.0.0.1:${toString config.services.prometheus.port}/";
       proxyWebsockets = true;

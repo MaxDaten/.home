@@ -75,7 +75,7 @@ in
   '';
 
   # nginx reverse proxy
-  services.nginx.virtualHosts."grafana.pi4-nixos.local" = {
+  services.nginx.virtualHosts."${config.networking.fqdnOrHostName}" = {
     locations."${grafanaUriPath}" = {
       proxyPass = "http://127.0.0.1:${toString config.services.grafana.settings.server.http_port}/";
       proxyWebsockets = true;

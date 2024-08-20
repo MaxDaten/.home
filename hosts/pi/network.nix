@@ -1,12 +1,18 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 let
-  subnet-mask = "255.255.255.0";
+  subnetMask = "255.255.255.0";
   subnet = "192.168.178.0/24";
+
+  dashboard = pkgs.linkFarm "dashboard" [{
+    name = "index.html";
+    path = ./dashboard.html;
+  }];
 in
 {
 
   networking.hostName = "pi";
+  networking.domain = "local";
 
   services.avahi = {
     enable = true;
@@ -28,14 +34,15 @@ in
     recommendedOptimisation = true;
     recommendedGzipSettings = true;
     recommendedProxySettings = true;
+    virtualHosts."${config.networking.fqdnOrHostName}" = {
+      locations."/" = {
+        root = dashboard;
+      };
+    };
   };
 
   services.snowflake-proxy.enable = true;
   services.snowflake-proxy.capacity = 32;
-
-  networking.firewall = {
-    allowedTCPPorts = [ 80 433 ];
-  };
 
   # add nft to systemPackages
   environment.systemPackages = with pkgs; [
@@ -47,6 +54,8 @@ in
   networking.nftables.firewall = {
     enable = true;
     snippets.nnf-common.enable = true;
+    #  nixos-nftables-firewall to local
+
     zones.uplink = {
       interfaces = [ "end0" "wlan0" ];
     };
@@ -64,6 +73,12 @@ in
       allowedUDPPortRanges = [
         { from = 32768; to = 60999; }
       ];
+    };
+
+    rules.http = {
+      from = [ "local" ];
+      to = [ "fw" ];
+      allowedTCPPorts = [ 80 443 ];
     };
   };
 

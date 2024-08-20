@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Raspberry Pi Services Dashboard</title>
+    <style>
+      @keyframes lavaLamp1 {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        33% {
+          transform: translate(5%, 10%) scale(1.1);
+        }
+        66% {
+          transform: translate(-5%, -10%) scale(0.9);
+        }
+      }
+      @keyframes lavaLamp2 {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        33% {
+          transform: translate(-10%, 5%) scale(0.9);
+        }
+        66% {
+          transform: translate(10%, -5%) scale(1.1);
+        }
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #e0e0e0;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        background-color: #1a1a1a;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      .lava-background {
+        position: fixed;
+        top: -50%;
+        left: -50%;
+        right: -50%;
+        bottom: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(-45deg, #2c2c2c, #3a3a3a, #2c2c2c, #3a3a3a);
+        opacity: 0.6;
+        filter: blur(30px);
+        animation: lavaLamp1 20s ease-in-out infinite;
+        z-index: -1;
+      }
+
+      .lava-background::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        opacity: 0.05;
+        mix-blend-mode: overlay;
+      }
+
+      .lava-background::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 30% 40%, #bb86fc, transparent 60%),
+          radial-gradient(circle at 70% 60%, #03dac6, transparent 60%);
+        opacity: 0.2;
+        mix-blend-mode: screen;
+        animation: lavaLamp2 15s ease-in-out infinite;
+      }
+
+      .header {
+        background: rgba(28, 28, 28, 0.8);
+        backdrop-filter: blur(10px);
+        padding: 20px 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      h1 {
+        color: #bb86fc;
+        text-align: center;
+        margin: 0;
+        font-size: 2rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .service-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+      }
+
+      .service-card {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      .service-card h2 {
+        color: #03dac6;
+        margin-top: 0;
+        display: flex;
+        align-items: center;
+      }
+
+      .service-card h2 svg {
+        margin-right: 10px;
+      }
+
+      .service-card p {
+        margin-bottom: 15px;
+        flex-grow: 1;
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: rgba(3, 218, 198, 0.8);
+        color: #1a1a1a;
+        padding: 12px 20px;
+        text-decoration: none;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+        text-align: center;
+        align-self: stretch;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        border: 2px solid transparent;
+        backdrop-filter: blur(5px);
+      }
+
+      .btn:hover {
+        background-color: rgba(3, 218, 198, 0.2);
+        color: #03dac6;
+        border-color: #03dac6;
+      }
+
+      .btn svg {
+        vertical-align: middle;
+        margin-right: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="lava-background"></div>
+    <header class="header">
+      <h1>Raspberry Pi Services Dashboard</h1>
+    </header>
+    <div class="container">
+      <div class="service-grid">
+        <div class="service-card">
+          <h2>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 2L2 7L12 12L22 7L12 2Z"
+                stroke="#bb86fc"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M2 17L12 22L22 17"
+                stroke="#bb86fc"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M2 12L12 17L22 12"
+                stroke="#bb86fc"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            Grafana
+          </h2>
+          <p>Access your Grafana dashboards and visualizations.</p>
+          <a href="/dashboard" class="btn">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18 8L22 12L18 16"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M2 12H22"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            Launch Grafana dashboard
+          </a>
+        </div>
+        <div class="service-card">
+          <h2>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="3"
+                y="6"
+                width="18"
+                height="12"
+                rx="2"
+                stroke="#03dac6"
+                stroke-width="2"
+              />
+              <path
+                d="M7 15H17"
+                stroke="#03dac6"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+              <path
+                d="M7 11H17"
+                stroke="#03dac6"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            CUPS
+          </h2>
+          <p>Manage your printing services with CUPS.</p>
+          <a href="/printing" class="btn">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18 8L22 12L18 16"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M2 12H22"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            Access CUPS interface
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

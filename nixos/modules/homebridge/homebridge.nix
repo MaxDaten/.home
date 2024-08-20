@@ -21,7 +21,7 @@ with lib; let
         name = "Config";
         port = cfg.uiPort;
         sudo = false; # prevent upgrading of plugins & homebridge because we want to be pure
-        proxyHost = "pi4-nixos.local:${toString cfg.uiPort}";
+        proxyHost = "${config.networking.hostName}.local:${toString cfg.uiPort}";
         tempUnits = "c";
         # log = {
         #   method = "systemd";
