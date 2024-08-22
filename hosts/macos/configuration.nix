@@ -13,12 +13,12 @@
   nix.settings.substituters = [
     "https://cache.nixos.org/"
     "https://cache.nixos.org/"
-    "https://briendsgmbh.cachix.org"
+    "https://maxdaten-io.cachix.org"
   ];
   nix.settings.trusted-public-keys = [
     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
     # setup authtoken via `cachix authtoken <token>`
-    "briendsgmbh.cachix.org-1:gJT1XP1/F3dNEwqyWOBsZ11uFKTvDKaMQA/dFhs/ywE="
+    "maxdaten-io.cachix.org-1:ZDDi/8gGLSeUEU9JST6uXDcQfNp2VZzccmjUljPHHS8="
   ];
   nix.settings.trusted-users = [
     "root"
@@ -47,9 +47,7 @@
   environment.variables.LANG = "en_US.UTF-8";
 
   # Auto upgrade nix package and the daemon service.
-  programs.nix-index-database.comma.enable = true;
   services.nix-daemon.enable = true;
-  programs.nix-index.enable = true;
 
   # Add ability to used TouchID for sudo authentication
   security.pam.enableSudoTouchIdAuth = true;

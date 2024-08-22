@@ -54,6 +54,7 @@ with lib; {
     # (import ./modules/heygpt.nix { inherit pkgs config isDarwin lib; })
   ];
 
+  programs.nix-index-database.comma.enable = true;
 
   home.packages = with pkgs;
     [
