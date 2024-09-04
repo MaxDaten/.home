@@ -11,6 +11,7 @@ let
     iterm2
     raycast
     warp-terminal
+    wireshark
   ];
 
   isDarwin = pkgs.stdenv.isDarwin;

@@ -3,11 +3,11 @@
   nixpkgs.hostPlatform = "aarch64-darwin";
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = [
-    pkgs.fish
-    pkgs.git
-    pkgs.cachix
-    pkgs.mas
+  environment.systemPackages = with pkgs; [
+    fish
+    git
+    cachix
+    mas
   ];
 
 
