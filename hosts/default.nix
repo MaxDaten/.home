@@ -20,6 +20,7 @@ in
 
         modules = [
           ./macos
+          inputs.nix-homebrew.darwinModules.nix-homebrew
           inputs.home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;

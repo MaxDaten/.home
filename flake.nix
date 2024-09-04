@@ -17,6 +17,22 @@
         url = "github:lnl7/nix-darwin";
         inputs.nixpkgs.follows = "nixos-darwin";
       };
+      # Install Homebrew
+      nix-homebrew = {
+        url = "github:zhaofengli-wip/nix-homebrew";
+      };
+      homebrew-bundle = {
+        url = "github:homebrew/homebrew-bundle";
+        flake = false;
+      };
+      homebrew-core = {
+        url = "github:homebrew/homebrew-core";
+        flake = false;
+      };
+      homebrew-cask = {
+        url = "github:homebrew/homebrew-cask";
+        flake = false;
+      };
 
       flake-parts.url = "github:hercules-ci/flake-parts";
 

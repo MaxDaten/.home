@@ -7,6 +7,7 @@
     pkgs.fish
     pkgs.git
     pkgs.cachix
+    pkgs.mas
   ];
 
 
