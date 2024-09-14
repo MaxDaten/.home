@@ -9,14 +9,14 @@
   networking.wireless = {
     enable = true;
     interfaces = [ "wlan0" ];
-    environmentFile = "/run/secrets/wireless.env";
+    secretsFile = config.sops.secrets."wireless.env".path;
     networks = {
       "Player Five" = {
-        psk = "@PLAYER_FIVE@";
+        psk = "ext:PLAYER_FIVE";
         priority = 100;
       };
       "Player Two" = {
-        psk = "@PLAYER_TWO@";
+        psk = "ext:PLAYER_TWO";
         priority = 50;
       };
     };
