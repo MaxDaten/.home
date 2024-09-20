@@ -1235,7 +1235,7 @@
       "flake": false,
       "locked": {
         "lastModified": 1719265450,
-        "narHash": "sha256-xd/Pz/uZFYW9hJIFKryWDE9Aks6f2EIvEDCmfk0C70c=",
+        "narHash": "sha256-z633Yz/vqAiSW9ztf9VCNcm2kl68SUVylTlcBmwD9As=",
         "owner": "raspberrypi",
         "repo": "linux",
         "rev": "f61d3aca8045e70d64b55f7b98f083738f639ad2",
