@@ -4,7 +4,9 @@
 , ...
 }: {
   sops.secrets."wireless.env" = {
-    neededForUsers = true;
+    restartUnits = [ "wpa_supplicant-wlan0.service" ];
+    group = "wheel";
+    mode = "0440";
   };
 
   # Wireless networking (1). You might want to enable this if your Pi is not attached via Ethernet.
