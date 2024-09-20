@@ -3,7 +3,9 @@
 , modulesPath
 , ...
 }: {
-  sops.secrets."wireless.env" = { };
+  sops.secrets."wireless.env" = {
+    neededForUsers = true;
+  };
 
   # Wireless networking (1). You might want to enable this if your Pi is not attached via Ethernet.
   networking.wireless = {
@@ -12,11 +14,11 @@
     secretsFile = config.sops.secrets."wireless.env".path;
     networks = {
       "Player Five" = {
-        psk = "ext:PLAYER_FIVE";
+        pskRaw = "ext:PLAYER_FIVE";
         priority = 100;
       };
       "Player Two" = {
-        psk = "ext:PLAYER_TWO";
+        pskRaw = "ext:PLAYER_TWO";
         priority = 50;
       };
     };
