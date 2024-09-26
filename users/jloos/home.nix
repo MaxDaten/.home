@@ -98,8 +98,9 @@ with lib; {
 
       # Nix tools
       nixfmt
-      alejandra
+      # alejandra
       nil # Nix Language Server
+      nixd
 
       # Infrastructure
       # awscli2 # currently broken
