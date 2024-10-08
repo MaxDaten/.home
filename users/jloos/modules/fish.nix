@@ -1,13 +1,6 @@
-{ pkgs
-, isDarwin
-, config
-, lib
-, ...
-}:
-let
-  trace = false; # like set -x
-in
-{
+{ pkgs, isDarwin, config, lib, ... }:
+let trace = false; # like set -x
+in {
   programs.fish.enable = true;
   programs.fish = {
     plugins = with pkgs.fishPlugins; [
@@ -70,7 +63,8 @@ in
       (lib.mkIf isDarwin {
         # Install nix-darwin (initially)
         # nix run nix-darwin -- switch --flake ${config.home.homeDirectory}/Workspace/.home/"
-        nix-switch = "darwin-rebuild switch --flake ${config.home.homeDirectory}/Workspace/.home/";
+        nix-switch =
+          "darwin-rebuild switch --flake ${config.home.homeDirectory}/Workspace/.home/";
       })
     ];
 
@@ -92,9 +86,6 @@ in
       set __done_enabled
     '';
 
-    functions = {
-      gitignore = "curl -sL https://www.gitignore.io/api/$argv";
-      fish_reload = "source ~/.config/fish/config.fish";
-    };
+    functions.fish_reload = "source ~/.config/fish/config.fish";
   };
 }

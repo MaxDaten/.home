@@ -1,10 +1,4 @@
-{ config
-, lib
-, pkgs
-, inputs
-, headless ? true
-, ...
-}:
+{ config, lib, pkgs, inputs, headless ? true, ... }:
 let
   darwinPackages = with pkgs; [
     terminal-notifier
@@ -16,29 +10,20 @@ let
 
   isDarwin = pkgs.stdenv.isDarwin;
 
-  guiPackages = with pkgs; [
-    # https://www.nerdfonts.com/
-    (nerdfonts.override
-      {
-        fonts = [
-          "Hack"
-          "JetBrainsMono"
-          "FiraMono"
-          "FiraCode"
-          "Terminus"
-        ];
+  guiPackages = with pkgs;
+    [
+      # https://www.nerdfonts.com/
+      (nerdfonts.override {
+        fonts = [ "Hack" "JetBrainsMono" "FiraMono" "FiraCode" "Terminus" ];
       })
-  ];
-in
-with lib; {
+    ];
+in with lib; {
   home.stateVersion = "24.05";
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "jloos";
   home.homeDirectory =
-    if isDarwin
-    then lib.mkForce "/Users/jloos"
-    else "/home/jloos";
+    if isDarwin then lib.mkForce "/Users/jloos" else "/home/jloos";
 
   imports = [
     inputs.nix-index-database.hmModules.nix-index
@@ -67,6 +52,7 @@ with lib; {
 
       peco
       gh
+      git-ignore
 
       # shell tools
       spaceship-prompt
@@ -114,8 +100,7 @@ with lib; {
         url = "https://install.devenv.sh/latest";
         sha256 = "sha256:0crbzs9axvvvswm4qphx6snz77xhh67qgy2wlil5xpr2hm7i3wdb";
       })).packages.${pkgs.stdenv.system}.default
-    ]
-    ++ lib.optionals (pkgs.stdenv.isDarwin) darwinPackages
+    ] ++ lib.optionals (pkgs.stdenv.isDarwin) darwinPackages
     ++ lib.optionals (!headless) guiPackages;
 
   # Let Home Manager install and manage itself.
@@ -131,9 +116,6 @@ with lib; {
   };
 
   home.sessionVariables = {
-    EDITOR =
-      if pkgs.stdenv.isDarwin
-      then "code --wait"
-      else "vim";
+    EDITOR = if pkgs.stdenv.isDarwin then "code --wait" else "vim";
   };
 }
