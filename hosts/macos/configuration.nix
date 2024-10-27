@@ -5,34 +5,23 @@
   system.stateVersion = 5;
   ids.gids.nixbld = 30000;
 
-  environment.systemPackages = with pkgs; [
-    fish
-    git
-    cachix
-    mas
-  ];
+  environment.systemPackages = with pkgs; [ fish git cachix mas ];
 
-
-  nix.settings.substituters = [
-    "https://cache.nixos.org/"
-    "https://cache.nixos.org/"
-    "https://maxdaten-io.cachix.org"
-  ];
+  nix.settings.substituters =
+    [ "https://cache.nixos.org/" "https://maxdaten-io.cachix.org" ];
   nix.settings.trusted-public-keys = [
     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
     # setup authtoken via `cachix authtoken <token>`
     "maxdaten-io.cachix.org-1:ZDDi/8gGLSeUEU9JST6uXDcQfNp2VZzccmjUljPHHS8="
   ];
-  nix.settings.trusted-users = [
-    "root"
-    "@admin"
-  ];
+  nix.settings.trusted-users = [ "root" "@admin" ];
   nix.configureBuildUsers = true;
 
   nix.package = pkgs.nix;
   # Enable experimental nix command and flakes
   nix.settings = {
-    experimental-features = "nix-command flakes auto-allocate-uids auto-allocate-uids";
+    experimental-features =
+      "nix-command flakes auto-allocate-uids auto-allocate-uids";
     auto-optimise-store = false;
     keep-outputs = true;
     keep-derivations = true;
