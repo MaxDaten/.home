@@ -21,10 +21,13 @@
     extraConfig = {
       core = {
         autocrlf = "input";
-        excludesfile = (pkgs.writeText ".gitignore" (builtins.readFile ./global.gitignore)).outPath;
+        excludesfile = (pkgs.writeText ".gitignore"
+          (builtins.readFile ./global.gitignore)).outPath;
       };
 
       pull = { rebase = false; };
+
+      push = { autoSetupRemote = true; };
 
       init = { defaultBranch = "main"; };
     };
