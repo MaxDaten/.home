@@ -25,6 +25,8 @@
           (builtins.readFile ./global.gitignore)).outPath;
       };
 
+      blame = { ignoreRevsFile = ".git-blame-ignore-revs"; };
+
       pull = { rebase = false; };
 
       push = { autoSetupRemote = true; };
