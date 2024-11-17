@@ -1,23 +1,17 @@
 { config, lib, pkgs, inputs, headless ? true, ... }:
 let
-  darwinPackages = with pkgs; [
-    terminal-notifier
-    iterm2
-    raycast
-    warp-terminal
-    wireshark
-  ];
+  darwinPackages = with pkgs; [ terminal-notifier iterm2 raycast wireshark ];
 
   isDarwin = pkgs.stdenv.isDarwin;
 
-  guiPackages = with pkgs;
-    [
-      # https://www.nerdfonts.com/
-      (nerdfonts.override {
-        fonts = [ "Hack" "JetBrainsMono" "FiraMono" "FiraCode" "Terminus" ];
-      })
-    ];
-in with lib; {
+  guiPackages = with pkgs; [
+    # https://www.nerdfonts.com/
+    (nerdfonts.override {
+      fonts = [ "Hack" "JetBrainsMono" "FiraMono" "FiraCode" "Terminus" ];
+    })
+    warp-terminal
+  ];
+in {
   home.stateVersion = "24.05";
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -37,8 +31,17 @@ in with lib; {
     ./modules/programs.nix
     ./modules/fzf.nix
     ./modules/sops.nix
-    # (import ./modules/heygpt.nix { inherit pkgs config isDarwin lib; })
   ];
+
+  home.file.warp-themes = lib.mkIf (!headless) {
+    target = ".warp/themes";
+    recursive = true;
+    source = builtins.fetchGit {
+      url = "https://github.com/warpdotdev/themes.git";
+      ref = "main";
+      rev = "2a25630d59a6c4f2673f1e5156d2bf29ba6a9190";
+    };
+  };
 
   programs.nix-index-database.comma.enable = true;
 
