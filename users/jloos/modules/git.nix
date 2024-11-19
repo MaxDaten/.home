@@ -16,6 +16,7 @@
       publish = "push origin HEAD --force-with-lease";
       pub = "publish";
       amend = "commit --amend --no-edit";
+      blog = "git log --all --decorate --oneline --graph";
     };
 
     extraConfig = {
