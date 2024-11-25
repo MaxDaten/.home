@@ -12,26 +12,4 @@
 
     mutableTaps = false;
   };
-
-  homebrew = {
-    enable = true;
-
-    user = "jloos";
-
-    onActivation.cleanup = "zap";
-
-    taps = builtins.attrNames config.nix-homebrew.taps;
-
-    casks = [
-      "keyclu"
-    ];
-
-    masApps = {
-      "Discovery" = 1381004916;
-      "WhatsApp" = 310633997;
-      "WireGuard" = 1451685025;
-      "Strongbox - Password Manager" = 897283731;
-      "AusweisApp" = 948660805;
-    };
-  };
 }
