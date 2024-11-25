@@ -1,7 +1,7 @@
 { config, inputs, ... }: {
   nix-homebrew = {
     enable = true;
-    # enableRosetta = true;
+    enableRosetta = true;
 
     user = "jloos";
     taps = {
@@ -15,6 +15,10 @@
 
   homebrew = {
     enable = true;
+
+    enableRosetta = true;
+
+    user = "jloos";
 
     onActivation.cleanup = "zap";
 
