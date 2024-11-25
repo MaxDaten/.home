@@ -16,8 +16,6 @@
   homebrew = {
     enable = true;
 
-    enableRosetta = true;
-
     user = "jloos";
 
     onActivation.cleanup = "zap";
