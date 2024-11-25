@@ -14,7 +14,7 @@ in
   flake.darwinConfigurations =
     {
       # scutil --get LocalHostName
-      "MacBook-Pro" = darwinSystem {
+      "Jan-Philips-MacBook-Pro" = darwinSystem {
         system = "aarch64-darwin";
         inherit specialArgs;
 
