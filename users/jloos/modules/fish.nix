@@ -64,7 +64,7 @@ in {
         # Install nix-darwin (initially)
         # nix run nix-darwin -- switch --flake ${config.home.homeDirectory}/Workspace/.home/"
         nix-switch =
-          "darwin-rebuild switch --flake ${config.home.homeDirectory}/Workspace/.home/";
+          "darwin-rebuild switch --flake ${config.home.homeDirectory}/Developer/.home/";
       })
     ];
 
