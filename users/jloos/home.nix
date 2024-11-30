@@ -6,9 +6,9 @@ let
 
   guiPackages = with pkgs; [
     # https://www.nerdfonts.com/
-    (nerdfonts.override {
-      fonts = [ "Hack" "JetBrainsMono" "FiraMono" "FiraCode" "Terminus" ];
-    })
+    # https://github.com/NixOS/nixpkgs/blob/master/pkgs/data/fonts/nerd-fonts/manifests/fonts.json
+    nerd-fonts.hack
+    nerd-fonts.jetbrains-mono
     warp-terminal
   ];
 in {
