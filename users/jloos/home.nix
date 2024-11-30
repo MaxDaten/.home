@@ -9,7 +9,9 @@ let
     # https://github.com/NixOS/nixpkgs/blob/master/pkgs/data/fonts/nerd-fonts/manifests/fonts.json
     nerd-fonts.hack
     nerd-fonts.jetbrains-mono
+    nerd-fonts.zed-mono
     warp-terminal
+    zed-editor
   ];
 in {
   home.stateVersion = "24.05";

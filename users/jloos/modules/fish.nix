@@ -77,6 +77,7 @@ in {
       "e!" = "gh copilot explain";
       "!!" = "gh copilot suggest -t shell";
       "git!" = "gh copilot suggest -t git";
+      zed = "zeditor";
     };
 
     shellInit = ''
