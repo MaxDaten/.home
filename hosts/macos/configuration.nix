@@ -29,6 +29,7 @@
     build-users-group = "nixbld";
     builders-use-substitutes = true;
     allow-import-from-derivation = true;
+    download-buffer-size = 2000000000; # 2 GB
   };
   # nix.settings.extra-platforms = lib.optionalString (pkgs.system == "aarch64-darwin") "x86_64-darwin aarch64-darwin";
 
