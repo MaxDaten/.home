@@ -1,6 +1,11 @@
 { config, lib, pkgs, inputs, headless ? true, ... }:
 let
-  darwinPackages = with pkgs; [ terminal-notifier iterm2 raycast wireshark ];
+  darwinPackages = with pkgs; [
+    terminal-notifier
+    iterm2
+    raycast
+    # wireshark # broken on darwin https://github.com/NixOS/nixpkgs/issues/362416
+  ];
 
   isDarwin = pkgs.stdenv.isDarwin;
 
