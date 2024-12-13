@@ -127,6 +127,6 @@ in {
   };
 
   home.sessionVariables = {
-    EDITOR = if pkgs.stdenv.isDarwin then "code --wait" else "vim";
+    EDITOR = if pkgs.stdenv.isDarwin then "zeditor --wait" else "vim";
   };
 }
