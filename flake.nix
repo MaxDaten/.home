@@ -104,6 +104,8 @@
             age
             ssh-to-age
 
+            just
+
             stress
             speedtest-cli
 
