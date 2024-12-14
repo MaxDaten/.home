@@ -63,6 +63,7 @@ in {
       peco
       gh
       git-ignore
+      lazygit
 
       # shell tools
       spaceship-prompt
