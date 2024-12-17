@@ -57,6 +57,7 @@ in {
         tp = "terraform plan";
         ta = "terraform apply";
         tay = "terraform apply --yes";
+        lg = "lazygit";
         # Handy for nix shells with deep folder structures
         cdr = "cd $PRJ_ROOT";
       }
