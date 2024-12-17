@@ -76,6 +76,7 @@ in {
       lsd
       fd
       rename
+      tldr
       #> ERROR: Could not find a version that satisfies the requirement keyring<24.0,>=23.4 (from yubikey-manager) (from versions: none)
       #> ERROR: No matching distribution found for keyring<24.0,>=23.4
       # yubikey-manager
