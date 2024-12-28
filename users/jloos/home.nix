@@ -109,6 +109,10 @@ in {
       dive # Analyze docker layer
       lazydocker # k9s for docker
       skopeo # inspect docker images without docker daemon
+
+      # gimick
+      cmatrix
+
       (import (fetchTarball {
         url = "https://install.devenv.sh/latest";
         sha256 = "sha256:03bc61v6k49wf74yk68da35jff03qmvsm72b53mvs89cmffn868n";
