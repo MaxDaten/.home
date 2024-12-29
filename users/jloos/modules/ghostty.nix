@@ -1,0 +1,37 @@
+{ config, lib, ... }: {
+  xdg.configFile."ghostty/config".text = ''
+    # Theme & Appearance
+    theme = atelier-cave
+  '';
+
+  # theme
+  xdg.configFile."ghostty/themes/atelier-cave".text = ''
+    background = 19171c
+    foreground = 8b8792
+
+    cursor-color = 8b8792
+    selection-background = 26232a
+    selection-foreground = e2dfe7
+
+    palette = 0=#19171c
+    palette = 1=#be4678
+    palette = 2=#2a9292
+    palette = 3=#a06e3b
+    palette = 4=#576ddb
+    palette = 5=#955ae7
+    palette = 6=#398bc6
+    palette = 7=#8b8792
+
+    palette = 8=#655f6d
+    palette = 9=#aa573c
+    palette = 10=#2a9292
+    palette = 11=#a06e3b
+    palette = 12=#576ddb
+    palette = 13=#bf40bf
+    palette = 14=#398bc6
+    palette = 15=#efecf4
+
+    cursor-style = block
+    cursor-style-blink = false
+  '';
+}

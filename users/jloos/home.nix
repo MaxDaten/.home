@@ -38,6 +38,7 @@ in {
     ./modules/programs.nix
     ./modules/fzf.nix
     ./modules/sops.nix
+    ./modules/ghostty.nix
   ];
 
   home.file.warp-themes = lib.mkIf (!headless) {
