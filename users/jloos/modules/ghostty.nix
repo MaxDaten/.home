@@ -1,4 +1,4 @@
-{ config, lib, ... }: {
+{ ... }: {
   xdg.configFile."ghostty/config".text = ''
     # Theme & Appearance
     theme = atelier-cave
