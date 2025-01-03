@@ -84,7 +84,7 @@ in {
     shellInit = ''
       ${if trace then "set -U fish_trace 2" else "set -e fish_trace"}
       set -U fish_greeting
-      set -U PROJECT_PATHS ~/Developer/buzzar ~/Developer/gitops ~/Workspace/.home ~/Developer
+      set -U PROJECT_PATHS ~/Developer/maxdaten-io/buzzar ~/Developer/maxdaten-io/gitops ~/Workspace/.home ~/Developer ~/Developer/medosync
       set __done_enabled
     '';
 
