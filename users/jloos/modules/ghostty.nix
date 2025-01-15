@@ -5,6 +5,8 @@
 
     working-directory = ${config.home.homeDirectory}/Developer
     window-inherit-working-directory = true
+
+    unfocused-split-opacity = 0.8
   '';
 
   # theme
@@ -13,8 +15,6 @@
     foreground = 8b8792
 
     cursor-color = 8b8792
-    selection-background = 26232a
-    selection-foreground = e2dfe7
 
     palette = 0=#19171c
     palette = 1=#be4678
@@ -36,5 +36,6 @@
 
     cursor-style = block
     cursor-style-blink = false
+    selection-invert-fg-bg = true
   '';
 }
