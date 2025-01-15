@@ -1,7 +1,10 @@
-{ ... }: {
+{ config, ... }: {
   xdg.configFile."ghostty/config".text = ''
     # Theme & Appearance
     theme = atelier-cave
+
+    working-directory = ${config.home.homeDirectory}/Developer
+    window-inherit-working-directory = true
   '';
 
   # theme
