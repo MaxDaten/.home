@@ -107,6 +107,7 @@ in {
       google-cloud-sdk
       kubectl
       kustomize
+      kubectx
       dive # Analyze docker layer
       lazydocker # k9s for docker
       skopeo # inspect docker images without docker daemon
