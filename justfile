@@ -4,6 +4,9 @@ default:
 switch:
     darwin-rebuild switch --flake . --verbose
 
+update:
+    nix flake update --commit-lock-file
+
 # List all secrets in the flake
 sops-list-secrets:
     find . -type f \
