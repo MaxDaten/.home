@@ -31,8 +31,9 @@
 
       custom = {
         direnv_basename = {
-          command = "basename \"\${DIRENV_DIR/#-/\~}\"";
-          when = "[[ -n \"$DIRENV_DIR\" ]]"; # Only show when in a direnv directory & loaded env
+          command = ''basename "''${DIRENV_DIR/#-/~}"'';
+          when = ''
+            [[ -n "$DIRENV_DIR" ]]''; # Only show when in a direnv directory & loaded env
           format = "[$output;]($style) ";
           shell = [ "bash" ];
           style = "red bold";
@@ -45,7 +46,7 @@
         disabled = false;
       };
 
-      docker_context = { disabled = true; };
+      docker_context.disabled = true;
 
       nix_shell = {
         format = "$symbol$state";

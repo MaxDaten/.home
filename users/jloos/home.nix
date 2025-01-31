@@ -67,7 +67,6 @@ in {
       lazygit
 
       # shell tools
-      spaceship-prompt
       ripgrep
       watch
       tree
