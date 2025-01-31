@@ -26,7 +26,10 @@
           (builtins.readFile ./global.gitignore)).outPath;
       };
 
-      blame = { ignoreRevsFile = ".git-blame-ignore-revs"; };
+      blame = {
+        ignoreRevsFile = ".git-blame-ignore-revs";
+        ignoreRevsFileIsOptional = true;
+      };
 
       pull = { rebase = false; };
 
