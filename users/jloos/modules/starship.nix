@@ -2,6 +2,8 @@
   programs.starship = {
     enable = true;
     enableFishIntegration = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
 
     # https://starship.rs/config/
     settings = {
