@@ -10,19 +10,14 @@
 
       line_break = { disabled = false; };
 
-      format = pkgs.lib.concatStrings [
-        "$directory"
-        "$git_branch"
-        "$git_status"
-        "$package"
-        "$all"
-        "$kubernetes"
-        "$line_break"
-        "$nix_shell$shell$character"
-      ];
+      format = ''
+        [┌─>](bold green)$time$cmd_duration$kubernetes$package
+        [│](bold green)$directory$git_branch$git_status$direnv
+        [└─>](bold green)$nix_shell$shell$character
+      '';
 
-      right_format =
-        pkgs.lib.concatStrings [ "$direnv" "$time" "$cmd_duration" ];
+      # right_format =
+      #   pkgs.lib.concatStrings [ "$direnv" "$time" "$cmd_duration" ];
 
       kubernetes = {
         disabled = false;
@@ -39,7 +34,7 @@
       };
 
       time = {
-        format = "[$time]($style) ";
+        format = "[\\[$time\\]]($style)";
         disabled = false;
       };
 
