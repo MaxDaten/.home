@@ -11,17 +11,18 @@
       line_break = { disabled = false; };
 
       format = pkgs.lib.concatStrings [
-        "$custom"
         "$directory"
         "$git_branch"
         "$git_status"
         "$package"
         "$all"
         "$kubernetes"
-        "$cmd_duration"
         "$line_break"
         "$nix_shell$shell$character"
       ];
+
+      right_format =
+        pkgs.lib.concatStrings [ "$direnv" "$time" "$cmd_duration" ];
 
       kubernetes = {
         disabled = false;
@@ -29,21 +30,23 @@
         context_aliases = { };
       };
 
-      custom = {
-        direnv_basename = {
-          command = ''basename "''${DIRENV_DIR/#-/~}"'';
-          when = ''
-            [[ -n "$DIRENV_DIR" ]]''; # Only show when in a direnv directory & loaded env
-          format = "[$output;]($style) ";
-          shell = [ "bash" ];
-          style = "red bold";
-        };
-      };
+      direnv = { disabled = false; };
 
       shell = {
         fish_indicator = "🐡";
         bash_indicator = ">_";
         disabled = false;
+      };
+
+      time = {
+        format = "[$time]($style) ";
+        disabled = false;
+      };
+
+      cmd_duration = {
+        format = "[~$duration]($style) ";
+        disabled = false;
+        style = "bold #505050";
       };
 
       docker_context.disabled = true;
@@ -54,6 +57,7 @@
         pure_msg = "+";
       };
       gcloud.disabled = true;
+
       character = {
         success_symbol = "[➜](bold green)";
         error_symbol = "[➜](bold red)";
