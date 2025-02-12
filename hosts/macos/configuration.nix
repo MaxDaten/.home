@@ -15,7 +15,6 @@
     "maxdaten-io.cachix.org-1:ZDDi/8gGLSeUEU9JST6uXDcQfNp2VZzccmjUljPHHS8="
   ];
   nix.settings.trusted-users = [ "root" "@admin" ];
-  nix.configureBuildUsers = true;
 
   nix.package = pkgs.nix;
   # Enable experimental nix command and flakes
@@ -40,9 +39,6 @@
     export PATH=$HOME/.local/bin:$PATH
   '';
   environment.variables.LANG = "en_US.UTF-8";
-
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
 
   # Add ability to used TouchID for sudo authentication
   security.pam.enableSudoTouchIdAuth = true;
