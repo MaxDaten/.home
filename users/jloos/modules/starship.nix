@@ -15,7 +15,7 @@
       format = ''
         [┌─❮](dimmed green)$time$kubernetes$packages$all[❯](dimmed green)
         [│](dimmed green)$directory$git_branch$git_status
-        [└─❮](dimmed green)$nix_shell$shell$character'';
+        [└─❮](dimmed green)$nix_shell$shell$status$character'';
 
       right_format = "$direnv$cmd_duration";
 
@@ -57,8 +57,14 @@
 
       character = {
         success_symbol = "[❯](bold green)";
-        error_symbol = "[✗](bold red)";
+        error_symbol = "[❯](bold red)";
         format = "$symbol";
+      };
+
+      status = {
+        style = "bold red";
+        symbol = "✗";
+        disabled = false;
       };
     };
   };
