@@ -8,12 +8,12 @@
     # https://starship.rs/config/
     settings = {
       # Inserts a blank line between shell prompts
-      add_newline = true;
+      add_newline = false;
 
-      line_break = { disabled = false; };
+      line_break = { disabled = true; };
 
       format = ''
-        [┌─❮](dimmed green)$time$kubernetes$package[❯](dimmed green)
+        [┌─❮](dimmed green)$time$kubernetes$packages$all[❯](dimmed green)
         [│](dimmed green)$directory$git_branch$git_status
         [└─❮](dimmed green)$nix_shell$shell$character'';
 
@@ -21,7 +21,8 @@
 
       kubernetes = {
         disabled = false;
-        format = "[\\[$symbol$context( \\($namespace\\))\\]]($style) ";
+        format = "[\\[$symbol$context:$namespace\\]]($style) ";
+        symbol = "🧊 ";
         context_aliases = { };
       };
 
@@ -46,8 +47,8 @@
 
       nix_shell = {
         format = "$symbol$state";
-        impure_msg = "[-](bold red)";
-        pure_msg = "[+](bold green)";
+        impure_msg = "[λ](bold red)";
+        pure_msg = "[λ](bold green)";
         symbol = "❄️";
       };
 
