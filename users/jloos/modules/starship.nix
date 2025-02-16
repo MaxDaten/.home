@@ -23,7 +23,10 @@
         disabled = false;
         format = "[\\[$symbol$context:$namespace\\]]($style) ";
         symbol = "🧊 ";
-        context_aliases = { };
+        contexts = [{
+          context_pattern = "gke_.*_(?P<cluster>[\\w-]+)";
+          context_alias = "gke-$cluster";
+        }];
       };
 
       direnv = { disabled = false; };
