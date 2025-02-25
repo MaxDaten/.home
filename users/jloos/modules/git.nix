@@ -39,11 +39,6 @@
         renames = true;
       };
 
-      blame = {
-        ignoreRevsFile = ".git-blame-ignore-revs";
-        ignoreRevsFileIsOptional = true;
-      };
-
       pull = { rebase = false; };
 
       push = { autoSetupRemote = true; };
