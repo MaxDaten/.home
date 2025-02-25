@@ -3,7 +3,6 @@ let
   darwinPackages = with pkgs; [
     terminal-notifier
     iterm2
-    raycast
     # wireshark # broken on darwin https://github.com/NixOS/nixpkgs/issues/362416
   ];
 
@@ -65,6 +64,7 @@ in {
       gh
       git-ignore
       lazygit
+      gh-dash
 
       # shell tools
       ripgrep
@@ -98,7 +98,6 @@ in {
 
       # Nix tools
       nixfmt
-      # alejandra
       nil # Nix Language Server
       nixd
 

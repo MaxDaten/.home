@@ -26,6 +26,19 @@
           (builtins.readFile ./global.gitignore)).outPath;
       };
 
+      column = { ui = "auto"; };
+
+      branch = { sort = "-committerdate"; };
+
+      tag = { sort = "version:refname"; };
+
+      diff = {
+        algorithm = "histogram";
+        colorMoved = "plain";
+        mnemonicPrefix = true;
+        renames = true;
+      };
+
       blame = {
         ignoreRevsFile = ".git-blame-ignore-revs";
         ignoreRevsFileIsOptional = true;
@@ -36,6 +49,14 @@
       push = { autoSetupRemote = true; };
 
       init = { defaultBranch = "main"; };
+
+      fetch = {
+        prune = true;
+        pruneTags = true;
+        all = true;
+      };
+
+      commit = { verbose = true; };
     };
   };
 }
