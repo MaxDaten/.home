@@ -1,5 +1,7 @@
 { pkgs, ... }: {
 
+  home.packages = with pkgs; [ diffnav ];
+
   # Git
   programs.git = {
     enable = true;
@@ -33,6 +35,8 @@
       branch = { sort = "-committerdate"; };
 
       tag = { sort = "version:refname"; };
+
+      pager = { diff = "diffnav"; };
 
       diff = {
         algorithm = "histogram";

@@ -19,5 +19,4 @@
     "!!" = "gh copilot suggest -t shell";
     "git!" = "gh copilot suggest -t git";
   };
-
 }
