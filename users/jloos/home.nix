@@ -17,6 +17,7 @@ let
     warp-terminal
     zed-editor
   ];
+
 in {
   home.stateVersion = "24.05";
   # Home Manager needs a bit of information about you and the
@@ -31,6 +32,7 @@ in {
     (import ./modules/fish.nix { inherit pkgs config isDarwin lib; })
     ./modules/starship.nix
     ./modules/git.nix
+    ./modules/gh.nix
     ./modules/vim.nix
     ./modules/ssh.nix
     ./modules/tmux.nix
@@ -61,10 +63,8 @@ in {
       xz
 
       peco
-      gh
       git-ignore
       lazygit
-      gh-dash
 
       # shell tools
       ripgrep

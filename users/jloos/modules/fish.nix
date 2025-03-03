@@ -75,9 +75,6 @@ in {
       ls = "${pkgs.lsd}/bin/lsd -l";
       h = "heygpt";
       x = "xgpt4";
-      "e!" = "gh copilot explain";
-      "!!" = "gh copilot suggest -t shell";
-      "git!" = "gh copilot suggest -t git";
       zed = "zeditor";
     };
 
