@@ -8,5 +8,10 @@
     secrets.OPENAI_API_KEY = {
       path = "${config.home.homeDirectory}/.config/openai/OPENAI_API_KEY";
     };
+
+
+    secrets.GITHUB_TOKEN = {
+      path = "${config.home.homeDirectory}/.config/github/GITHUB_TOKEN";
+    };
   };
 }
