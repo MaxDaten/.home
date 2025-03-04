@@ -4,7 +4,6 @@
     theme = atelier-cave
 
     working-directory = ${config.home.homeDirectory}/Developer
-    window-inherit-working-directory = true
 
     unfocused-split-opacity = 0.8
   '';
