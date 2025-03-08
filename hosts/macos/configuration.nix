@@ -19,8 +19,7 @@
   nix.package = pkgs.nix;
   # Enable experimental nix command and flakes
   nix.settings = {
-    experimental-features =
-      "nix-command flakes auto-allocate-uids auto-allocate-uids";
+    experimental-features = "nix-command flakes auto-allocate-uids";
     auto-optimise-store = false;
     keep-outputs = true;
     keep-derivations = true;
