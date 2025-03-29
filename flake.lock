@@ -574,6 +574,21 @@
         "type": "github"
       }
     },
+    "nixpkgs-master": {
+      "locked": {
+        "lastModified": 1743275568,
+        "narHash": "sha256-5h+A2jKbpHC+H50t45hNWsrkves4uLsmax/JVOlvWeo=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "94f16f27082b066f4d1de5161963820f1215e23e",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "master",
+        "type": "indirect"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1717432640,
@@ -761,6 +776,7 @@
         "nix2container": "nix2container",
         "nixos-darwin": "nixos-darwin",
         "nixpkgs": "nixpkgs_7",
+        "nixpkgs-master": "nixpkgs-master",
         "nnf": "nnf",
         "raspberry-pi-nix": "raspberry-pi-nix",
         "sops-nix": "sops-nix",

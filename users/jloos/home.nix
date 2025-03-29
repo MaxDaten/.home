@@ -1,5 +1,14 @@
 { config, lib, pkgs, inputs, headless ? true, ... }:
 let
+  masterOverlays = final: prev: {
+    zed-editor = inputs.nixpkgs-master.legacyPackages.${prev.system}.zed-editor;
+  };
+  pkgsWithOverlay = import inputs.nixpkgs {
+    inherit (pkgs) system;
+    overlays = [ masterOverlays ];
+    config.allowUnfree = true;
+  };
+
   darwinPackages = with pkgs; [
     terminal-notifier
     iterm2
@@ -8,7 +17,7 @@ let
 
   isDarwin = pkgs.stdenv.isDarwin;
 
-  guiPackages = with pkgs; [
+  guiPackages = with pkgsWithOverlay; [
     # https://www.nerdfonts.com/
     # https://github.com/NixOS/nixpkgs/blob/master/pkgs/data/fonts/nerd-fonts/manifests/fonts.json
     nerd-fonts.hack
@@ -134,6 +143,6 @@ in {
   };
 
   home.sessionVariables = {
-    EDITOR = if pkgs.stdenv.isDarwin then "zeditor --wait" else "vim";
+    EDITOR = if pkgs.stdenv.isDarwin then "zeditor --new --wait" else "vim";
   };
 }
