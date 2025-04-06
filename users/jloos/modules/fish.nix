@@ -85,7 +85,7 @@ in {
       set __done_enabled
 
       # Currently disabled because PAT not working for oauth, use gh auth login --web -h github.com
-      # set -gx GITHUB_TOKEN (cat ${config.sops.secrets.GITHUB_TOKEN.path})
+      set -gx GITHUB_TOKEN (cat ${config.sops.secrets.GITHUB_TOKEN.path})
     '';
 
     functions.fish_reload = "source ~/.config/fish/config.fish";
