@@ -125,7 +125,7 @@ in {
 
       (import (fetchTarball {
         url = "https://install.devenv.sh/latest";
-        sha256 = "sha256:0vifgk9mbq55dqgc7xjwvlmqs9n7y5fsdm7kc8y60y9ylhf6fdrs";
+        sha256 = "sha256:0sfssrh74cjjw0588ls3hsf7rx7iz3kccv52i778d1h4awh5r6bc";
       })).packages.${pkgs.stdenv.system}.default
     ] ++ lib.optionals (pkgs.stdenv.isDarwin) darwinPackages
     ++ lib.optionals (!headless) guiPackages;
