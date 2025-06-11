@@ -4,6 +4,7 @@
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = 5;
   ids.gids.nixbld = 350;
+  system.primaryUser = "jloos";
 
   environment.systemPackages = with pkgs; [ fish git cachix mas ];
 
