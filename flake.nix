@@ -91,6 +91,11 @@
       perSystem = { pkgs, system, ... }: {
         debug = true;
 
+        _module.args.pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
+
         devenv.shells.default = {
           devenv.root = let
             devenvRootFileContent =
@@ -107,6 +112,7 @@
             ssh-to-age
 
             just
+            claude-code
 
             stress
             speedtest-cli
