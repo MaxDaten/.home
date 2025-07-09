@@ -13,7 +13,7 @@
       line_break.disabled = true;
 
       format = ''
-        [╭─](bold bright-purple)[](dimmed white) $directory\[$nix_shell\] $git_branch$git_status
+        [╭─](bold bright-purple)[](dimmed white) $directory$nix_shell $git_branch$git_status
         [│ ](bold bright-purple)[⚡](bright-yellow)${I}$shell$all
         [│ ](bold bright-purple)[🌐](bright-blue)${I}$docker_context$kubernetes$aws$gcloud$azure
         [╰─](bold bright-purple)[$time](dimmed yellow) $character '';
@@ -69,12 +69,6 @@
         format = "[$path]($style)[$read_only]($read_only_style) ";
         truncation_length = 3;
         truncate_to_repo = true;
-        substitutions = {
-          "Documents" = "📄";
-          "Downloads" = "📥";
-          "Developer" = "💻";
-          "~" = "🏠";
-        };
       };
 
       kubernetes = {
