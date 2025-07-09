@@ -23,6 +23,9 @@ let
     nerd-fonts.hack
     nerd-fonts.jetbrains-mono
     nerd-fonts.zed-mono
+    nerd-fonts.iosevka
+    nerd-fonts.fira-mono
+    nerd-fonts.fira-code
     warp-terminal
     zed-editor
   ];
