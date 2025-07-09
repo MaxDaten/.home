@@ -2,7 +2,7 @@ default:
     echo 'Hello, world!'
 
 switch:
-    darwin-rebuild switch --flake . --verbose
+    sudo darwin-rebuild switch --flake . --verbose
 
 update:
     nix flake update --commit-lock-file
