@@ -27,7 +27,6 @@ let
     nerd-fonts.fira-mono
     nerd-fonts.fira-code
     warp-terminal
-    zed-editor
   ];
 
 in {
@@ -52,6 +51,7 @@ in {
     ./modules/fzf.nix
     ./modules/sops.nix
     ./modules/ghostty.nix
+    ./modules/zed.nix
   ];
 
   home.file.warp-themes = lib.mkIf (!headless) {
