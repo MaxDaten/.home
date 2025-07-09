@@ -6,6 +6,7 @@
     working-directory = ${config.home.homeDirectory}/Developer
 
     unfocused-split-opacity = 0.8
+    font-size = 14
   '';
 
   # theme
