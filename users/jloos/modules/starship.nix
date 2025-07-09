@@ -13,7 +13,7 @@
       line_break = { disabled = true; };
 
       format = ''
-        [┌─❮](dimmed green)$time$kubernetes$packages$all[❯](dimmed green)
+        [┌─❮](dimmed green)$time[|](dimmed green)$kubernetes$packages$all[❯](dimmed green)
         [│](dimmed green)$directory$git_branch$git_status
         [└─❮](dimmed green)$nix_shell$shell$status$character'';
 
