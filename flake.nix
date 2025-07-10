@@ -65,6 +65,9 @@
     };
     vscode-server.url = "github:msteen/nixos-vscode-server";
     nil.url = "github:oxalica/nil";
+
+    # Code formatting
+    treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
   nixConfig = {
@@ -81,20 +84,27 @@
   };
 
   outputs = { self, nixpkgs, darwin, flake-parts, home-manager, sops-nix, devenv
-    , nil, ... }@inputs:
+    , nil, treefmt-nix, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } ({ ... }: {
-      imports = [ inputs.devenv.flakeModule ./hosts ];
+      imports = [
+        inputs.devenv.flakeModule
+        ./hosts
+        ./nix/modules/treefmt.nix
+      ];
 
       systems =
         [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
 
-      perSystem = { pkgs, system, ... }: {
+      perSystem = { pkgs, system, config, ... }: {
         debug = true;
 
         _module.args.pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
         };
+
+        formatter = config.treefmt.build.wrapper;
+        # checks
 
         devenv.shells.default = {
           devenv.root = let
@@ -113,6 +123,7 @@
 
             just
             claude-code
+            nodejs # required to execute mcp via mcp-remote
 
             stress
             speedtest-cli
@@ -120,7 +131,7 @@
             node2nix
             rsync
             nil.packages.${system}.default
-            nixpkgs-fmt
+            nixfmt
             zstd
           ];
 
