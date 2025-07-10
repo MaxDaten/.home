@@ -26,6 +26,7 @@ let
     nerd-fonts.iosevka
     nerd-fonts.fira-mono
     nerd-fonts.fira-code
+    nerd-fonts.sauce-code-pro
     warp-terminal
   ];
 
