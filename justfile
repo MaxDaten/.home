@@ -11,3 +11,11 @@ update:
 sops-list-secrets:
     find . -type f \
         | grep -E "$(yq -r '.creation_rules[].path_regex' .sops.yaml | paste -sd '|')"
+
+# Format all files
+fmt:
+    nix fmt
+
+# Check formatting without changing files
+check-fmt:
+    nix fmt -- --check
