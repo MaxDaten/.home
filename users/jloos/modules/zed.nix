@@ -18,6 +18,7 @@
     buffer_font_fallbacks = ["JetBrainsMono Nerd Font"];
     terminal = {
       font_family = "JetBrainsMono Nerd Font";
+      line_height = "standard";
       font_size = 14;
     };
 
