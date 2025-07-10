@@ -35,7 +35,7 @@
       add_newline = false;
       line_break.disabled = false;
 
-      palette = "gruvbox_dark";
+      palette = "atelier-cave";
 
       # Custom palette colors
       palettes.spaceship = {
@@ -55,6 +55,19 @@
         color_purple = "#b16286";
         color_red = "#cc241d";
         color_yellow = "#d79921";
+      };
+
+      palettes.atelier-cave = {
+        color_fg0 = "#efecf4";
+        color_bg1 = "#19171c";
+        color_bg3 = "#655f6d";
+        color_blue = "#576ddb";
+        color_aqua = "#398bc6";
+        color_green = "#2a9292";
+        color_orange = "#aa573c";
+        color_purple = "#955ae7";
+        color_red = "#be4678";
+        color_yellow = "#a06e3b";
       };
 
 
