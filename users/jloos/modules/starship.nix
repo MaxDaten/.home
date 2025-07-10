@@ -1,5 +1,28 @@
 { lib, ... }: {
-  programs.starship = let I = "[|](bold bright-black)";
+  programs.starship = let
+    # Function to create language configuration
+    mkLanguageConfig = { symbol ? null }: {
+      disabled = false;
+      format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
+      inherit symbol;
+      style = "bg:color_blue";
+    };
+
+    # Language configurations with their symbols
+    languages = {
+      package = mkLanguageConfig { symbol = ""; };
+      nodejs = mkLanguageConfig { symbol = ""; };
+      terraform = mkLanguageConfig { symbol = ""; };
+      python = mkLanguageConfig { symbol = ""; };
+      rust = mkLanguageConfig { symbol = ""; };
+      golang = mkLanguageConfig { symbol = ""; };
+      java = mkLanguageConfig { symbol = ""; };
+      kotlin = mkLanguageConfig { symbol = ""; };
+      swift = mkLanguageConfig { symbol = ""; };
+      haskell = mkLanguageConfig { symbol = ""; };
+      gradle = mkLanguageConfig { symbol = ""; };
+      helm = mkLanguageConfig { symbol = ""; };
+    };
   in {
     enable = true;
     enableFishIntegration = true;
@@ -150,23 +173,6 @@
         style = "bg:color_bg3";
       };
 
-      # Languages
-
-      terraform.disabled = false;
-      package = {
-        disabled = false;
-        format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
-        symbol = "";
-        style = "bg:color_blue";
-      };
-
-      nodejs = {
-        disabled = false;
-        format = "[[ $symbol($version) ](fg:color_fg0 bg:color_blue)]($style)";
-        style = "bg:color_blue";
-      };
-
-
       # System View
 
       time = {
@@ -222,6 +228,6 @@
         bash_indicator = "🐚";
         style = "cyan bold";
       };
-    };
+    } // languages;
   };
 }
