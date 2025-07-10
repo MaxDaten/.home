@@ -155,9 +155,9 @@
       terraform.disabled = false;
       package = {
         disabled = false;
-        format = "[[ $symbol( $version) ](fg:#83a598 bg:color_bg3)]($style)";
-        symbol = "📦";
-        style = "bg:color_bg3";
+        format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
+        symbol = "";
+        style = "bg:color_blue";
       };
 
       nodejs = {
