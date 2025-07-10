@@ -178,8 +178,8 @@
 
       memory_usage = {
         disabled = false;
-        threshold = -1;
-        format = "[[ $symbol$ram ](fg:#716965 bg:color_bg1)]($style)";
+        threshold = 75;
+        format = "[[ $symbol( $ram) ](fg:#716965 bg:color_bg1)]($style)";
         symbol = "";
         style = "bg:color_bg1";
       };
