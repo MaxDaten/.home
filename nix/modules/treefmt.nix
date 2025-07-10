@@ -16,11 +16,24 @@
           includes = [
             "*.json"
           ];
+          excludes = [
+            ".vscode/*.json"
+            "secrets"
+          ];
         };
 
         programs.shellcheck.enable = true;
         programs.shfmt.enable = true;
-        programs.yamlfmt.enable = true;
+        programs.yamlfmt = {
+          enable = true;
+          includes = [
+            "*.yaml"
+          ];
+          excludes = [
+            ".sops.yaml"
+            "secrets/*.yaml"
+          ];
+        };
 
         # Markdown formatting
         programs.mdformat.enable = true;
