@@ -18,4 +18,4 @@ fmt:
 
 # Check formatting without changing files
 check-fmt:
-    nix fmt -- --check
+    nix fmt -- --fail-on-change
