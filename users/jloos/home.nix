@@ -1,6 +1,13 @@
-{ config, lib, pkgs, inputs, headless ? true, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  headless ? true,
+  ...
+}:
 let
-  masterOverlays = final: prev: {
+  masterOverlays = _final: prev: {
     zed-editor = inputs.nixpkgs-master.legacyPackages.${prev.system}.zed-editor;
   };
   pkgsWithOverlay = import inputs.nixpkgs {
@@ -30,18 +37,25 @@ let
     warp-terminal
   ];
 
-in {
+in
+{
   home.stateVersion = "24.05";
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "jloos";
-  home.homeDirectory =
-    if isDarwin then lib.mkForce "/Users/jloos" else "/home/jloos";
+  home.homeDirectory = if isDarwin then lib.mkForce "/Users/jloos" else "/home/jloos";
 
   imports = [
     inputs.nix-index-database.hmModules.nix-index
     inputs.sops-nix.homeManagerModule
-    (import ./modules/fish.nix { inherit pkgs config isDarwin lib; })
+    (import ./modules/fish.nix {
+      inherit
+        pkgs
+        config
+        isDarwin
+        lib
+        ;
+    })
     ./modules/starship.nix
     ./modules/git.nix
     ./modules/gh.nix
@@ -67,7 +81,8 @@ in {
 
   programs.nix-index-database.comma.enable = true;
 
-  home.packages = with pkgs;
+  home.packages =
+    with pkgs;
     [
       gnupg
       direnv
@@ -131,7 +146,8 @@ in {
         url = "https://install.devenv.sh/latest";
         sha256 = "sha256:1jmiplyf9mfjh2absdwi1zdqiybi3y9l4dcysclpp7x52v2mci88";
       })).packages.${pkgs.stdenv.system}.default
-    ] ++ lib.optionals (pkgs.stdenv.isDarwin) darwinPackages
+    ]
+    ++ lib.optionals (pkgs.stdenv.isDarwin) darwinPackages
     ++ lib.optionals (!headless) guiPackages;
 
   # Let Home Manager install and manage itself.

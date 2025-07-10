@@ -18,7 +18,9 @@
       inputs.nixpkgs.follows = "nixos-darwin";
     };
     # Install Homebrew
-    nix-homebrew = { url = "github:zhaofengli-wip/nix-homebrew"; };
+    nix-homebrew = {
+      url = "github:zhaofengli-wip/nix-homebrew";
+    };
     homebrew-bundle = {
       url = "github:homebrew/homebrew-bundle";
       flake = false;
@@ -83,61 +85,82 @@
     ];
   };
 
-  outputs = { self, nixpkgs, darwin, flake-parts, home-manager, sops-nix, devenv
-    , nil, treefmt-nix, ... }@inputs:
-    flake-parts.lib.mkFlake { inherit inputs; } ({ ... }: {
-      imports = [
-        inputs.devenv.flakeModule
-        ./hosts
-        ./nix/modules/treefmt.nix
-      ];
+  outputs =
+    {
+      nixpkgs,
+      flake-parts,
+      devenv,
+      nil,
+      ...
+    }@inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } (
+      { ... }:
+      {
+        imports = [
+          inputs.devenv.flakeModule
+          ./hosts
+          ./nix/modules/treefmt.nix
+        ];
 
-      systems =
-        [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
+        systems = [
+          "x86_64-linux"
+          "aarch64-linux"
+          "aarch64-darwin"
+          "x86_64-darwin"
+        ];
 
-      perSystem = { pkgs, system, config, ... }: {
-        debug = true;
+        perSystem =
+          {
+            pkgs,
+            system,
+            config,
+            ...
+          }:
+          {
+            debug = true;
 
-        _module.args.pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
+            _module.args.pkgs = import nixpkgs {
+              inherit system;
+              config.allowUnfree = true;
+            };
 
-        formatter = config.treefmt.build.wrapper;
-        # checks
+            formatter = config.treefmt.build.wrapper;
+            # checks
 
-        devenv.shells.default = {
-          devenv.root = let
-            devenvRootFileContent =
-              builtins.readFile inputs.devenv-root.outPath;
-          in pkgs.lib.mkIf (devenvRootFileContent != "") devenvRootFileContent;
+            devenv.shells.default = {
+              devenv.root =
+                let
+                  devenvRootFileContent = builtins.readFile inputs.devenv-root.outPath;
+                in
+                pkgs.lib.mkIf (devenvRootFileContent != "") devenvRootFileContent;
 
-          name = ".home shell";
+              name = ".home shell";
 
-          imports = [ ];
+              imports = [ ];
 
-          packages = with pkgs; [
-            sops
-            age
-            ssh-to-age
+              packages = with pkgs; [
+                sops
+                age
+                ssh-to-age
 
-            just
-            claude-code
-            nodejs # required to execute mcp via mcp-remote
+                just
+                claude-code
+                nodejs # required to execute mcp via mcp-remote
 
-            stress
-            speedtest-cli
+                stress
+                speedtest-cli
 
-            node2nix
-            rsync
-            nil.packages.${system}.default
-            nixfmt
-            zstd
-          ];
+                node2nix
+                rsync
+                nil.packages.${system}.default
+                nixfmt
+                zstd
+              ];
 
-          env.SOPS_AGE_KEY_FILE = "/Users/jloos/.config/sops/age/keys.txt";
-          env.SOPS_AGE_KEY_DIRECTORY = "/Users/jloos/.config/sops/age";
-        };
-      };
-    });
+              env.SOPS_AGE_KEY_FILE = "/Users/jloos/.config/sops/age/keys.txt";
+              env.SOPS_AGE_KEY_DIRECTORY = "/Users/jloos/.config/sops/age";
+            };
+          };
+      }
+    );
 }

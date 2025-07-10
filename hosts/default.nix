@@ -1,8 +1,7 @@
-{ inputs
-, outputs
-, self
-, withSystem
-, ...
+{
+  inputs,
+  outputs,
+  ...
 }:
 let
   inherit (inputs.nixpkgs) lib;
@@ -11,28 +10,27 @@ let
   specialArgs = { inherit inputs outputs; };
 in
 {
-  flake.darwinConfigurations =
-    {
-      # scutil --get LocalHostName
-      "Jan-Philips-MacBook-Pro" = darwinSystem {
-        system = "aarch64-darwin";
-        inherit specialArgs;
+  flake.darwinConfigurations = {
+    # scutil --get LocalHostName
+    "Jan-Philips-MacBook-Pro" = darwinSystem {
+      system = "aarch64-darwin";
+      inherit specialArgs;
 
-        modules = [
-          ./macos
-          inputs.nix-homebrew.darwinModules.nix-homebrew
-          inputs.home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = specialArgs // {
-              headless = false;
-            };
-            home-manager.users.jloos = import ../users/jloos/home.nix;
-          }
-        ];
-      };
+      modules = [
+        ./macos
+        inputs.nix-homebrew.darwinModules.nix-homebrew
+        inputs.home-manager.darwinModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.extraSpecialArgs = specialArgs // {
+            headless = false;
+          };
+          home-manager.users.jloos = import ../users/jloos/home.nix;
+        }
+      ];
     };
+  };
 
   flake.nixosConfigurations =
     let

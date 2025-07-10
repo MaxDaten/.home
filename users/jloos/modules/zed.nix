@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ pkgs, ... }:
+{
 
   home.packages = with pkgs; [ zed-editor ];
 
@@ -13,9 +14,11 @@
 
     # Font settings
     ui_font_size = 16;
-    ui_font_features = { calt = true; };
+    ui_font_features = {
+      calt = true;
+    };
     buffer_font_size = 12;
-    buffer_font_fallbacks = ["JetBrainsMono Nerd Font"];
+    buffer_font_fallbacks = [ "JetBrainsMono Nerd Font" ];
     terminal = {
       font_family = "JetBrainsMono Nerd Font";
       line_height = "standard";
@@ -23,7 +26,9 @@
     };
 
     # Features
-    features = { edit_prediction_provider = "zed"; };
+    features = {
+      edit_prediction_provider = "zed";
+    };
 
     # Assistant
     assistant = {
@@ -36,17 +41,34 @@
 
     # Language-specific settings
     languages = {
-      Nix = { language_servers = [ pkgs.nixd "!nil" ]; };
-      JavaScript = { format_on_save = "off"; };
+      Nix = {
+        language_servers = [
+          pkgs.nixd
+          "!nil"
+        ];
+      };
+      JavaScript = {
+        format_on_save = "off";
+      };
     };
 
     # LSP configurations
     lsp = {
       nixd = {
-        binary = { path_lookup = true; };
-        settings = { formatting = { command = [ pkgs.nixfmt ]; }; };
+        binary = {
+          path_lookup = true;
+        };
+        settings = {
+          formatting = {
+            command = [ pkgs.nixfmt ];
+          };
+        };
       };
-      terraform = { binary = { path_lookup = true; }; };
+      terraform = {
+        binary = {
+          path_lookup = true;
+        };
+      };
       tinymist = {
         initialization_options = {
           exportPdf = "onSave";

@@ -1,13 +1,14 @@
 { pkgs, config, ... }:
 
 let
-  subnetMask = "255.255.255.0";
   subnet = "192.168.178.0/24";
 
-  dashboard = pkgs.linkFarm "dashboard" [{
-    name = "index.html";
-    path = ./dashboard.html;
-  }];
+  dashboard = pkgs.linkFarm "dashboard" [
+    {
+      name = "index.html";
+      path = ./dashboard.html;
+    }
+  ];
 in
 {
 
@@ -57,7 +58,10 @@ in
     #  nixos-nftables-firewall to local
 
     zones.uplink = {
-      interfaces = [ "end0" "wlan0" ];
+      interfaces = [
+        "end0"
+        "wlan0"
+      ];
     };
     zones.local = {
       parent = "uplink";
@@ -68,17 +72,29 @@ in
       from = "all";
       to = [ "fw" ];
       # Stun and Turn
-      allowedUDPPorts = [ 3478 5349 ];
-      allowedTCPPorts = [ 3478 5349 ];
+      allowedUDPPorts = [
+        3478
+        5349
+      ];
+      allowedTCPPorts = [
+        3478
+        5349
+      ];
       allowedUDPPortRanges = [
-        { from = 32768; to = 60999; }
+        {
+          from = 32768;
+          to = 60999;
+        }
       ];
     };
 
     rules.http = {
       from = [ "local" ];
       to = [ "fw" ];
-      allowedTCPPorts = [ 80 443 ];
+      allowedTCPPorts = [
+        80
+        443
+      ];
     };
   };
 
@@ -88,6 +104,5 @@ in
     to = [ "fw" ];
     allowedTCPPorts = [ 22 ];
   };
-
 
 }

@@ -1,4 +1,9 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 let
   port = 631;
 in
@@ -28,15 +33,17 @@ in
   };
 
   # nginx reverse proxy from /printing to localhost:631
-  services.nginx.virtualHosts."${config.networking.fqdnOrHostName}" = lib.mkIf config.services.nginx.enable {
-    locations."/printing/" = {
-      proxyPass = "http://127.0.0.1:${toString port}/";
-      recommendedProxySettings = true;
-      extraConfig = ''
-        sub_filter 'href="/' 'href="/printing/';
-        sub_filter 'src="/' 'src="/printing/';
-        sub_filter_once off;
-      '';
-    };
-  };
+  services.nginx.virtualHosts."${config.networking.fqdnOrHostName}" =
+    lib.mkIf config.services.nginx.enable
+      {
+        locations."/printing/" = {
+          proxyPass = "http://127.0.0.1:${toString port}/";
+          recommendedProxySettings = true;
+          extraConfig = ''
+            sub_filter 'href="/' 'href="/printing/';
+            sub_filter 'src="/' 'src="/printing/';
+            sub_filter_once off;
+          '';
+        };
+      };
 }

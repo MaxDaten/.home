@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
 
   home.packages = with pkgs; [ diffnav ];
 
@@ -26,17 +27,24 @@
     extraConfig = {
       core = {
         autocrlf = "input";
-        excludesfile = (pkgs.writeText ".gitignore"
-          (builtins.readFile ./global.gitignore)).outPath;
+        excludesfile = (pkgs.writeText ".gitignore" (builtins.readFile ./global.gitignore)).outPath;
       };
 
-      column = { ui = "auto"; };
+      column = {
+        ui = "auto";
+      };
 
-      branch = { sort = "-committerdate"; };
+      branch = {
+        sort = "-committerdate";
+      };
 
-      tag = { sort = "version:refname"; };
+      tag = {
+        sort = "version:refname";
+      };
 
-      pager = { diff = "diffnav"; };
+      pager = {
+        diff = "diffnav";
+      };
 
       diff = {
         algorithm = "histogram";
@@ -45,11 +53,17 @@
         renames = true;
       };
 
-      pull = { rebase = false; };
+      pull = {
+        rebase = false;
+      };
 
-      push = { autoSetupRemote = true; };
+      push = {
+        autoSetupRemote = true;
+      };
 
-      init = { defaultBranch = "main"; };
+      init = {
+        defaultBranch = "main";
+      };
 
       fetch = {
         prune = true;
@@ -57,7 +71,9 @@
         all = true;
       };
 
-      commit = { verbose = true; };
+      commit = {
+        verbose = true;
+      };
     };
   };
 }

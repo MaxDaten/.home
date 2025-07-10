@@ -1,7 +1,5 @@
-{ config
-, pkgs
-, lib
-, ...
+{
+  ...
 }:
 let
   mount = "/mnt/timecapsule";

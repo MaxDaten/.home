@@ -1,6 +1,6 @@
 # jloos nix/nixos configs
 
-Inspired by <DAlperin/dotfiles>.
+Inspired by \<DAlperin/dotfiles>.
 
 ## Structure
 
@@ -90,7 +90,7 @@ systemctl --user start auto-fix-vscode-server.service
 You have to follow these steps to allow yourself to edit secrets:
 
 1. Get your age compatible key from ssh `./generate-sops-keys.sh`
-2. Add your key to `./.sops.yaml`:
+1. Add your key to `./.sops.yaml`:
 
 ```yaml
 keys:

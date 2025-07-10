@@ -1,12 +1,15 @@
-{ lib
-, config
-, inputs
-, pkgs
-, ...
-}: {
+{
+  pkgs,
+  ...
+}:
+{
   system.stateVersion = "24.11";
 
-  environment.shells = with pkgs; [ bashInteractive fish zsh ];
+  environment.shells = with pkgs; [
+    bashInteractive
+    fish
+    zsh
+  ];
 
   boot.growPartition = true;
   boot.loader.timeout = 3;

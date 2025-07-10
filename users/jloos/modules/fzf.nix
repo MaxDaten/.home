@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.fzf =
     let
       fd = "${pkgs.fd}/bin/fd";

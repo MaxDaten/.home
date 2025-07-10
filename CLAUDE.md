@@ -5,6 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Repository Overview
 
 This is a personal NixOS/Darwin configuration repository managed with Nix Flakes. It contains configuration for:
+
 - macOS system configuration via nix-darwin
 - Home Manager configuration for user environments
 - Raspberry Pi NixOS configuration
@@ -16,6 +17,7 @@ This is a personal NixOS/Darwin configuration repository managed with Nix Flakes
 ### Building and Switching Configurations
 
 **macOS (Darwin) system rebuild:**
+
 ```bash
 just switch
 # or manually:
@@ -23,16 +25,19 @@ sudo darwin-rebuild switch --flake . --verbose
 ```
 
 **Home Manager configuration for macOS:**
+
 ```bash
 home-manager switch --flake '.#jloos-macos'
 ```
 
 **NixOS (Pi) rebuild locally:**
+
 ```bash
 sudo nixos-rebuild switch --flake .
 ```
 
 **NixOS (Pi) rebuild remotely:**
+
 ```bash
 nix run .#nixos-switch-pi4-nixos
 ```
@@ -40,6 +45,7 @@ nix run .#nixos-switch-pi4-nixos
 ### Flake Management
 
 **Update all flake inputs:**
+
 ```bash
 just update
 # or manually:
@@ -47,6 +53,7 @@ nix flake update --commit-lock-file
 ```
 
 **Build specific packages:**
+
 ```bash
 nix build .#packages.aarch64-linux.default --system 'aarch64-linux' --max-jobs 0
 ```
@@ -54,11 +61,13 @@ nix build .#packages.aarch64-linux.default --system 'aarch64-linux' --max-jobs 0
 ### Development Environment
 
 **Enter development shell:**
+
 ```bash
 nix develop
 ```
 
 **Build with remote builders:**
+
 ```bash
 nix build .#packages.aarch64-linux.default --system 'aarch64-linux' --max-jobs 0
 ```
@@ -66,11 +75,13 @@ nix build .#packages.aarch64-linux.default --system 'aarch64-linux' --max-jobs 0
 ### Secret Management
 
 **List all secrets:**
+
 ```bash
 just sops-list-secrets
 ```
 
 **Generate age keys for sops:**
+
 ```bash
 ./generate-sops-keys.sh
 ```
@@ -97,6 +108,7 @@ just sops-list-secrets
 ### Flake Inputs
 
 The configuration uses multiple flake inputs including:
+
 - `nixpkgs` - Main package repository
 - `home-manager` - User environment management
 - `darwin` - macOS system configuration
@@ -114,10 +126,10 @@ Uses sops-nix for encrypted secret management. Age keys are generated from SSH k
 ## Common Workflows
 
 1. **Making system changes on macOS**: Edit configuration files, then run `just switch`
-2. **Updating packages**: Run `just update` to update all flake inputs
-3. **Adding new packages**: Add to appropriate nix file, then rebuild
-4. **Managing secrets**: Use sops to edit encrypted files, ensure proper age keys are configured
-5. **Building ARM packages**: Use remote building to Pi or local VM with `--system 'aarch64-linux'`
+1. **Updating packages**: Run `just update` to update all flake inputs
+1. **Adding new packages**: Add to appropriate nix file, then rebuild
+1. **Managing secrets**: Use sops to edit encrypted files, ensure proper age keys are configured
+1. **Building ARM packages**: Use remote building to Pi or local VM with `--system 'aarch64-linux'`
 
 ## Important Notes
 

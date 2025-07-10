@@ -1,8 +1,8 @@
-{ config
-, pkgs
-, modulesPath
-, ...
-}: {
+{
+  config,
+  ...
+}:
+{
   sops.secrets."wireless.env" = {
     restartUnits = [ "wpa_supplicant-wlan0.service" ];
     group = "wheel";

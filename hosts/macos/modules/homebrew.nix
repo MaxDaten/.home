@@ -1,4 +1,5 @@
-{ config, inputs, ... }: {
+{ config, inputs, ... }:
+{
   nix-homebrew = {
     enable = true;
     enableRosetta = true;
@@ -20,7 +21,10 @@
 
     taps = builtins.attrNames config.nix-homebrew.taps;
 
-    casks = [ "keyclu" "ghostty" ];
+    casks = [
+      "keyclu"
+      "ghostty"
+    ];
 
     masApps = {
       "Discovery" = 1381004916;

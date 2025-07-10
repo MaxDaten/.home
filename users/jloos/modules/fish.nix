@@ -1,6 +1,14 @@
-{ pkgs, isDarwin, config, lib, ... }:
-let trace = false; # like set -x
-in {
+{
+  pkgs,
+  isDarwin,
+  config,
+  lib,
+  ...
+}:
+let
+  trace = false; # like set -x
+in
+{
   programs.fish.enable = true;
   programs.fish = {
     plugins = with pkgs.fishPlugins; [
@@ -64,8 +72,7 @@ in {
       (lib.mkIf isDarwin {
         # Install nix-darwin (initially)
         # nix run nix-darwin -- switch --flake ${config.home.homeDirectory}/Workspace/.home/"
-        nix-switch =
-          "darwin-rebuild switch --flake ${config.home.homeDirectory}/Developer/.home/";
+        nix-switch = "darwin-rebuild switch --flake ${config.home.homeDirectory}/Developer/.home/";
       })
     ];
 
