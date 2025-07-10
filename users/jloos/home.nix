@@ -111,7 +111,7 @@ in {
 
       # Nix tools
       nixfmt
-      nil # Nix Language Server
+      # nil # Nix Language Server
       nixd
 
       # Infrastructure
