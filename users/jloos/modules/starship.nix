@@ -58,9 +58,7 @@
         $cmd_duration
         $memory_usage
         [ ](fg:color_bg1)
-        $line_break$shell$character '';
-
-      # right_format = "$cmd_duration$memory_usage$jobs";
+        $line_break$jobs$shell$status$character '';
 
       os = {
         disabled = false;
