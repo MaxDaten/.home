@@ -1,4 +1,5 @@
-{ inputs, ... }: {
+{ inputs, ... }:
+{
   imports = [
     inputs.vscode-server.nixosModule
     inputs.sops-nix.nixosModules.sops
@@ -11,12 +12,6 @@
     ./vscode-server.nix
     ./system-dashboard
     ../../nixos/modules/my-networks
-
-    # ./nixos/modules/homebridge
-    # {
-    #   services.homebridge.enable = true;
-    #   services.homebridge.openFirewall = true;
-    # }
   ];
 
   sops.defaultSopsFile = ./secrets.yaml;
