@@ -145,7 +145,7 @@
 
       gcloud = {
         disabled = false;
-        format = "[[ $symbol( $account(@$domain)(($region)) )](fg:#83a598 bg:color_bg3)]($style)";
+        format = "[[ $symbol( $project:$account(@$domain)((:$region)) )](fg:#83a598 bg:color_bg3)]($style)";
         symbol = "";
         style = "bg:color_bg3";
       };
