@@ -116,9 +116,8 @@
       };
 
       git_branch = {
-        symbol = "";
         style = "bg:color_aqua";
-        format = "[[ $symbol $branch ](fg:color_fg0 bg:color_aqua)]($style)";
+        format = "[[ $symbol$branch ](fg:color_fg0 bg:color_aqua)]($style)";
       };
 
       git_status = {
