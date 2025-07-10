@@ -12,3 +12,4 @@ keys/
 .idea/
 .devenv
 .env
+.claude/settings.local.json
