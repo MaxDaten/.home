@@ -3,7 +3,28 @@
   home.packages = with pkgs; [ zed-editor ];
 
   xdg.configFile."zed/settings.json".text = builtins.toJSON {
+    # UI and theme settings
+    theme = {
+      mode = "system";
+      light = "One Light";
+      dark = "One Dark";
+    };
+    base_keymap = "JetBrains";
+
+    # Font settings
+    ui_font_size = 16;
+    ui_font_features = { calt = true; };
+    buffer_font_size = 12;
+    buffer_font_fallbacks = ["JetBrainsMono Nerd Font"];
+    terminal = {
+      font_family = "JetBrainsMono Nerd Font";
+      font_size = 14;
+    };
+
+    # Features
     features = { edit_prediction_provider = "zed"; };
+
+    # Assistant
     assistant = {
       default_model = {
         provider = "anthropic";
@@ -11,24 +32,14 @@
       };
       version = "2";
     };
-    buffer_font_fallbacks = ["JetBrainsMono Nerd Font"];
-    ui_font_size = 16;
-    buffer_font_size = 12;
-    ui_font_features = { calt = true; };
-    base_keymap = "JetBrains";
-    theme = {
-      mode = "system";
-      light = "One Light";
-      dark = "One Dark";
-    };
-    terminal = {
-      font_family = "JetBrainsMono Nerd Font";
-      font_size = 14;
-    };
+
+    # Language-specific settings
     languages = {
       Nix = { language_servers = [ pkgs.nixd "!nil" ]; };
       JavaScript = { format_on_save = "off"; };
     };
+
+    # LSP configurations
     lsp = {
       nixd = {
         binary = { path_lookup = true; };
