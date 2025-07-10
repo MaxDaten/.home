@@ -11,6 +11,7 @@
       };
       version = "2";
     };
+    buffer_font_fallbacks = ["JetBrainsMono Nerd Font"];
     ui_font_size = 16;
     buffer_font_size = 12;
     ui_font_features = { calt = true; };
