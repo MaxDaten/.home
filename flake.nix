@@ -70,6 +70,8 @@
 
     # Code formatting
     treefmt-nix.url = "github:numtide/treefmt-nix";
+
+    mk-shell-bin.url = "github:rrbutani/nix-mk-shell-bin";
   };
 
   nixConfig = {
@@ -123,9 +125,6 @@
               inherit system;
               config.allowUnfree = true;
             };
-
-            formatter = config.treefmt.build.wrapper;
-            # checks
 
             devenv.shells.default = {
               devenv.root =
