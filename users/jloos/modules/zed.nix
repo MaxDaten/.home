@@ -60,7 +60,7 @@
         };
         settings = {
           formatting = {
-            command = [ pkgs.nixfmt ];
+            command = [ pkgs.nixfmt-rfc-style ];
           };
         };
       };

@@ -152,7 +152,7 @@
                 node2nix
                 rsync
                 nil.packages.${system}.default
-                nixfmt
+                nixfmt-rfc-style
                 zstd
               ];
 

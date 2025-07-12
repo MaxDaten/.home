@@ -125,7 +125,7 @@ in
       shellcheck
 
       # Nix tools
-      nixfmt
+      nixfmt-rfc-style
       # nil # Nix Language Server
       nixd
 
