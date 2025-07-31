@@ -46,7 +46,7 @@ in
   home.homeDirectory = if isDarwin then lib.mkForce "/Users/jloos" else "/home/jloos";
 
   imports = [
-    inputs.nix-index-database.hmModules.nix-index
+    inputs.nix-index-database.homeModules.nix-index
     inputs.sops-nix.homeManagerModule
     (import ./modules/fish.nix {
       inherit
