@@ -56,6 +56,4 @@
   environment.variables.LANG = "en_US.UTF-8";
 
   security.pam.services.sudo_local.touchIdAuth = true;
-
-  services.ollama.enable = true;
 }
