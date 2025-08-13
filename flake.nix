@@ -137,6 +137,15 @@
 
               imports = [ ];
 
+              git-hooks.hooks = {
+                nix-fmt = {
+                  enable = true;
+                  name = "Format all via treefmt";
+                  entry = "nix fmt";
+                  pass_filenames = false;
+                };
+              };
+
               packages = with pkgs; [
                 sops
                 age

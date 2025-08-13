@@ -19,3 +19,6 @@ fmt:
 # Check formatting without changing files
 check-fmt:
     nix fmt -- --fail-on-change
+
+run-hooks:
+    pre-commit run --verbose

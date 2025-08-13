@@ -13,3 +13,4 @@ keys/
 .devenv
 .env
 .claude/settings.local.json
+.pre-commit-config.yaml
