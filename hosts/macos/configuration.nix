@@ -16,7 +16,7 @@
 
   nix.enable = false;
 
-  environment.etc."nix/nix.custom.conf".text = ''
+  environment.etc."nix/nix.custom.conf".text = pkgs.lib.mkForce ''
     # Written by hosts/macos/configuration.nix
     # The contents below are based on options specified at installation time.
     substituters = https://cache.nixos.org/ https://maxdaten-io.cachix.org
