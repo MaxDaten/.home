@@ -7,15 +7,16 @@
       flake = false;
     };
 
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/0";
+
     # Nix Derivations
-    nixpkgs.url = "nixpkgs/nixpkgs-unstable";
-    nixos-darwin.url = "nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
 
     nixpkgs-master.url = "nixpkgs/master";
 
     darwin = {
-      url = "github:lnl7/nix-darwin";
-      inputs.nixpkgs.follows = "nixos-darwin";
+      url = "https://flakehub.com/f/nix-darwin/nix-darwin/0";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     # Install Homebrew
     nix-homebrew = {

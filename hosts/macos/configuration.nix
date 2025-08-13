@@ -14,34 +14,15 @@
     mas
   ];
 
-  nix.settings.substituters = [
-    "https://cache.nixos.org/"
-    "https://maxdaten-io.cachix.org"
-  ];
-  nix.settings.trusted-public-keys = [
-    "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-    # setup authtoken via `cachix authtoken <token>`
-    "maxdaten-io.cachix.org-1:ZDDi/8gGLSeUEU9JST6uXDcQfNp2VZzccmjUljPHHS8="
-  ];
-  nix.settings.trusted-users = [
-    "root"
-    "@admin"
-  ];
+  nix.enable = false;
 
-  nix.package = pkgs.nix;
-  # Enable experimental nix command and flakes
-  nix.settings = {
-    experimental-features = "nix-command flakes auto-allocate-uids";
-    auto-optimise-store = false;
-    keep-outputs = true;
-    keep-derivations = true;
-    warn-dirty = false;
-    build-users-group = "nixbld";
-    builders-use-substitutes = true;
-    allow-import-from-derivation = true;
-    download-buffer-size = 2000000000; # 2 GB
-  };
-  # nix.settings.extra-platforms = lib.optionalString (pkgs.system == "aarch64-darwin") "x86_64-darwin aarch64-darwin";
+  environment.etc."nix/nix.custom.conf".text = ''
+    # Written by hosts/macos/configuration.nix
+    # The contents below are based on options specified at installation time.
+    substituters = https://cache.nixos.org/ https://maxdaten-io.cachix.org
+    trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= maxdaten-io.cachix.org-1:ZDDi/8gGLSeUEU9JST6uXDcQfNp2VZzccmjUljPHHS8=
+    trusted-users = root @admin
+  '';
 
   # init nix in zsh & fish
   programs.fish.enable = true;
