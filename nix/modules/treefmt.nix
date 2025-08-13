@@ -2,12 +2,14 @@
 {
   imports = [ inputs.treefmt-nix.flakeModule ];
   perSystem =
-    { ... }:
+    { pkgs, lib, ... }:
     {
       treefmt = {
         projectRootFile = "flake.nix";
         # Nix formatting
-        programs.nixfmt.enable = true;
+        programs.nixfmt.enable = pkgs.lib.meta.availableOn pkgs.stdenv.buildPlatform pkgs.nixfmt-rfc-style.compiler;
+        programs.nixfmt.package = pkgs.nixfmt-rfc-style;
+
         programs.deadnix.enable = true;
 
         # JSON/YAML formatting
