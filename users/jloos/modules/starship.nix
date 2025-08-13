@@ -249,6 +249,7 @@
           bash_indicator = "🐚";
           style = "cyan bold";
         };
-      } // languages;
+      }
+      // languages;
     };
 }
