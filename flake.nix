@@ -138,13 +138,10 @@
 
               imports = [ ];
 
-              git-hooks.hooks = {
-                nix-fmt = {
-                  enable = true;
-                  name = "Format all via treefmt";
-                  entry = "nix fmt";
-                  pass_filenames = false;
-                };
+              git-hooks.hooks.treefmt = {
+                enable = true;
+                # configured in nix/modules/treefmt.nix
+                package = config.treefmt.build.wrapper;
               };
 
               packages = with pkgs; [
@@ -162,7 +159,6 @@
                 node2nix
                 rsync
                 nil.packages.${system}.default
-                nixfmt-rfc-style
                 zstd
               ];
 
