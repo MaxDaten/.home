@@ -159,11 +159,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1755039979,
-        "narHash": "sha256-Hixrg8iZgE0tgBL+0u0jOl1sbSRUV54mEWSY3dxsB6k=",
+        "lastModified": 1755623654,
+        "narHash": "sha256-/Ns43FaRhZp9J9sUODGFmh3eu5b9e6mLAeXprXzaV0g=",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "63db0a32cd767c2a9089fbaf24b0bb91c64c0652",
+        "rev": "00e23ae9d762e94c749dcb0f021855a35c0fdedc",
         "type": "github"
       },
       "original": {
@@ -391,11 +391,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1754974548,
-        "narHash": "sha256-XMjUjKD/QRPcqUnmSDczSYdw46SilnG0+wkho654DFM=",
+        "lastModified": 1755739851,
+        "narHash": "sha256-SC703bnPGOPWSEdZN2J2MkJWQBcUHV4QzuvFPdSVUME=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "27a26be51ff0162a8f67660239f9407dba68d7c5",
+        "rev": "3c3510e61ca5c15a0f13d73c2232fa2d5478a86c",
         "type": "github"
       },
       "original": {
@@ -424,11 +424,11 @@
     "homebrew-cask": {
       "flake": false,
       "locked": {
-        "lastModified": 1755086913,
-        "narHash": "sha256-N73asFRR6a0ilneAdZ03wcBadqsnsslB5HcGkmxtDVE=",
+        "lastModified": 1755742813,
+        "narHash": "sha256-vQiGfGgVTXi0dRg9EtM8Ym3MpReSXjagJbMYbfsk0u4=",
         "owner": "homebrew",
         "repo": "homebrew-cask",
-        "rev": "07825dae2201a57d4b476dce92ef04230804a38a",
+        "rev": "6ede9acbb326dbd4302693f81e829c2025474e51",
         "type": "github"
       },
       "original": {
@@ -440,11 +440,11 @@
     "homebrew-core": {
       "flake": false,
       "locked": {
-        "lastModified": 1755086859,
-        "narHash": "sha256-6CbSk98OWOaCmpybsXBnZ8GpI70SDjHERzvpwPBbXec=",
+        "lastModified": 1755745428,
+        "narHash": "sha256-3o8BF4WdgYw7iXHnt+ZV9k4DlAOefDU0m3JlGibWzHw=",
         "owner": "homebrew",
         "repo": "homebrew-core",
-        "rev": "70abe4316fc03956b37518d88cf60429e74960bd",
+        "rev": "b2e183251e2cb9d880be2ec7a163c9dbe07d05f6",
         "type": "github"
       },
       "original": {
@@ -563,11 +563,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1754800038,
-        "narHash": "sha256-UbLO8/0pVBXLJuyRizYOJigtzQAj8Z2bTnbKSec/wN0=",
+        "lastModified": 1755404379,
+        "narHash": "sha256-Q6ZxZDBmD/B988Jjbx7/NchxOKIpOKBBrx9Yb0zMzpQ=",
         "owner": "nix-community",
         "repo": "nix-index-database",
-        "rev": "b65f8d80656f9fcbd1fecc4b7f0730f468333142",
+        "rev": "ebbc1c05f786ae39bb5e04e57bf2c10c44a649e3",
         "type": "github"
       },
       "original": {
@@ -704,11 +704,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1755086773,
-        "narHash": "sha256-KhyV4Hjlji7cTImo9cC8D1N9/zYP4ZI3gwu1DaCadC4=",
+        "lastModified": 1755744140,
+        "narHash": "sha256-XLMNPXXCUh/dE8ndSstWdh+4kgK8WDeJ88zcFAs7IPE=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "64cf35ea43472e3a79066295d56e0b24712aefed",
+        "rev": "57df8cf8205b78b8c3909c60dc9ff9f5ca4b7c1b",
         "type": "github"
       },
       "original": {
@@ -795,12 +795,12 @@
     },
     "nixpkgs_6": {
       "locked": {
-        "lastModified": 1754937576,
-        "narHash": "sha256-3sWA5WJybUE16kIMZ3+uxcxKZY/JRR4DFBqLdSLBo7w=",
-        "rev": "ddae11e58c0c345bf66efbddbf2192ed0e58f896",
-        "revCount": 808080,
+        "lastModified": 1755593991,
+        "narHash": "sha256-BA9MuPjBDx/WnpTJ0EGhStyfE7hug8g85Y3Ju9oTsM4=",
+        "rev": "a58390ab6f1aa810eb8e0f0fc74230e7cc06de03",
+        "revCount": 808472,
         "type": "tarball",
-        "url": "https://api.flakehub.com/f/pinned/NixOS/nixpkgs/0.2505.808080%2Brev-ddae11e58c0c345bf66efbddbf2192ed0e58f896/01989f5e-b09d-7b09-9699-5d522e6f12ce/source.tar.gz"
+        "url": "https://api.flakehub.com/f/pinned/NixOS/nixpkgs/0.2505.808472%2Brev-a58390ab6f1aa810eb8e0f0fc74230e7cc06de03/0198c5fd-8879-7943-9ad5-80d21afe0417/source.tar.gz"
       },
       "original": {
         "type": "tarball",
