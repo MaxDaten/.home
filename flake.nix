@@ -12,7 +12,7 @@
     # Nix Derivations
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
 
-    nixpkgs-master.url = "nixpkgs/master";
+    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
     darwin = {
       url = "https://flakehub.com/f/nix-darwin/nix-darwin/0";
