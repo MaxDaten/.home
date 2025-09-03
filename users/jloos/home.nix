@@ -67,6 +67,7 @@ in
     ./modules/sops.nix
     ./modules/ghostty.nix
     ./modules/zed.nix
+    ./modules/zoxide.nix
   ];
 
   home.file.warp-themes = lib.mkIf (!headless) {
