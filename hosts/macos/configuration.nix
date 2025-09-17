@@ -12,6 +12,10 @@
     git
     cachix
     mas
+
+    nixfmt-rfc-style
+    nixd
+    devenv
   ];
 
   nix.enable = false;

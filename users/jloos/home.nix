@@ -126,11 +126,6 @@ in
       # linting
       shellcheck
 
-      # Nix tools
-      nixfmt-rfc-style
-      # nil # Nix Language Server
-      nixd
-
       # Infrastructure
       # awscli2 # currently broken
       google-cloud-sdk
@@ -143,11 +138,6 @@ in
 
       # gimick
       cmatrix
-
-      (import (fetchTarball {
-        url = "https://install.devenv.sh/latest";
-        sha256 = "sha256:1jmiplyf9mfjh2absdwi1zdqiybi3y9l4dcysclpp7x52v2mci88";
-      })).packages.${pkgs.stdenv.system}.default
     ]
     ++ lib.optionals (pkgs.stdenv.isDarwin) darwinPackages
     ++ lib.optionals (!headless) guiPackages;

@@ -93,7 +93,6 @@
       nixpkgs,
       flake-parts,
       devenv,
-      nil,
       ...
     }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } (
@@ -158,7 +157,7 @@
 
                 node2nix
                 rsync
-                nil.packages.${system}.default
+                nixd
                 zstd
               ];
 
