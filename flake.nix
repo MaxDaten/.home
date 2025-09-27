@@ -10,12 +10,10 @@
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/0";
 
     # Nix Derivations
-    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
-
-    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
 
     darwin = {
-      url = "https://flakehub.com/f/nix-darwin/nix-darwin/0";
+      url = "https://flakehub.com/f/nix-darwin/nix-darwin/0.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Install Homebrew
@@ -92,7 +90,6 @@
     {
       nixpkgs,
       flake-parts,
-      devenv,
       ...
     }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } (

@@ -7,12 +7,8 @@
   ...
 }:
 let
-  masterOverlays = _final: prev: {
-    zed-editor = inputs.nixpkgs-master.legacyPackages.${prev.system}.zed-editor;
-  };
   pkgsWithOverlay = import inputs.nixpkgs {
     inherit (pkgs) system;
-    overlays = [ masterOverlays ];
     config.allowUnfree = true;
   };
 
