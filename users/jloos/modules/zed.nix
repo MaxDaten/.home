@@ -3,6 +3,7 @@
 
   home.packages = with pkgs; [ zed-editor ];
 
+  # https://zed.dev/docs/configuring-zed
   xdg.configFile."zed/settings.json".text = builtins.toJSON {
     # UI and theme settings
     theme = {
