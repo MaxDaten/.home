@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   # https://daiderd.com/nix-darwin/manual/index.html
   nixpkgs.hostPlatform = "aarch64-darwin";
@@ -15,7 +15,7 @@
 
     nixfmt-rfc-style
     nixd
-    devenv
+    inputs.devenv.packages.aarch64-darwin.devenv
   ];
 
   nix.enable = false;

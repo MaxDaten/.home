@@ -59,7 +59,7 @@
     };
 
     # Development environment
-    devenv.url = "github:cachix/devenv";
+    devenv.url = "github:cachix/devenv/ce82fad570fd74ac5dfe3ce587ee8b37e918d71f";
     nix2container = {
       url = "github:nlewo/nix2container";
       inputs.nixpkgs.follows = "nixpkgs";
