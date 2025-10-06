@@ -156,10 +156,28 @@
                 rsync
                 nixd
                 zstd
+                inputs.devenv.packages.${system}.default
               ];
 
               env.SOPS_AGE_KEY_FILE = "/Users/jloos/.config/sops/age/keys.txt";
               env.SOPS_AGE_KEY_DIRECTORY = "/Users/jloos/.config/sops/age";
+
+              claude.code = {
+                enable = true;
+
+                mcpServers = {
+                  # Local devenv MCP server
+                  devenv = {
+                    type = "stdio";
+                    command = "${inputs.devenv.packages.${system}.default}/bin/devenv";
+                    args = [ "mcp" ];
+                    env = {
+                      DEVENV_ROOT = "${./.}";
+                    };
+                  };
+                };
+              };
+
             };
           };
       }
