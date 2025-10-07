@@ -2,11 +2,6 @@
   description = "Personal NixOS configuration";
 
   inputs = {
-    devenv-root = {
-      url = "file+file:///dev/null";
-      flake = false;
-    };
-
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/0";
 
     # Nix Derivations
@@ -59,7 +54,7 @@
     };
 
     # Development environment
-    devenv.url = "github:cachix/devenv/312f261d4cc7cfe5e6e6a0e03a7e16a002d6bb1e";
+    devenv.url = "github:cachix/devenv/6880d8946d4a02b1fd2c74f2b6a342f45034b483";
     nix2container = {
       url = "github:nlewo/nix2container";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -75,12 +70,10 @@
 
   nixConfig = {
     extra-trusted-public-keys = [
-      "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
       "maxdaten-io.cachix.org-1:ZDDi/8gGLSeUEU9JST6uXDcQfNp2VZzccmjUljPHHS8="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
     extra-substituters = [
-      "https://devenv.cachix.org"
       "https://maxdaten-io.cachix.org"
       "https://nix-community.cachix.org"
     ];
@@ -96,7 +89,6 @@
       { ... }:
       {
         imports = [
-          inputs.devenv.flakeModule
           ./hosts
           ./nix/modules/treefmt.nix
         ];
@@ -116,68 +108,9 @@
             ...
           }:
           {
-            debug = true;
-
             _module.args.pkgs = import nixpkgs {
               inherit system;
               config.allowUnfree = true;
-            };
-
-            devenv.shells.default = {
-              devenv.root =
-                let
-                  devenvRootFileContent = builtins.readFile inputs.devenv-root.outPath;
-                in
-                pkgs.lib.mkIf (devenvRootFileContent != "") devenvRootFileContent;
-
-              name = ".home shell";
-
-              imports = [ ];
-
-              git-hooks.hooks.treefmt = {
-                enable = true;
-                # configured in nix/modules/treefmt.nix
-                package = config.treefmt.build.wrapper;
-              };
-
-              packages = with pkgs; [
-                sops
-                age
-                ssh-to-age
-
-                just
-                claude-code
-                nodejs # required to execute mcp via mcp-remote
-
-                stress
-                speedtest-cli
-
-                node2nix
-                rsync
-                nixd
-                zstd
-                inputs.devenv.packages.${system}.default
-              ];
-
-              env.SOPS_AGE_KEY_FILE = "/Users/jloos/.config/sops/age/keys.txt";
-              env.SOPS_AGE_KEY_DIRECTORY = "/Users/jloos/.config/sops/age";
-
-              claude.code = {
-                enable = true;
-
-                mcpServers = {
-                  # Local devenv MCP server
-                  devenv = {
-                    type = "stdio";
-                    command = "${inputs.devenv.packages.${system}.default}/bin/devenv";
-                    args = [ "mcp" ];
-                    env = {
-                      DEVENV_ROOT = "${./.}";
-                    };
-                  };
-                };
-              };
-
             };
           };
       }

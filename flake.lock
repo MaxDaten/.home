@@ -160,30 +160,18 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1759784928,
-        "narHash": "sha256-2GwAR2oQoyRSSmIihPhf3FjU0XsFMbV7IXz6MUbykfM=",
+        "lastModified": 1759795821,
+        "narHash": "sha256-rsb+6Wca43guzLL4Czoc89L394ZW9JZF2MShxaz2Sx4=",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "312f261d4cc7cfe5e6e6a0e03a7e16a002d6bb1e",
+        "rev": "6880d8946d4a02b1fd2c74f2b6a342f45034b483",
         "type": "github"
       },
       "original": {
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "312f261d4cc7cfe5e6e6a0e03a7e16a002d6bb1e",
+        "rev": "6880d8946d4a02b1fd2c74f2b6a342f45034b483",
         "type": "github"
-      }
-    },
-    "devenv-root": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-d6xi4mKdjkX2JFicDIv5niSzpyI0m/Hnm8GGAIU04kY=",
-        "type": "file",
-        "url": "file:///dev/null"
-      },
-      "original": {
-        "type": "file",
-        "url": "file:///dev/null"
       }
     },
     "flake-compat": {
@@ -896,7 +884,6 @@
         "darwin": "darwin",
         "determinate": "determinate",
         "devenv": "devenv",
-        "devenv-root": "devenv-root",
         "flake-parts": "flake-parts_3",
         "home-manager": "home-manager",
         "homebrew-bundle": "homebrew-bundle",

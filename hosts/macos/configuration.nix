@@ -11,11 +11,14 @@
     fish
     git
     cachix
+    curl
+    rsync
     mas
 
     nixfmt-rfc-style
     nixd
     inputs.devenv.packages.aarch64-darwin.devenv
+    direnv
   ];
 
   nix.enable = false;

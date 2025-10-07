@@ -71,7 +71,6 @@ in
     with pkgs;
     [
       direnv
-      inputs.devenv.packages.${pkgs.system}.default # Cutting edge devenv version
 
       gnupg
       htop
@@ -93,7 +92,6 @@ in
       fd
       rename
       tldr
-      repomix
       claude-code
       #> ERROR: Could not find a version that satisfies the requirement keyring<24.0,>=23.4 (from yubikey-manager) (from versions: none)
       #> ERROR: No matching distribution found for keyring<24.0,>=23.4

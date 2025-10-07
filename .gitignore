@@ -11,6 +11,10 @@ nixos.qcow2
 keys/
 .idea/
 .devenv
+.devenv.flake.nix
 .env
 .claude/settings.local.json
 .pre-commit-config.yaml
+
+.claude/
+.mcp.json
