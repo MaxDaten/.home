@@ -30,7 +30,6 @@ let
     nerd-fonts.fira-mono
     nerd-fonts.fira-code
     nerd-fonts.sauce-code-pro
-    warp-terminal
   ];
 
 in
@@ -66,23 +65,15 @@ in
     ./modules/zoxide.nix
   ];
 
-  home.file.warp-themes = lib.mkIf (!headless) {
-    target = ".warp/themes";
-    recursive = true;
-    source = builtins.fetchGit {
-      url = "https://github.com/warpdotdev/themes.git";
-      ref = "main";
-      rev = "2a25630d59a6c4f2673f1e5156d2bf29ba6a9190";
-    };
-  };
-
   programs.nix-index-database.comma.enable = true;
 
   home.packages =
     with pkgs;
     [
-      gnupg
       direnv
+      inputs.devenv.packages.${pkgs.system}.default # Cutting edge devenv version
+
+      gnupg
       htop
       duf
       xz
@@ -134,6 +125,10 @@ in
 
       # gimick
       cmatrix
+
+      # Other tools
+      stress
+      speedtest-cli
     ]
     ++ lib.optionals (pkgs.stdenv.isDarwin) darwinPackages
     ++ lib.optionals (!headless) guiPackages;
