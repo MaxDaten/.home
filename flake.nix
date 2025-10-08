@@ -90,7 +90,6 @@
       {
         imports = [
           ./hosts
-          ./nix/modules/treefmt.nix
         ];
 
         systems = [
@@ -102,9 +101,7 @@
 
         perSystem =
           {
-            pkgs,
             system,
-            config,
             ...
           }:
           {
