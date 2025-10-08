@@ -1,0 +1,101 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check-flake:
+    name: Check Flake
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v14
+
+      - name: Setup Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@v8
+
+      - name: Check flake
+        run: nix flake check --all-systems --show-trace
+
+  build-darwin:
+    name: Build Darwin Configuration
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v14
+
+      - name: Setup Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@v8
+
+      - name: Build Darwin configuration
+        run: |
+          nix build .#darwinConfigurations.macos.system \
+            --show-trace \
+            --print-build-logs
+
+  build-nixos:
+    name: Build NixOS Configuration
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v14
+
+      - name: Setup Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@v8
+
+      - name: Setup QEMU for aarch64
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu-user-static
+
+      - name: Build NixOS configuration (Pi)
+        run: |
+          nix build .#nixosConfigurations.pi4-nixos.config.system.build.toplevel \
+            --system aarch64-linux \
+            --show-trace \
+            --print-build-logs
+
+  build-home-manager:
+    name: Build Home Manager Configuration
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v14
+
+      - name: Setup Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@v8
+
+      - name: Build Home Manager configuration
+        run: |
+          nix build .#homeConfigurations.jloos-macos.activationPackage \
+            --show-trace \
+            --print-build-logs
+
+  check-formatting:
+    name: Check Formatting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v14
+
+      - name: Setup Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@v8
+
+      - name: Setup devenv
+        uses: cachix/devenv-action@v1
+
+      - name: Check formatting with treefmt
+        run: devenv shell treefmt --fail-on-change
