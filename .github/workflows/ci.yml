@@ -94,8 +94,8 @@ jobs:
       - name: Setup Magic Nix Cache
         uses: DeterminateSystems/magic-nix-cache-action@v8
 
-      - name: Setup devenv
-        uses: cachix/devenv-action@v1
+      - name: Install devenv.sh
+        run: nix profile install nixpkgs#devenv
 
       - name: Check formatting with treefmt
         run: devenv shell treefmt --fail-on-change
