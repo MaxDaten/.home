@@ -1,0 +1,31 @@
+name: Update Flake Inputs
+
+on:
+  workflow_dispatch: # Allow manual trigger
+  schedule:
+    - cron: '0 0 * * 0' # Weekly on Sunday at midnight UTC
+
+jobs:
+  update:
+    name: Update Flake Lock
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v14
+
+      - name: Setup Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@v8
+
+      - name: Update flake lock
+        uses: DeterminateSystems/update-flake-lock@v24
+        with:
+          pr-title: "chore: Update flake inputs"
+          pr-labels: dependencies,automated
+          commit-msg: "chore: Update flake lock"
+          branch: update-flake-lock
