@@ -1,6 +1,8 @@
 { ... }:
 
 {
+  system.stateVersion = "24.11";
+
   raspberry-pi-nix.board = "bcm2712";
   raspberry-pi-nix.libcamera-overlay.enable = false;
 

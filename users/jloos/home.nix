@@ -34,7 +34,7 @@ let
 
 in
 {
-  home.stateVersion = "24.05";
+  home.stateVersion = "25.11";
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "jloos";

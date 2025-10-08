@@ -14,9 +14,6 @@
 
   ];
 
-  env.SOPS_AGE_KEY_FILE = "/Users/jloos/.config/sops/age/keys.txt";
-  env.SOPS_AGE_KEY_DIRECTORY = "/Users/jloos/.config/sops/age";
-
   # Claude Code MCP server configuration
   claude.code = {
     enable = true;

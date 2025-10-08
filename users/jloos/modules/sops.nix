@@ -10,4 +10,9 @@
       path = "${config.home.homeDirectory}/.config/openai/OPENAI_API_KEY";
     };
   };
+
+  home.sessionVariables = {
+    SOPS_AGE_KEY_FILE = "/Users/jloos/.config/sops/age/keys.txt";
+    SOPS_AGE_KEY_DIRECTORY = "/Users/jloos/.config/sops/age";
+  };
 }
