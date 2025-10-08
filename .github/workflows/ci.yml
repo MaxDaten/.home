@@ -42,7 +42,7 @@ jobs:
 
       - name: Build Darwin configuration
         run: |
-          nix build .#darwinConfigurations.macos.system \
+          nix build .#darwinConfigurations.macos.config.system.build.toplevel \
             --show-trace \
             --print-build-logs
 
