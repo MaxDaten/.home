@@ -42,7 +42,7 @@ jobs:
 
       - name: Build Darwin configuration
         run: |
-          nix build .#darwinConfigurations.macos.config.system.build.toplevel \
+          nix build .#darwinConfigurations.Jan-Philips-MacBook-Pro.system \
             --show-trace \
             --print-build-logs
 
@@ -68,29 +68,8 @@ jobs:
 
       - name: Build NixOS configuration (Pi)
         run: |
-          nix build .#nixosConfigurations.pi4-nixos.config.system.build.toplevel \
+          nix build .#nixosConfigurations.pi.config.system.build.toplevel \
             --system aarch64-linux \
-            --show-trace \
-            --print-build-logs
-
-  build-home-manager:
-    name: Build Home Manager Configuration
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@v14
-        with:
-          extra-conf: |
-            accept-flake-config = true
-
-      - name: Setup Magic Nix Cache
-        uses: DeterminateSystems/magic-nix-cache-action@v8
-
-      - name: Build Home Manager configuration
-        run: |
-          nix build .#homeConfigurations.jloos-macos.activationPackage \
             --show-trace \
             --print-build-logs
 
