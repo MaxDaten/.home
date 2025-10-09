@@ -54,6 +54,7 @@ jobs:
   #           --print-build-logs
 
   build-nixos-pi:
+    if: false
     name: Build NixOS Configuration (Pi)
     runs-on: blacksmith-4vcpu-ubuntu-2404-arm
     steps:
