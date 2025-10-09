@@ -49,33 +49,28 @@ jobs:
   #           --show-trace \
   #           --print-build-logs
 
-  # build-nixos:
-  #   name: Build NixOS Configuration
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
+  build-nixos-pi:
+    name: Build NixOS Configuration (Pi)
+    runs-on: blacksmith-4vcpu-ubuntu-2404-arm
+    steps:
+      - uses: actions/checkout@v4
 
-  #     - name: Install Nix
-  #       uses: cachix/install-nix-action@v30
-  #       with:
-  #         extra_nix_config: |
-  #           accept-flake-config = true
-  #           experimental-features = nix-command flakes
+      - name: Install Nix
+        uses: cachix/install-nix-action@v30
+        with:
+          extra_nix_config: |
+            accept-flake-config = true
+            experimental-features = nix-command flakes
 
-  #     - name: Setup Magic Nix Cache
-  #       uses: DeterminateSystems/magic-nix-cache-action@v8
+      - name: Setup Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@v8
 
-  #     - name: Setup QEMU for aarch64
-  #       run: |
-  #         sudo apt-get update
-  #         sudo apt-get install -y qemu-user-static
-
-  #     - name: Build NixOS configuration (Pi)
-  #       run: |
-  #         nix build .#nixosConfigurations.pi.config.system.build.toplevel \
-  #           --system aarch64-linux \
-  #           --show-trace \
-  #           --print-build-logs
+      - name: Build NixOS configuration (Pi)
+        run: |
+          nix build .#nixosConfigurations.pi.config.system.build.toplevel \
+            --system aarch64-linux \
+            --show-trace \
+            --print-build-logs
 
   check-formatting:
     name: Check Formatting
