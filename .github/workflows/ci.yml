@@ -31,49 +31,6 @@ jobs:
       - name: Check flake
         run: nix flake check --all-systems --show-trace
 
-  # build-darwin:
-  #   name: Build Darwin Configuration
-  #   runs-on: macos-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-
-  #     - name: Install Nix
-  #       uses: cachix/install-nix-action@v30
-  #       with:
-  #         extra_nix_config: |
-  #           accept-flake-config = true
-  #           experimental-features = nix-command flakes
-
-  #     - name: Setup Magic Nix Cache
-  #       uses: DeterminateSystems/magic-nix-cache-action@v8
-
-  #     - name: Build Darwin configuration
-  #       run: |
-  #         nix build .#darwinConfigurations.Jan-Philips-MacBook-Pro.system \
-  #           --show-trace \
-  #           --print-build-logs
-
-  build-nixos-pi:
-    if: false
-    name: Build NixOS Configuration (Pi)
-    runs-on: blacksmith-4vcpu-ubuntu-2404-arm
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install Nix
-        uses: cachix/install-nix-action@v30
-        with:
-          extra_nix_config: |
-            accept-flake-config = true
-            experimental-features = nix-command flakes
-
-      - name: Build NixOS configuration (Pi)
-        run: |
-          nix build .#nixosConfigurations.pi.config.system.build.toplevel \
-            --system aarch64-linux \
-            --show-trace \
-            --print-build-logs
-
   check-formatting:
     name: Check Formatting
     runs-on: blacksmith-4vcpu-ubuntu-2404
