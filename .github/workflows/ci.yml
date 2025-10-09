@@ -7,6 +7,10 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  id-token: "write"
+  contents: "read"
+
 jobs:
   check-flake:
     name: Check Flake
@@ -61,9 +65,6 @@ jobs:
           extra_nix_config: |
             accept-flake-config = true
             experimental-features = nix-command flakes
-
-      - name: Setup Magic Nix Cache
-        uses: DeterminateSystems/magic-nix-cache-action@v8
 
       - name: Build NixOS configuration (Pi)
         run: |
