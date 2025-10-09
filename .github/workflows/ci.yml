@@ -19,6 +19,7 @@ jobs:
         with:
           extra-conf: |
             accept-flake-config = true
+            download-buffer-size = 524288000
 
       - name: Setup Magic Nix Cache
         uses: DeterminateSystems/magic-nix-cache-action@v8
@@ -85,6 +86,7 @@ jobs:
         with:
           extra-conf: |
             accept-flake-config = true
+            download-buffer-size = 524288000
 
       - name: Setup Magic Nix Cache
         uses: DeterminateSystems/magic-nix-cache-action@v8
