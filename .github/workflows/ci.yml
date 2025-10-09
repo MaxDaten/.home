@@ -34,10 +34,11 @@ jobs:
   #     - uses: actions/checkout@v4
 
   #     - name: Install Nix
-  #       uses: DeterminateSystems/nix-installer-action@v14
+  #       uses: cachix/install-nix-action@v30
   #       with:
-  #         extra-conf: |
+  #         extra_nix_config: |
   #           accept-flake-config = true
+  #           experimental-features = nix-command flakes
 
   #     - name: Setup Magic Nix Cache
   #       uses: DeterminateSystems/magic-nix-cache-action@v8
@@ -55,10 +56,11 @@ jobs:
   #     - uses: actions/checkout@v4
 
   #     - name: Install Nix
-  #       uses: DeterminateSystems/nix-installer-action@v14
+  #       uses: cachix/install-nix-action@v30
   #       with:
-  #         extra-conf: |
+  #         extra_nix_config: |
   #           accept-flake-config = true
+  #           experimental-features = nix-command flakes
 
   #     - name: Setup Magic Nix Cache
   #       uses: DeterminateSystems/magic-nix-cache-action@v8
